@@ -8,19 +8,20 @@ import { BsTrash } from 'react-icons/bs';
 
 //Internal lib imports
 import Layout from '../../../layout/Layout';
-import { useLeaveDeleteMutation, useLeaveListQuery } from '../../../redux/services/leaveService';
+import { useOthersDeleteMutation, useOthersListQuery } from '../../../redux/services/othersService';
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
-import DateFormatter from '../../../utils/DateFormatter';
 
-const Leave = () => {
+const Others = () => {
+  const [singleOthers, setSingleOthers] = useState({});
+
   const { t } = useTranslation();
-  const { data: Leaves, isLoading } = useLeaveListQuery();
-  const [LeaveDelete] = useLeaveDeleteMutation();
-  const data = Leaves?.data || [];
+  const { data: Otherss, isLoading } = useOthersListQuery();
+  const [OthersDelete] = useOthersDeleteMutation();
+  const data = Otherss?.data || [];
 
   const deleteItem = (id) => {
-    AleartMessage.Delete(id, LeaveDelete);
+    AleartMessage.Delete(id, OthersDelete);
   };
 
   const columns = [
@@ -32,6 +33,11 @@ const Leave = () => {
     {
       Header: t('subject'),
       accessor: (d) => <span className="ms-1"> {d.subject}</span>,
+      sort: true,
+    },
+    {
+      Header: t('description'),
+      accessor: (d) => <span className="ms-1"> {d.description}</span>,
       sort: true,
     },
     {
@@ -58,21 +64,6 @@ const Leave = () => {
       sort: true,
     },
     {
-      Header: t('start date'),
-      accessor: (d) => DateFormatter(d?.startDate),
-      sort: true,
-    },
-    {
-      Header: t('end date'),
-      accessor: (d) => DateFormatter(d?.endDate),
-      sort: true,
-    },
-    {
-      Header: t('duration'),
-      accessor: (d) => <span className="ms-1"> {d.duration}</span>,
-      sort: true,
-    },
-    {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
@@ -81,7 +72,7 @@ const Leave = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
           >
-            <Link to={`/leave-create-update?id=${d?.id}`}>
+            <Link to={`/others-create-update?id=${d?.id}`}>
               <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
                 <AiOutlineEdit />
               </Button>
@@ -127,10 +118,10 @@ const Leave = () => {
           <Card.Body>
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
-                <h5>{t('leave')}</h5>
-                <Link to={'/leave-create-update'}>
+                <h5>{t('Others')}</h5>
+                <Link to={'/others-create-update'}>
                   <Button size="sm" variant="primary">
-                    {t('create leave')}
+                    {t('create Others')}
                   </Button>
                 </Link>
               </Col>
@@ -158,4 +149,4 @@ const Leave = () => {
   );
 };
 
-export default Leave;
+export default Others;

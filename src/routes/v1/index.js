@@ -8,6 +8,7 @@ const leaveRoute = require('./leave.route');
 const retakeAssessmentRoute = require('./retake.assessment.route');
 const subjectRepetitionRoute = require('./subject.repetition.route');
 const scholarshipRoute = require('./scholarship.route');
+const othersRoute = require('./others.route');
 const dashboardRoute = require('./dashboard.route');
 
 const router = express.Router();
@@ -36,6 +37,10 @@ const defaultRoutes = [
   {
     path: '/scholarship',
     route: scholarshipRoute,
+  },
+  {
+    path: '/others',
+    route: othersRoute,
   },
   {
     path: '/dashboard',

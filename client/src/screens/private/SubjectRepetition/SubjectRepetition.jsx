@@ -8,19 +8,23 @@ import { BsTrash } from 'react-icons/bs';
 
 //Internal lib imports
 import Layout from '../../../layout/Layout';
-import { useLeaveDeleteMutation, useLeaveListQuery } from '../../../redux/services/leaveService';
+import {
+  useSubjectRepetitionDeleteMutation,
+  useSubjectRepetitionListQuery,
+} from '../../../redux/services/subjectRepetitionService';
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
-import DateFormatter from '../../../utils/DateFormatter';
 
-const Leave = () => {
+const SubjectRepetition = () => {
+  const [singleSubjectRepetition, setSingleSubjectRepetition] = useState({});
+
   const { t } = useTranslation();
-  const { data: Leaves, isLoading } = useLeaveListQuery();
-  const [LeaveDelete] = useLeaveDeleteMutation();
-  const data = Leaves?.data || [];
+  const { data: SubjectRepetitions, isLoading } = useSubjectRepetitionListQuery();
+  const [SubjectRepetitionDelete] = useSubjectRepetitionDeleteMutation();
+  const data = SubjectRepetitions?.data || [];
 
   const deleteItem = (id) => {
-    AleartMessage.Delete(id, LeaveDelete);
+    AleartMessage.Delete(id, SubjectRepetitionDelete);
   };
 
   const columns = [
@@ -30,8 +34,28 @@ const Leave = () => {
       sort: true,
     },
     {
-      Header: t('subject'),
-      accessor: (d) => <span className="ms-1"> {d.subject}</span>,
+      Header: t('name'),
+      accessor: (d) => <span className="ms-1"> {d.studentName}</span>,
+      sort: true,
+    },
+    {
+      Header: t('roll'),
+      accessor: (d) => d.rollNo,
+      sort: true,
+    },
+    {
+      Header: t('session'),
+      accessor: (d) => d.session,
+      sort: true,
+    },
+    {
+      Header: t('session registration'),
+      accessor: (d) => <span className="ms-1"> {d.sessionRegistration}</span>,
+      sort: true,
+    },
+    {
+      Header: t('session CGPA'),
+      accessor: (d) => <span className="ms-1"> {d.sessionCGPA}</span>,
       sort: true,
     },
     {
@@ -58,21 +82,6 @@ const Leave = () => {
       sort: true,
     },
     {
-      Header: t('start date'),
-      accessor: (d) => DateFormatter(d?.startDate),
-      sort: true,
-    },
-    {
-      Header: t('end date'),
-      accessor: (d) => DateFormatter(d?.endDate),
-      sort: true,
-    },
-    {
-      Header: t('duration'),
-      accessor: (d) => <span className="ms-1"> {d.duration}</span>,
-      sort: true,
-    },
-    {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
@@ -81,7 +90,7 @@ const Leave = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
           >
-            <Link to={`/leave-create-update?id=${d?.id}`}>
+            <Link to={`/subject-repetition-create-update?id=${d?.id}`}>
               <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
                 <AiOutlineEdit />
               </Button>
@@ -127,10 +136,10 @@ const Leave = () => {
           <Card.Body>
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
-                <h5>{t('leave')}</h5>
-                <Link to={'/leave-create-update'}>
+                <h5>{t('subject repetition')}</h5>
+                <Link to={'/subject-repetition-create-update'}>
                   <Button size="sm" variant="primary">
-                    {t('create leave')}
+                    {t('create subject repetition')}
                   </Button>
                 </Link>
               </Col>
@@ -158,4 +167,4 @@ const Leave = () => {
   );
 };
 
-export default Leave;
+export default SubjectRepetition;

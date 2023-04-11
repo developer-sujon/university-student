@@ -4,7 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import i18next from 'i18next';
 
 import enFlag from './flags/us.jpg';
-import bnFlag from './flags/bangladesh.png';
+import pakistanFlag from './flags/pakistan.png';
 import germanyFlag from './flags/germany.jpg';
 import italyFlag from './flags/italy.jpg';
 import spainFlag from './flags/spain.jpg';
@@ -15,9 +15,9 @@ import { changeLanguage } from '../../redux/slice/settingReducer';
 // Get the languages
 const Languages = [
   {
-    display: 'Bangla',
-    name: 'bn',
-    flag: bnFlag,
+    display: 'Pakistan',
+    name: 'urdu',
+    flag: pakistanFlag,
   },
   {
     display: 'English',

@@ -5,3 +5,4 @@ module.exports.Leave = require('./leave.model');
 module.exports.RetakeAssessment = require('./retake.assessment.model');
 module.exports.SubjectRepetition = require('./subject.repetition.model');
 module.exports.Scholarship = require('./scholarship.model');
+module.exports.Others = require('./others.model');

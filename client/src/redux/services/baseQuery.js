@@ -6,7 +6,7 @@ import ToastMessage from '../../helpers/ToastMessage';
 import { setLoading } from '../slice/settingReducer';
 import { setLogout } from '../slice/authReducer';
 
-const SERVER_URL = process.env.REACT_APP_API_SERVER_URL || '/';
+const SERVER_URL = process.env.REACT_APP_API_SERVER_URL || 'https://university-student-production.up.railway.app';
 const API_PREFIX_PATH = process.env.REACT_APP_API_PREFIX_PATH || '/api/v1';
 
 const basefetchBaseQuery = fetchBaseQuery({

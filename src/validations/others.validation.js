@@ -4,50 +4,44 @@ const Joi = require('joi');
 //Internal Lib Import
 const { objectId } = require('./custom.validation');
 
-const subjectRepetitionCreate = {
+const othersCreate = {
   body: Joi.object().keys({
-    studentName: Joi.string().required(),
-    rollNo: Joi.string().required(),
-    session: Joi.string().required(),
-    sessionRegistration: Joi.string().required(),
-    sessionCGPA: Joi.string().required(),
+    subject: Joi.string().required(),
+    description: Joi.string().required(),
     adminRemark: Joi.string(),
     attach: Joi.object(),
     status: Joi.string().valid('REJECTED', 'APPROVED', 'PENDING'),
   }),
 };
 
-const subjectRepetitionDetails = {
+const othersDetails = {
   params: Joi.object().keys({
     id: Joi.string().custom(objectId).required(),
   }),
 };
 
-const subjectRepetitionUpdate = {
+const othersUpdate = {
   params: Joi.object().keys({
     id: Joi.string().custom(objectId).required(),
   }),
   body: Joi.object().keys({
-    studentName: Joi.string().required(),
-    rollNo: Joi.string().required(),
-    session: Joi.string().required(),
-    sessionRegistration: Joi.string().required(),
-    sessionCGPA: Joi.string().required(),
+    subject: Joi.string().required(),
+    description: Joi.string().required(),
     adminRemark: Joi.string(),
     attach: Joi.object(),
     status: Joi.string().valid('REJECTED', 'APPROVED', 'PENDING'),
   }),
 };
 
-const subjectRepetitionDelete = {
+const othersDelete = {
   params: Joi.object().keys({
     id: Joi.string().custom(objectId).required(),
   }),
 };
 
 module.exports = {
-  subjectRepetitionCreate,
-  subjectRepetitionDetails,
-  subjectRepetitionUpdate,
-  subjectRepetitionDelete,
+  othersCreate,
+  othersDetails,
+  othersUpdate,
+  othersDelete,
 };

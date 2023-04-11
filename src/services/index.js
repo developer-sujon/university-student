@@ -7,4 +7,5 @@ module.exports.leaveService = require('./leave.service');
 module.exports.retakeAssessmentService = require('./retake.assessment.service');
 module.exports.subjectRepetitionService = require('./subject.repetition.service');
 module.exports.scholarshipService = require('./scholarship.service');
+module.exports.othersService = require('./others.service');
 module.exports.dashboardService = require('./dashboard.service');

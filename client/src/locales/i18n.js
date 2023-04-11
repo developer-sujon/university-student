@@ -4,14 +4,14 @@ import detector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
 //Internal Lib Import
-import translationBn from './bn/translation.json';
+import translationUrdu from './urdu/translation.json';
 import translationEn from './en/translation.json';
 import store from '../redux/store';
 
 //Translations
 const resources = {
-  bn: {
-    translation: translationBn,
+  urdu: {
+    translation: translationUrdu,
   },
   en: {
     translation: translationEn,
@@ -21,8 +21,7 @@ const resources = {
 i18n.use(detector).use(initReactI18next).init({
   resources,
   lng: store?.getState()?.settingReducer?.language,
-
-  fallbackLng: 'en',
+  fallbackLng: 'urdu',
 });
 
 export default i18n;
