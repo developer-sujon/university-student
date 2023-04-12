@@ -73,7 +73,7 @@ const Navigation = ({ openMenu, setOpenMenu, title = 'Home' }) => {
               <div className="user-dropdown">
                 <img
                   className="icon-nav-img icon-nav"
-                  src={profileDetails?.data?.photo || defaultUserAvatar}
+                  src={profileDetails?.data?.image || defaultUserAvatar}
                   alt={profileDetails?.data?.email}
                   onClick={() => setOpenDropdown(!openDropdown)}
                 />
@@ -81,7 +81,7 @@ const Navigation = ({ openMenu, setOpenMenu, title = 'Home' }) => {
                   <div className="mt-4 text-center">
                     <img
                       className="icon-nav-img"
-                      src={profileDetails?.data?.photo || defaultUserAvatar}
+                      src={profileDetails?.data?.image || defaultUserAvatar}
                       alt={profileDetails?.data?.email}
                     />
                     <br />
