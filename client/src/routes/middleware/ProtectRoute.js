@@ -9,7 +9,7 @@ const ProtectRoute = ({ r, children }) => {
   const { accessToken, userDetails } = useSelector((state) => state.authReducer);
 
   if (accessToken) {
-    if (userDetails?.role !== 'proprietor') {
+    if (userDetails?.role !== 'ADMIN') {
       if (r.roles.indexOf(userDetails?.role) === -1 && !r.roles.includes('all')) {
         return <Navigate to="/not-access" replace />;
       } else {

@@ -9,6 +9,13 @@ export const profileService = apiService.injectEndpoints({
         method: 'GET',
       }),
     }),
+    updateProfile: builder.mutation({
+      query: (postBody) => ({
+        url: 'profile/updateProfile',
+        method: 'PATCH',
+        body: postBody,
+      }),
+    }),
   }),
 });
-export const { useProfileDetailsQuery } = profileService;
+export const { useProfileDetailsQuery, useUpdateProfileMutation } = profileService;

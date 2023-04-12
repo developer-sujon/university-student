@@ -12,12 +12,14 @@ import { useLeaveDeleteMutation, useLeaveListQuery } from '../../../redux/servic
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
+import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 
 const Leave = () => {
   const { t } = useTranslation();
   const { data: Leaves, isLoading } = useLeaveListQuery();
   const [LeaveDelete] = useLeaveDeleteMutation();
   const data = Leaves?.data || [];
+  const { data: profileDetails } = useProfileDetailsQuery();
 
   const deleteItem = (id) => {
     AleartMessage.Delete(id, LeaveDelete);
@@ -81,8 +83,17 @@ const Leave = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
           >
-            <Link to={`/leave-create-update?id=${d?.id}`}>
-              <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
+            <Link
+              to={`/leave-create-update?id=${d?.id}`}
+              onClick={(e) => e.d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT' && e.preventDefault()}
+            >
+              <Button
+                variant="primary"
+                style={{ padding: '5px 10px' }}
+                className="me-1"
+                disabled={d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT'}
+                onClick={(e) => e.preventDefault()}
+              >
                 <AiOutlineEdit />
               </Button>
             </Link>
@@ -92,7 +103,12 @@ const Leave = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('delete')}</Tooltip>}
           >
-            <Button variant="danger" style={{ padding: '5px 10px' }} onClick={() => deleteItem(d.id)}>
+            <Button
+              variant="danger"
+              style={{ padding: '5px 10px' }}
+              onClick={() => deleteItem(d.id)}
+              disabled={d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT'}
+            >
               <BsTrash />
             </Button>
           </OverlayTrigger>

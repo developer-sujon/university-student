@@ -76,5 +76,20 @@
   "PENDING":"زیر التواء",
   "session CGPA":"سیشن CGPA",
   "logout":"لاگ آوٹ",
-  "roll":"رول"
+  "profile":"پروفائل",
+  "roll":"رول", 
+  "mobile":"موبائل",
+  "address":"پتہ", 
+  "image":"تصویر",
+  "name is required":"نام 2 درکار ہے۔", 
+  "mobile is required":"موبائل 2 درکار ہے۔",
+  "address is required":"پتہ 2 درکار ہے۔",
+  "scholarship type":"اسکالرشپ کی قسم",
+  "name of the profile":"پروفائل کا نام",
+  "address of the profile":"ٹی پروفائل کا پتہ",
+  "mobile of the profile":"موبائل آف ٹی پروفائل",
+  "choice scholarship":"چوائس اسکالرشپ",
+  "scholarship type is required":"اسکالرشپ کی قسم II درکار ہے۔",
+  "description is required":"تفصیل 2 درکار ہے۔",
+  "description registration of the scholarship":"تفصیل اسکالرشپ کی رجسٹریشن"
  }

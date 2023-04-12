@@ -14,6 +14,19 @@ const profileDetails = catchAsync(async (req, res) => {
   res.json({ status: true, message: null, data });
 });
 
+/**
+ * @desc profile details
+ * @access private
+ * @route /api/v1/profile/updateProfile
+ * @methud GET
+ */
+
+const updateProfile = catchAsync(async (req, res) => {
+  const data = await userService.updateUserById(req.user.userID, req.body);
+  res.json({ status: true, message: null, data });
+});
+
 module.exports = {
   profileDetails,
+  updateProfile,
 };

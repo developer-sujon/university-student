@@ -73,24 +73,26 @@ const Navigation = ({ openMenu, setOpenMenu, title = 'Home' }) => {
               <div className="user-dropdown">
                 <img
                   className="icon-nav-img icon-nav"
-                  src={profileDetails?.photo || defaultUserAvatar}
-                  alt={profileDetails?.email}
+                  src={profileDetails?.data?.photo || defaultUserAvatar}
+                  alt={profileDetails?.data?.email}
                   onClick={() => setOpenDropdown(!openDropdown)}
                 />
                 <div className={openDropdown ? 'user-dropdown-content d-block' : 'user-dropdown-content'}>
                   <div className="mt-4 text-center">
                     <img
                       className="icon-nav-img"
-                      src={profileDetails?.photo || defaultUserAvatar}
-                      alt={profileDetails?.email}
+                      src={profileDetails?.data?.photo || defaultUserAvatar}
+                      alt={profileDetails?.data?.email}
                     />
-                    <h6>{profileDetails?.name}</h6>
+                    <br />
+                    <span>{profileDetails?.data?.role}</span>
+                    <h6>{profileDetails?.data?.name}</h6>
                     <hr className="user-dropdown-divider  p-0" />
                   </div>
-                  {/* <NavLink to="/profile" className={({ isActive }) => (isActive ? 'link-item-active' : 'link-item')}>
+                  <NavLink to="/profile" className={({ isActive }) => (isActive ? 'link-item-active' : 'link-item')}>
                     <AiOutlineUser className="link-item-icon" />
                     <span className="link-item-caption">{t('profile')}</span>
-                  </NavLink> */}{' '}
+                  </NavLink>
                   <span onClick={() => dispatch(setLogout())} className="link-item" style={{ cursor: 'pointer' }}>
                     <AiOutlineLogout className="link-item-icon" />
                     <span className="link-item-caption">{t('logout')}</span>

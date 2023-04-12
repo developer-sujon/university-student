@@ -11,9 +11,11 @@ import Layout from '../../../layout/Layout';
 import { useScholarshipDeleteMutation, useScholarshipListQuery } from '../../../redux/services/scholarshipService';
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
+import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 
 const Scholarship = () => {
   const [singleScholarship, setSingleScholarship] = useState({});
+  const { data: profileDetails } = useProfileDetailsQuery();
 
   const { t } = useTranslation();
   const { data: Scholarships, isLoading } = useScholarshipListQuery();
@@ -36,13 +38,13 @@ const Scholarship = () => {
       sort: true,
     },
     {
-      Header: t('instructor'),
-      accessor: (d) => d.instructor,
+      Header: t('scholarship type'),
+      accessor: (d) => <span className="ms-1"> {d.scholarshipType}</span>,
       sort: true,
     },
     {
-      Header: t('assessment type'),
-      accessor: (d) => <span className="ms-1"> {d.assessmentType}</span>,
+      Header: t('description'),
+      accessor: (d) => <span className="ms-1"> {d.description}</span>,
       sort: true,
     },
     {
@@ -77,8 +79,16 @@ const Scholarship = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
           >
-            <Link to={`/scholarship-create-update?id=${d?.id}`}>
-              <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
+            <Link
+              to={`/scholarship-create-update?id=${d?.id}`}
+              onClick={(e) => e.d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT' && e.preventDefault()}
+            >
+              <Button
+                variant="primary"
+                style={{ padding: '5px 10px' }}
+                className="me-1"
+                disabled={d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT'}
+              >
                 <AiOutlineEdit />
               </Button>
             </Link>
@@ -88,7 +98,12 @@ const Scholarship = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('delete')}</Tooltip>}
           >
-            <Button variant="danger" style={{ padding: '5px 10px' }} onClick={() => deleteItem(d.id)}>
+            <Button
+              variant="danger"
+              style={{ padding: '5px 10px' }}
+              onClick={() => deleteItem(d.id)}
+              disabled={d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT'}
+            >
               <BsTrash />
             </Button>
           </OverlayTrigger>

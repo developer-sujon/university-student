@@ -10,6 +10,7 @@ const Others = lazy(() => import('../screens/private/Others/Others'));
 const SubjectRepetition = lazy(() => import('../screens/private/SubjectRepetition/SubjectRepetition'));
 const RetakeAssessment = lazy(() => import('../screens/private/RetakeAssessment/RetakeAssessment'));
 const Scholarship = lazy(() => import('../screens/private/Scholarship/Scholarship'));
+const Profile = lazy(() => import('../screens/private/Profile/Profile'));
 
 const CreateUpdateLeave = lazy(() => import('../screens/private/Leave/CreateUpdateLeave'));
 const CreateUpdateOthers = lazy(() => import('../screens/private/Others/CreateUpdateOthers'));
@@ -31,7 +32,7 @@ const privateRoutes = [
         <Dashboard />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -41,7 +42,7 @@ const privateRoutes = [
         <Dashboard />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -51,7 +52,7 @@ const privateRoutes = [
         <Leave />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -61,7 +62,7 @@ const privateRoutes = [
         <CreateUpdateLeave />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -71,7 +72,7 @@ const privateRoutes = [
         <SubjectRepetition />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -81,7 +82,7 @@ const privateRoutes = [
         <CreateUpdateSubjectRepetition />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -91,7 +92,7 @@ const privateRoutes = [
         <RetakeAssessment />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -101,7 +102,7 @@ const privateRoutes = [
         <CreateUpdateRetakeAssessment />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -111,7 +112,7 @@ const privateRoutes = [
         <Scholarship />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -121,7 +122,7 @@ const privateRoutes = [
         <CreateUpdateScholarship />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -131,7 +132,7 @@ const privateRoutes = [
         <Others />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
   {
@@ -141,7 +142,17 @@ const privateRoutes = [
         <CreateUpdateOthers />
       </LazyLoading>
     ),
-    roles: ['user', 'admin'],
+    roles: ['ADMIN', 'STUDENT'],
+    accessPermission: null,
+  },
+  {
+    path: '/profile',
+    element: (
+      <LazyLoading>
+        <Profile />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN', 'STUDENT'],
     accessPermission: null,
   },
 ];

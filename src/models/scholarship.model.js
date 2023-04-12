@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 //Internal Lib Import
 const { toJSON, paginate } = require('./plugins');
-const { status, assessment } = require('../config/enums');
+const { status, scholarship } = require('../config/enums');
 
 const scholarshipSchema = mongoose.Schema(
   {
@@ -17,15 +17,10 @@ const scholarshipSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    instructor: {
+    scholarshipType: {
       type: String,
       required: true,
-      trim: true,
-    },
-    assessmentType: {
-      type: String,
-      required: true,
-      enum: assessment,
+      enum: scholarship,
     },
     status: {
       type: String,
@@ -33,7 +28,7 @@ const scholarshipSchema = mongoose.Schema(
       default: 'PENDING',
       required: true,
     },
-    reason: {
+    description: {
       type: String,
       trim: true,
       required: true,

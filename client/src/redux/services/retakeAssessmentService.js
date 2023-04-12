@@ -39,10 +39,12 @@ export const retakeAssessmentService = apiService.injectEndpoints({
         const patchretakeAssessment = dispatch(
           apiService.util.updateQueryData('retakeAssessmentList', undefined, (draft) => {
             const findIndex = draft.data.findIndex((role) => role.id === id);
-            draft.data[findIndex].title = postBody.title;
+            draft.data[findIndex].assessmentType = postBody.assessmentType;
+            draft.data[findIndex].instructor = postBody.instructor;
+            draft.data[findIndex].reason = postBody.reason;
             draft.data[findIndex].status = postBody.status;
-            draft.data[findIndex].dueDate = postBody.dueDate;
-            draft.data[findIndex].descriptions = postBody.descriptions;
+            draft.data[findIndex].studentID = postBody.studentID;
+            draft.data[findIndex].subject = postBody.subject;
           })
         );
 

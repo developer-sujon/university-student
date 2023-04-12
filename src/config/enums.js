@@ -18,8 +18,14 @@ const allAssessment = {
   FINAL: [],
 };
 
+const allScholarship = {
+  FACS: [],
+  OTHERS: [],
+};
+
 const categories = Object.keys(allCategories);
 const status = Object.keys(allStatus);
 const assessment = Object.keys(allAssessment);
+const scholarship = Object.keys(allScholarship);
 
-module.exports = { categories, status, assessment };
+module.exports = { categories, status, assessment, scholarship };

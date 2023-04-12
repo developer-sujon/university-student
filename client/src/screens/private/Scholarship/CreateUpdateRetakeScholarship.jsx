@@ -19,9 +19,8 @@ const CreateUpdateScholarship = () => {
   let [objectID, SetObjectID] = useState(null);
   const [details, setDetails] = useState({
     subject: '',
-    instructor: '',
-    assessmentType: '',
-    reason: '',
+    scholarshipType: '',
+    description: '',
   });
 
   const { t } = useTranslation();
@@ -53,9 +52,8 @@ const CreateUpdateScholarship = () => {
     resolver: yupResolver(
       yup.object({
         subject: yup.string().required(t('subject is required')),
-        instructor: yup.string().required(t('instructor is required')),
-        assessmentType: yup.string().required(t('assessment type is required')),
-        reason: yup.string().required(t('reason is required')),
+        scholarshipType: yup.string().required(t('scholarship type is required')),
+        description: yup.string().required(t('description is required')),
       })
     ),
   });
@@ -69,12 +67,11 @@ const CreateUpdateScholarship = () => {
   /*
    * form handle submit
    */
-  const submitForm = ({ subject, instructor, assessmentType, reason }) => {
+  const submitForm = ({ subject, scholarshipType, description }) => {
     const postBody = {
       subject,
-      instructor,
-      assessmentType,
-      reason,
+      scholarshipType,
+      description,
     };
     if (!objectID) {
       ScholarshipCreate(postBody);
@@ -100,7 +97,7 @@ const CreateUpdateScholarship = () => {
               <Col>
                 <Form onSubmit={handleSubmit(submitForm)} onReset={reset}>
                   <Row class>
-                    <Col sm={4}>
+                    <Col sm={6}>
                       <Form.Group className="mb-3" controlId="subject">
                         <Form.Label>{t('subject')}</Form.Label>
                         <Controller
@@ -121,75 +118,52 @@ const CreateUpdateScholarship = () => {
                         {errors.subject && <Form.Text className="text-danger">{errors.subject.message}</Form.Text>}
                       </Form.Group>
                     </Col>
-                    <Col sm={4}>
-                      <Form.Group className="mb-3" controlId="instructor">
-                        <Form.Label>{t('instructor')}</Form.Label>
+                    <Col sm={6}>
+                      <Form.Group className="mb-3" controlId="scholarshipType">
+                        <Form.Label>{t('scholarship type')}</Form.Label>
                         <Controller
                           control={control}
-                          name="instructor"
-                          render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <Form.Control
-                              onChange={onChange}
-                              defaultValue={value}
-                              ref={ref}
-                              isInvalid={errors.instructor}
-                              placeholder={t('instructor of the scholarship')}
-                              type="text"
-                              size="sm"
-                            />
-                          )}
-                        />
-                        {errors.instructor && <Form.Text className="text-danger">{errors.instructor.message}</Form.Text>}
-                      </Form.Group>
-                    </Col>
-                    <Col sm={4}>
-                      <Form.Group className="mb-3" controlId="assessmentType">
-                        <Form.Label>{t('assessment type')}</Form.Label>
-
-                        <Controller
-                          control={control}
-                          name="assessmentType"
+                          name="scholarshipType"
                           render={({ field: { onChange, onBlur, value, ref } }) => (
                             <Form.Select
                               onChange={onChange}
                               value={value}
                               ref={ref}
                               isInvalid={errors.status}
-                              placeholder={t('assessment type of the scholarship')}
+                              placeholder={t('scholarship type of the scholarship')}
                               type="text"
                               size="sm"
                             >
-                              <option value="">{t('choice assessment')}</option>
-                              <option value="QUIZ">{t('QUIZ')}</option>
-                              <option value="MID_TERM">{t('MID_TERM')}</option>
-                              <option value="FINAL">{t('FINAL')}</option>
+                              <option value="">{t('choice scholarship')}</option>
+                              <option value="FACS">{t('FACS')}</option>
+                              <option value="OTHERS">{t('OTHERS')}</option>
                             </Form.Select>
                           )}
                         />
-                        {errors.assessmentType && (
-                          <Form.Text className="text-danger">{errors.assessmentType.message}</Form.Text>
+                        {errors.scholarshipType && (
+                          <Form.Text className="text-danger">{errors.scholarshipType.message}</Form.Text>
                         )}
                       </Form.Group>
                     </Col>
                     <Col sm={12}>
-                      <Form.Group className="mb-3" controlId="reason">
-                        <Form.Label>{t('reason')}</Form.Label>
+                      <Form.Group className="mb-3" controlId="description">
+                        <Form.Label>{t('description')}</Form.Label>
                         <Controller
                           control={control}
-                          name="reason"
+                          name="description"
                           render={({ field: { onChange, onBlur, value, ref } }) => (
                             <Form.Control
                               onChange={onChange}
                               defaultValue={value}
                               ref={ref}
-                              isInvalid={errors.reason}
-                              placeholder={t('reason registration of the scholarship')}
+                              isInvalid={errors.description}
+                              placeholder={t('description registration of the scholarship')}
                               as="textarea"
                               size="sm"
                             />
                           )}
                         />
-                        {errors.reason && <Form.Text className="text-danger">{errors.reason.message}</Form.Text>}
+                        {errors.description && <Form.Text className="text-danger">{errors.description.message}</Form.Text>}
                       </Form.Group>
                     </Col>
                   </Row>

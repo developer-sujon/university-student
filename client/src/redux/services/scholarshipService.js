@@ -39,10 +39,11 @@ export const scholarshipService = apiService.injectEndpoints({
         const patchscholarship = dispatch(
           apiService.util.updateQueryData('scholarshipList', undefined, (draft) => {
             const findIndex = draft.data.findIndex((role) => role.id === id);
-            draft.data[findIndex].title = postBody.title;
+            draft.data[findIndex].description = postBody.description;
+            draft.data[findIndex].scholarshipType = postBody.scholarshipType;
             draft.data[findIndex].status = postBody.status;
-            draft.data[findIndex].dueDate = postBody.dueDate;
-            draft.data[findIndex].descriptions = postBody.descriptions;
+            draft.data[findIndex].studentID = postBody.studentID;
+            draft.data[findIndex].subject = postBody.subject;
           })
         );
 

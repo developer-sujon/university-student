@@ -7,9 +7,8 @@ const { objectId } = require('./custom.validation');
 const scholarshipCreate = {
   body: Joi.object().keys({
     subject: Joi.string().required(),
-    instructor: Joi.string().required(),
-    assessmentType: Joi.string().valid('QUIZ', 'MID_TERM', 'FINAL'),
-    reason: Joi.string().required(),
+    scholarshipType: Joi.string().valid('FACS', 'OTHERS'),
+    description: Joi.string().required(),
     adminRemark: Joi.string(),
     attach: Joi.object(),
     status: Joi.string().valid('REJECTED', 'APPROVED', 'PENDING'),
@@ -28,9 +27,8 @@ const scholarshipUpdate = {
   }),
   body: Joi.object().keys({
     subject: Joi.string().required(),
-    instructor: Joi.string().required(),
-    assessmentType: Joi.string().valid('QUIZ', 'MID_TERM', 'FINAL'),
-    reason: Joi.string().required(),
+    scholarshipType: Joi.string().valid('FACS', 'OTHERS'),
+    description: Joi.string().required(),
     adminRemark: Joi.string(),
     attach: Joi.object(),
     status: Joi.string().valid('REJECTED', 'APPROVED', 'PENDING'),

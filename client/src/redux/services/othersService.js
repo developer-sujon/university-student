@@ -39,10 +39,10 @@ export const othersService = apiService.injectEndpoints({
         const patchothers = dispatch(
           apiService.util.updateQueryData('othersList', undefined, (draft) => {
             const findIndex = draft.data.findIndex((role) => role.id === id);
-            draft.data[findIndex].title = postBody.title;
+            draft.data[findIndex].description = postBody.description;
             draft.data[findIndex].status = postBody.status;
-            draft.data[findIndex].dueDate = postBody.dueDate;
-            draft.data[findIndex].descriptions = postBody.descriptions;
+            draft.data[findIndex].subject = postBody.subject;
+            draft.data[findIndex].studentID = postBody.studentID;
           })
         );
 

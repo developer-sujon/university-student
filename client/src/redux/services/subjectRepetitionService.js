@@ -39,10 +39,13 @@ export const subjectRepetitionService = apiService.injectEndpoints({
         const patchsubjectRepetition = dispatch(
           apiService.util.updateQueryData('subjectRepetitionList', undefined, (draft) => {
             const findIndex = draft.data.findIndex((role) => role.id === id);
-            draft.data[findIndex].title = postBody.title;
+            draft.data[findIndex].rollNo = postBody.rollNo;
+            draft.data[findIndex].session = postBody.session;
+            draft.data[findIndex].sessionCGPA = postBody.sessionCGPA;
+            draft.data[findIndex].sessionRegistration = postBody.sessionRegistration;
             draft.data[findIndex].status = postBody.status;
-            draft.data[findIndex].dueDate = postBody.dueDate;
-            draft.data[findIndex].descriptions = postBody.descriptions;
+            draft.data[findIndex].studentID = postBody.studentID;
+            draft.data[findIndex].studentName = postBody.studentName;
           })
         );
 

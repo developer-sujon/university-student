@@ -14,9 +14,11 @@ import {
 } from '../../../redux/services/retakeAssessmentService';
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
+import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 
 const RetakeAssessment = () => {
   const [singleRetakeAssessment, setSingleRetakeAssessment] = useState({});
+  const { data: profileDetails } = useProfileDetailsQuery();
 
   const { t } = useTranslation();
   const { data: RetakeAssessments, isLoading } = useRetakeAssessmentListQuery();
@@ -80,8 +82,16 @@ const RetakeAssessment = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
           >
-            <Link to={`/retake-assessment-create-update?id=${d?.id}`}>
-              <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
+            <Link
+              to={`/retake-assessment-create-update?id=${d?.id}`}
+              onClick={(e) => e.d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT' && e.preventDefault()}
+            >
+              <Button
+                variant="primary"
+                style={{ padding: '5px 10px' }}
+                className="me-1"
+                disabled={d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT'}
+              >
                 <AiOutlineEdit />
               </Button>
             </Link>
@@ -91,7 +101,12 @@ const RetakeAssessment = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('delete')}</Tooltip>}
           >
-            <Button variant="danger" style={{ padding: '5px 10px' }} onClick={() => deleteItem(d.id)}>
+            <Button
+              variant="danger"
+              style={{ padding: '5px 10px' }}
+              onClick={() => deleteItem(d.id)}
+              disabled={d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT'}
+            >
               <BsTrash />
             </Button>
           </OverlayTrigger>

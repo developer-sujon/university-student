@@ -1,4 +1,5 @@
 module.exports.authValidation = require('./auth.validation');
+module.exports.profileValidation = require('./profile.validation');
 // module.exports.userValidation = require('./user.validation');
 module.exports.leaveValidation = require('./leave.validation');
 module.exports.retakeAssessmentValidation = require('./retake.assessment.validation');

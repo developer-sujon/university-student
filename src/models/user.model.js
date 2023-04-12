@@ -9,12 +9,10 @@ const { roles } = require('../config/roles');
 
 const userSchema = mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      minlength: 3,
-      maxlength: 30,
-    },
+    name: String,
+    address: String,
+    image: String,
+    mobile: String,
     email: {
       type: String,
       required: true,
@@ -43,7 +41,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
       enum: roles,
-      default: 'admin',
+      default: 'STUDENT',
     },
   },
   {
