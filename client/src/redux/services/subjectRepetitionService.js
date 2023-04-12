@@ -36,24 +36,25 @@ export const subjectRepetitionService = apiService.injectEndpoints({
       }),
 
       async onQueryStarted({ id, postBody }, { dispatch, queryFulfilled }) {
-        const patchsubjectRepetition = dispatch(
-          apiService.util.updateQueryData('subjectRepetitionList', undefined, (draft) => {
-            const findIndex = draft.data.findIndex((role) => role.id === id);
-            draft.data[findIndex].rollNo = postBody.rollNo;
-            draft.data[findIndex].session = postBody.session;
-            draft.data[findIndex].sessionCGPA = postBody.sessionCGPA;
-            draft.data[findIndex].sessionRegistration = postBody.sessionRegistration;
-            draft.data[findIndex].status = postBody.status;
-            draft.data[findIndex].studentID = postBody.studentID;
-            draft.data[findIndex].studentName = postBody.studentName;
-          })
-        );
-
         try {
-          await queryFulfilled;
+          const { data } = await queryFulfilled;
+
+          dispatch(
+            apiService.util.updateQueryData('subjectRepetitionList', undefined, (draft) => {
+              const findIndex = draft.data.findIndex((role) => role.id === id);
+              draft.data[findIndex].rollNo = postBody.rollNo;
+              draft.data[findIndex].session = postBody.session;
+              draft.data[findIndex].sessionCGPA = postBody.sessionCGPA;
+              draft.data[findIndex].sessionRegistration = postBody.sessionRegistration;
+              draft.data[findIndex].status = data?.data?.status;
+              draft.data[findIndex].studentID = postBody.studentID;
+              draft.data[findIndex].studentName = postBody.studentName;
+            })
+          );
+
           //dispatch(dashboardService.endpoints.dashboardSummary.initiate());
         } catch {
-          patchsubjectRepetition.undo();
+          //patchsubjectRepetition.undo();
         }
       },
     }),

@@ -36,24 +36,25 @@ export const leaveService = apiService.injectEndpoints({
       }),
 
       async onQueryStarted({ id, postBody }, { dispatch, queryFulfilled }) {
-        const patchleave = dispatch(
-          apiService.util.updateQueryData('leaveList', undefined, (draft) => {
-            const findIndex = draft.data.findIndex((role) => role.id === id);
-            draft.data[findIndex].duration = postBody.duration;
-            draft.data[findIndex].endDate = postBody.endDate;
-            draft.data[findIndex].reason = postBody.reason;
-            draft.data[findIndex].startDate = postBody.startDate;
-            draft.data[findIndex].status = postBody.status;
-            draft.data[findIndex].studentID = postBody.studentID;
-            draft.data[findIndex].subject = postBody.subject;
-          })
-        );
-
         try {
-          await queryFulfilled;
+          const { data } = await queryFulfilled;
+
+          dispatch(
+            apiService.util.updateQueryData('leaveList', undefined, (draft) => {
+              const findIndex = draft.data.findIndex((role) => role.id === id);
+              draft.data[findIndex].duration = data?.data?.duration;
+              draft.data[findIndex].endDate = data?.data?.endDate;
+              draft.data[findIndex].reason = data?.data?.reason;
+              draft.data[findIndex].startDate = data?.data?.startDate;
+              draft.data[findIndex].status = data?.data?.status;
+              draft.data[findIndex].studentID = data?.data?.studentID;
+              draft.data[findIndex].subject = data?.data?.subject;
+            })
+          );
+
           //dispatch(dashboardService.endpoints.dashboardSummary.initiate());
         } catch {
-          patchleave.undo();
+          //patchleave.undo();
         }
       },
     }),

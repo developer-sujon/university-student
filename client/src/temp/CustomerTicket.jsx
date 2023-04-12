@@ -24,6 +24,11 @@ const CustomerTicket = () => {
       sort: true,
     },
     {
+      Header: t('student id'),
+      accessor: (d) => <span className="ms-1"> {d.studentID}</span>,
+      sort: true,
+    },
+    {
       Header: t('subject'),
       accessor: (d) => d?.subject,
       sort: true,

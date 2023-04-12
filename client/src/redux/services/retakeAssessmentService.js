@@ -36,23 +36,23 @@ export const retakeAssessmentService = apiService.injectEndpoints({
       }),
 
       async onQueryStarted({ id, postBody }, { dispatch, queryFulfilled }) {
-        const patchretakeAssessment = dispatch(
-          apiService.util.updateQueryData('retakeAssessmentList', undefined, (draft) => {
-            const findIndex = draft.data.findIndex((role) => role.id === id);
-            draft.data[findIndex].assessmentType = postBody.assessmentType;
-            draft.data[findIndex].instructor = postBody.instructor;
-            draft.data[findIndex].reason = postBody.reason;
-            draft.data[findIndex].status = postBody.status;
-            draft.data[findIndex].studentID = postBody.studentID;
-            draft.data[findIndex].subject = postBody.subject;
-          })
-        );
-
         try {
-          await queryFulfilled;
+          const { data } = await queryFulfilled;
+
+          dispatch(
+            apiService.util.updateQueryData('retakeAssessmentList', undefined, (draft) => {
+              const findIndex = draft.data.findIndex((role) => role.id === id);
+              draft.data[findIndex].assessmentType = data?.data.assessmentType;
+              draft.data[findIndex].instructor = data?.data.instructor;
+              draft.data[findIndex].reason = data?.data.reason;
+              draft.data[findIndex].status = data?.data?.status;
+              draft.data[findIndex].studentID = data?.data.studentID;
+              draft.data[findIndex].subject = data?.data.subject;
+            })
+          );
           //dispatch(dashboardService.endpoints.dashboardSummary.initiate());
         } catch {
-          patchretakeAssessment.undo();
+          //patchretakeAssessment.undo();
         }
       },
     }),

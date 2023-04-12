@@ -12,7 +12,7 @@ const { commonService } = require('.');
  */
 
 const leaveCreate = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
   return new Leave({ studentID, ...request.body }).save();
 };
 
@@ -22,10 +22,12 @@ const leaveCreate = (request) => {
  */
 
 const leaveDropDown = (request) => {
-  const { studentID } = request.user;
-  const matchQuery = {
-    studentID: ObjectId(studentID),
-  };
+  const { studentID, role } = request.user;
+
+  const matchQuery = {};
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
     label: '$title',
@@ -41,14 +43,15 @@ const leaveDropDown = (request) => {
  */
 
 const leaveList = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
-  const matchQuery = {
-    studentID: ObjectId(studentID),
-  };
+  const matchQuery = {};
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
-    studentID: 0,
+    role: 0,
   };
 
   return commonService.findService(Leave, matchQuery, projection);
@@ -60,15 +63,17 @@ const leaveList = (request) => {
  */
 
 const leaveDetails = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
-    studentID: 0,
+    role: 0,
   };
 
   return commonService.findOneService(Leave, matchQuery, projection);
@@ -80,12 +85,14 @@ const leaveDetails = (request) => {
  */
 
 const leaveUpdate = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
   const errorMessage = request.t('leave not found');
   return commonService.updateService(Leave, matchQuery, request.body, errorMessage);
 };
@@ -96,12 +103,14 @@ const leaveUpdate = (request) => {
  */
 
 const leaveDelete = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
   const errorMessage = request.t('leave not found');
   return commonService.deleteService(Leave, matchQuery, errorMessage);
 };

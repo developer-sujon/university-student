@@ -44,9 +44,18 @@ const updateUserById = (id, updateBody) => {
   return User.findByIdAndUpdate(id, updateBody, { new: true });
 };
 
+/**
+ * get Users
+ * @returns {Promise<[User]>}
+ */
+const getUsers = (matchQuery) => {
+  return User.find(matchQuery);
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
   updateUserById,
   getUserById,
+  getUsers,
 };

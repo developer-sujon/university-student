@@ -16,6 +16,12 @@ export const profileService = apiService.injectEndpoints({
         body: postBody,
       }),
     }),
+    studentList: builder.query({
+      query: () => ({
+        url: 'profile',
+        method: 'GET',
+      }),
+    }),
   }),
 });
-export const { useProfileDetailsQuery, useUpdateProfileMutation } = profileService;
+export const { useProfileDetailsQuery, useUpdateProfileMutation, useStudentListQuery } = profileService;

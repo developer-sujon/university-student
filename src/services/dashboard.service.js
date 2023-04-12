@@ -12,7 +12,7 @@ const { commonService } = require('.');
  */
 
 const dashboardSummary = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
     $match: { studentID: ObjectId(studentID) },

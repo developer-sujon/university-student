@@ -5,12 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { AiOutlineEdit, AiOutlineFolderView } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { BsTrash } from 'react-icons/bs';
+import { GrStatusGood } from 'react-icons/gr';
 
 //Internal lib imports
 import Layout from '../../../layout/Layout';
 import {
   useRetakeAssessmentDeleteMutation,
   useRetakeAssessmentListQuery,
+  useRetakeAssessmentUpdateMutation,
 } from '../../../redux/services/retakeAssessmentService';
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
@@ -19,6 +21,7 @@ import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 const RetakeAssessment = () => {
   const [singleRetakeAssessment, setSingleRetakeAssessment] = useState({});
   const { data: profileDetails } = useProfileDetailsQuery();
+  const [retakeAssessmentUpdate] = useRetakeAssessmentUpdateMutation();
 
   const { t } = useTranslation();
   const { data: RetakeAssessments, isLoading } = useRetakeAssessmentListQuery();
@@ -29,10 +32,20 @@ const RetakeAssessment = () => {
     AleartMessage.Delete(id, RetakeAssessmentDelete);
   };
 
+  const updateStatus = (data) => {
+    const { id, studentID, ...others } = data;
+    AleartMessage.StatusUpdate(id, others, retakeAssessmentUpdate);
+  };
+
   const columns = [
     {
       Header: '#',
       accessor: (_, index) => index + 1,
+      sort: true,
+    },
+    {
+      Header: t('student id'),
+      accessor: (d) => <span className="ms-1"> {d.studentID}</span>,
       sort: true,
     },
     {
@@ -77,6 +90,17 @@ const RetakeAssessment = () => {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
+          {profileDetails?.data?.role !== 'STUDENT' && (
+            <OverlayTrigger
+              placement="top"
+              delay={{ show: 250, hide: 400 }}
+              overlay={<Tooltip id="button-tooltip">{t('status')}</Tooltip>}
+            >
+              <Button className="mr-10" variant="warning" style={{ padding: '5px 10px' }} onClick={() => updateStatus(d)}>
+                <GrStatusGood />
+              </Button>
+            </OverlayTrigger>
+          )}
           <OverlayTrigger
             placement="top"
             delay={{ show: 250, hide: 400 }}
@@ -84,7 +108,9 @@ const RetakeAssessment = () => {
           >
             <Link
               to={`/retake-assessment-create-update?id=${d?.id}`}
-              onClick={(e) => e.d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT' && e.preventDefault()}
+              onClick={(e) =>
+                d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT' ? e.preventDefault() : undefined
+              }
             >
               <Button
                 variant="primary"

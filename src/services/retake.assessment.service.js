@@ -12,7 +12,7 @@ const { commonService } = require('.');
  */
 
 const retakeAssessmentCreate = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
   return new RetakeAssessment({ studentID, ...request.body }).save();
 };
 
@@ -22,10 +22,12 @@ const retakeAssessmentCreate = (request) => {
  */
 
 const retakeAssessmentDropDown = (request) => {
-  const { studentID } = request.user;
-  const matchQuery = {
-    studentID: ObjectId(studentID),
-  };
+  const { studentID, role } = request.user;
+
+  const matchQuery = {};
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
     label: '$title',
@@ -41,14 +43,15 @@ const retakeAssessmentDropDown = (request) => {
  */
 
 const retakeAssessmentList = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
-  const matchQuery = {
-    studentID: ObjectId(studentID),
-  };
+  const matchQuery = {};
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
-    studentID: 0,
+    role: 0,
   };
 
   return commonService.findService(RetakeAssessment, matchQuery, projection);
@@ -60,15 +63,18 @@ const retakeAssessmentList = (request) => {
  */
 
 const retakeAssessmentDetails = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
 
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
+
   const projection = {
-    studentID: 0,
+    role: 0,
   };
 
   return commonService.findOneService(RetakeAssessment, matchQuery, projection);
@@ -80,12 +86,14 @@ const retakeAssessmentDetails = (request) => {
  */
 
 const retakeAssessmentUpdate = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
   const errorMessage = request.t('retakeAssessment not found');
   return commonService.updateService(RetakeAssessment, matchQuery, request.body, errorMessage);
 };
@@ -96,12 +104,14 @@ const retakeAssessmentUpdate = (request) => {
  */
 
 const retakeAssessmentDelete = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
   const errorMessage = request.t('retakeAssessment not found');
   return commonService.deleteService(RetakeAssessment, matchQuery, errorMessage);
 };

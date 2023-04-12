@@ -36,21 +36,21 @@ export const othersService = apiService.injectEndpoints({
       }),
 
       async onQueryStarted({ id, postBody }, { dispatch, queryFulfilled }) {
-        const patchothers = dispatch(
-          apiService.util.updateQueryData('othersList', undefined, (draft) => {
-            const findIndex = draft.data.findIndex((role) => role.id === id);
-            draft.data[findIndex].description = postBody.description;
-            draft.data[findIndex].status = postBody.status;
-            draft.data[findIndex].subject = postBody.subject;
-            draft.data[findIndex].studentID = postBody.studentID;
-          })
-        );
-
         try {
-          await queryFulfilled;
+          const { data } = await queryFulfilled;
+
+          dispatch(
+            apiService.util.updateQueryData('othersList', undefined, (draft) => {
+              const findIndex = draft.data.findIndex((role) => role.id === id);
+              draft.data[findIndex].description = data?.data?.description;
+              draft.data[findIndex].status = data?.data?.status;
+              draft.data[findIndex].subject = data?.data?.subject;
+              draft.data[findIndex].studentID = data?.data?.studentID;
+            })
+          );
           //dispatch(dashboardService.endpoints.dashboardSummary.initiate());
         } catch {
-          patchothers.undo();
+          // patchothers.undo();
         }
       },
     }),

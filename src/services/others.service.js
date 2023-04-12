@@ -12,7 +12,7 @@ const { commonService } = require('.');
  */
 
 const othersCreate = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
   return new Others({ studentID, ...request.body }).save();
 };
 
@@ -22,10 +22,12 @@ const othersCreate = (request) => {
  */
 
 const othersDropDown = (request) => {
-  const { studentID } = request.user;
-  const matchQuery = {
-    studentID: ObjectId(studentID),
-  };
+  const { studentID, role } = request.user;
+
+  const matchQuery = {};
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
     label: '$title',
@@ -41,14 +43,15 @@ const othersDropDown = (request) => {
  */
 
 const othersList = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
-  const matchQuery = {
-    studentID: ObjectId(studentID),
-  };
+  const matchQuery = {};
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
-    studentID: 0,
+    role: 0,
   };
 
   return commonService.findService(Others, matchQuery, projection);
@@ -60,15 +63,17 @@ const othersList = (request) => {
  */
 
 const othersDetails = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
-    studentID: 0,
+    role: 0,
   };
 
   return commonService.findOneService(Others, matchQuery, projection);
@@ -80,12 +85,14 @@ const othersDetails = (request) => {
  */
 
 const othersUpdate = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
   const errorMessage = request.t('others not found');
   return commonService.updateService(Others, matchQuery, request.body, errorMessage);
 };
@@ -96,12 +103,14 @@ const othersUpdate = (request) => {
  */
 
 const othersDelete = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
   const errorMessage = request.t('others not found');
   return commonService.deleteService(Others, matchQuery, errorMessage);
 };

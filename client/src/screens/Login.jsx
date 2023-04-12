@@ -27,7 +27,7 @@ const Login = () => {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      email: 'devoloper.sujon@gmail.com',
+      email: 'admin@gmail.com',
       password: 'pass1234@',
     },
     resolver: yupResolver(

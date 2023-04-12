@@ -36,22 +36,23 @@ export const scholarshipService = apiService.injectEndpoints({
       }),
 
       async onQueryStarted({ id, postBody }, { dispatch, queryFulfilled }) {
-        const patchscholarship = dispatch(
-          apiService.util.updateQueryData('scholarshipList', undefined, (draft) => {
-            const findIndex = draft.data.findIndex((role) => role.id === id);
-            draft.data[findIndex].description = postBody.description;
-            draft.data[findIndex].scholarshipType = postBody.scholarshipType;
-            draft.data[findIndex].status = postBody.status;
-            draft.data[findIndex].studentID = postBody.studentID;
-            draft.data[findIndex].subject = postBody.subject;
-          })
-        );
-
         try {
-          await queryFulfilled;
+          const { data } = await queryFulfilled;
+
+          dispatch(
+            apiService.util.updateQueryData('scholarshipList', undefined, (draft) => {
+              const findIndex = draft.data.findIndex((role) => role.id === id);
+              draft.data[findIndex].description = postBody.description;
+              draft.data[findIndex].scholarshipType = postBody.scholarshipType;
+              draft.data[findIndex].status = data?.data?.status;
+              draft.data[findIndex].studentID = postBody.studentID;
+              draft.data[findIndex].subject = postBody.subject;
+            })
+          );
+
           //dispatch(dashboardService.endpoints.dashboardSummary.initiate());
         } catch {
-          patchscholarship.undo();
+          // patchscholarship.undo();
         }
       },
     }),

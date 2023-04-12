@@ -38,15 +38,15 @@ class AleartMessage {
     });
   }
 
-  static CourseUpdate(id, option, postBody, request) {
+  static StatusUpdate(id, data, request) {
     return Swal.fire({
       title: 'Change Status',
       input: 'select',
-      inputOptions: option,
-      inputValue: postBody.status,
+      inputOptions: { PENDING: 'PENDING', REJECTED: 'REJECTED', APPROVED: 'APPROVED' },
+      // inputValue: postBody.status,
     }).then((result) => {
       if (result.isConfirmed) {
-        return request(id, { ...postBody, status: result.value }).then((res) => {
+        return request({ id, postBody: { ...data, status: result.value } }).then((res) => {
           return res;
         });
       }

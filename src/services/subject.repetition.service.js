@@ -12,7 +12,7 @@ const { commonService } = require('.');
  */
 
 const subjectRepetitionCreate = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
   return new SubjectRepetition({ studentID, ...request.body }).save();
 };
 
@@ -22,10 +22,12 @@ const subjectRepetitionCreate = (request) => {
  */
 
 const subjectRepetitionDropDown = (request) => {
-  const { studentID } = request.user;
-  const matchQuery = {
-    studentID: ObjectId(studentID),
-  };
+  const { studentID, role } = request.user;
+
+  const matchQuery = {};
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
     label: '$title',
@@ -41,14 +43,15 @@ const subjectRepetitionDropDown = (request) => {
  */
 
 const subjectRepetitionList = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
-  const matchQuery = {
-    studentID: ObjectId(studentID),
-  };
+  const matchQuery = {};
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
-    studentID: 0,
+    role: 0,
   };
 
   return commonService.findService(SubjectRepetition, matchQuery, projection);
@@ -60,15 +63,17 @@ const subjectRepetitionList = (request) => {
  */
 
 const subjectRepetitionDetails = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
-    studentID: 0,
+    role: 0,
   };
 
   return commonService.findOneService(SubjectRepetition, matchQuery, projection);
@@ -80,12 +85,15 @@ const subjectRepetitionDetails = (request) => {
  */
 
 const subjectRepetitionUpdate = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
+
   const errorMessage = request.t('subjectRepetition not found');
   return commonService.updateService(SubjectRepetition, matchQuery, request.body, errorMessage);
 };
@@ -96,12 +104,14 @@ const subjectRepetitionUpdate = (request) => {
  */
 
 const subjectRepetitionDelete = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
   const errorMessage = request.t('subjectRepetition not found');
   return commonService.deleteService(SubjectRepetition, matchQuery, errorMessage);
 };

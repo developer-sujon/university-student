@@ -87,6 +87,10 @@
  "address of the profile":"Address of the Profile",
  "mobile of the profile":"Mobile of the Profile",
  "scholarship type":"Scholarship Type",
+ "email":"Email",
+ "students":"Students",
+ "REJECTED":"Rejected",
+ "APPROVED":"Approved",
  "choice scholarship":"Choice Scholarship",
  "scholarship type is required":"Scholarship Type is Required",
  "description registration of the scholarship":"Description Registration of the Scholarship"

@@ -5,12 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { AiOutlineEdit, AiOutlineFolderView } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { BsTrash } from 'react-icons/bs';
+import { GrStatusGood } from 'react-icons/gr';
 
 //Internal lib imports
 import Layout from '../../../layout/Layout';
 import {
   useSubjectRepetitionDeleteMutation,
   useSubjectRepetitionListQuery,
+  useSubjectRepetitionUpdateMutation,
 } from '../../../redux/services/subjectRepetitionService';
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
@@ -19,6 +21,7 @@ import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 const SubjectRepetition = () => {
   const [singleSubjectRepetition, setSingleSubjectRepetition] = useState({});
   const { data: profileDetails } = useProfileDetailsQuery();
+  const [subjectRepetitionUpdate] = useSubjectRepetitionUpdateMutation();
 
   const { t } = useTranslation();
   const { data: SubjectRepetitions, isLoading } = useSubjectRepetitionListQuery();
@@ -29,10 +32,20 @@ const SubjectRepetition = () => {
     AleartMessage.Delete(id, SubjectRepetitionDelete);
   };
 
+  const updateStatus = (data) => {
+    const { id, studentID, ...others } = data;
+    AleartMessage.StatusUpdate(id, others, subjectRepetitionUpdate);
+  };
+
   const columns = [
     {
       Header: '#',
       accessor: (_, index) => index + 1,
+      sort: true,
+    },
+    {
+      Header: t('student id'),
+      accessor: (d) => <span className="ms-1"> {d.studentID}</span>,
       sort: true,
     },
     {
@@ -87,6 +100,17 @@ const SubjectRepetition = () => {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
+          {profileDetails?.data?.role !== 'STUDENT' && (
+            <OverlayTrigger
+              placement="top"
+              delay={{ show: 250, hide: 400 }}
+              overlay={<Tooltip id="button-tooltip">{t('status')}</Tooltip>}
+            >
+              <Button className="mr-10" variant="warning" style={{ padding: '5px 10px' }} onClick={() => updateStatus(d)}>
+                <GrStatusGood />
+              </Button>
+            </OverlayTrigger>
+          )}
           <OverlayTrigger
             placement="top"
             delay={{ show: 250, hide: 400 }}
@@ -94,7 +118,9 @@ const SubjectRepetition = () => {
           >
             <Link
               to={`/subject-repetition-create-update?id=${d?.id}`}
-              onClick={(e) => e.d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT' && e.preventDefault()}
+              onClick={(e) =>
+                d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT' ? e.preventDefault() : undefined
+              }
             >
               <Button
                 variant="primary"

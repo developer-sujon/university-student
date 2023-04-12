@@ -12,7 +12,7 @@ const { commonService } = require('.');
  */
 
 const scholarshipCreate = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
   return new Scholarship({ studentID, ...request.body }).save();
 };
 
@@ -22,10 +22,12 @@ const scholarshipCreate = (request) => {
  */
 
 const scholarshipDropDown = (request) => {
-  const { studentID } = request.user;
-  const matchQuery = {
-    studentID: ObjectId(studentID),
-  };
+  const { studentID, role } = request.user;
+
+  const matchQuery = {};
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
     label: '$title',
@@ -41,14 +43,15 @@ const scholarshipDropDown = (request) => {
  */
 
 const scholarshipList = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
-  const matchQuery = {
-    studentID: ObjectId(studentID),
-  };
+  const matchQuery = {};
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
-    studentID: 0,
+    role: 0,
   };
 
   return commonService.findService(Scholarship, matchQuery, projection);
@@ -60,15 +63,17 @@ const scholarshipList = (request) => {
  */
 
 const scholarshipDetails = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
 
   const projection = {
-    studentID: 0,
+    role: 0,
   };
 
   return commonService.findOneService(Scholarship, matchQuery, projection);
@@ -80,12 +85,14 @@ const scholarshipDetails = (request) => {
  */
 
 const scholarshipUpdate = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
   const errorMessage = request.t('scholarship not found');
   return commonService.updateService(Scholarship, matchQuery, request.body, errorMessage);
 };
@@ -96,12 +103,14 @@ const scholarshipUpdate = (request) => {
  */
 
 const scholarshipDelete = (request) => {
-  const { studentID } = request.user;
+  const { studentID, role } = request.user;
 
   const matchQuery = {
-    studentID: ObjectId(studentID),
     _id: ObjectId(request.params.id),
   };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
   const errorMessage = request.t('scholarship not found');
   return commonService.deleteService(Scholarship, matchQuery, errorMessage);
 };

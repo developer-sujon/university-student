@@ -32,10 +32,10 @@ const leaveUpdate = {
     endDate: Joi.string().required(),
     duration: Joi.number().min(1).max(30).required(),
     subject: Joi.string().required(),
-    reason: Joi.string(),
+    reason: Joi.string().required(),
     adminRemark: Joi.string(),
     attach: Joi.object(),
-    status: Joi.string().valid('Rejected', 'Approved', 'Pending'),
+    status: Joi.string().valid('REJECTED', 'APPROVED', 'PENDING'),
   }),
 };
 

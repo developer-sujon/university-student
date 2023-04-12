@@ -11,6 +11,7 @@ const SubjectRepetition = lazy(() => import('../screens/private/SubjectRepetitio
 const RetakeAssessment = lazy(() => import('../screens/private/RetakeAssessment/RetakeAssessment'));
 const Scholarship = lazy(() => import('../screens/private/Scholarship/Scholarship'));
 const Profile = lazy(() => import('../screens/private/Profile/Profile'));
+const Students = lazy(() => import('../screens/private/Students/Students'));
 
 const CreateUpdateLeave = lazy(() => import('../screens/private/Leave/CreateUpdateLeave'));
 const CreateUpdateOthers = lazy(() => import('../screens/private/Others/CreateUpdateOthers'));
@@ -43,6 +44,16 @@ const privateRoutes = [
       </LazyLoading>
     ),
     roles: ['ADMIN', 'STUDENT'],
+    accessPermission: null,
+  },
+  {
+    path: '/students',
+    element: (
+      <LazyLoading>
+        <Students />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
     accessPermission: null,
   },
   {
