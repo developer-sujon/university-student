@@ -100,14 +100,20 @@ const Others = () => {
             <Link
               to={`/others-create-update?id=${d?.id}`}
               onClick={(e) =>
-                d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT' ? e.preventDefault() : undefined
+                (d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT') ||
+                profileDetails?.data?.role === 'ADMIN'
+                  ? e.preventDefault()
+                  : undefined
               }
             >
               <Button
                 variant="primary"
                 style={{ padding: '5px 10px' }}
                 className="me-1"
-                disabled={d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT'}
+                disabled={
+                  (d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT') ||
+                  profileDetails?.data?.role === 'ADMIN'
+                }
               >
                 <AiOutlineEdit />
               </Button>
@@ -122,7 +128,10 @@ const Others = () => {
               variant="danger"
               style={{ padding: '5px 10px' }}
               onClick={() => deleteItem(d.id)}
-              disabled={d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT'}
+              disabled={
+                (d?.status !== 'PENDING' && profileDetails?.data?.role === 'STUDENT') ||
+                profileDetails?.data?.role === 'ADMIN'
+              }
             >
               <BsTrash />
             </Button>
@@ -159,8 +168,11 @@ const Others = () => {
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
                 <h5>{t('Others')}</h5>
-                <Link to={'/others-create-update'}>
-                  <Button size="sm" variant="primary">
+                <Link
+                  to={'/others-create-update'}
+                  onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
+                >
+                  <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
                     {t('create Others')}
                   </Button>
                 </Link>
