@@ -18,6 +18,7 @@ const authSlice = createSlice({
       state.userDetails = SessionHelper.GetToken() && jwt_decode(SessionHelper.GetToken());
     },
     setLogout: (state, action) => {
+      window.location.href = '/login';
       SessionHelper.RemoveToken();
       state.accessToken = undefined;
     },

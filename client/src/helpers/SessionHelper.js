@@ -1,12 +1,12 @@
 class SessionHelper {
   static SetToken(token) {
-    localStorage.setItem('hellwetAccessToken', token);
+    localStorage.setItem('uniAccessToken', token);
   }
   static GetToken() {
-    return localStorage.getItem('hellwetAccessToken');
+    return localStorage.getItem('uniAccessToken');
   }
   static RemoveToken() {
-    return localStorage.removeItem('hellwetAccessToken');
+    return localStorage.removeItem('uniAccessToken');
   }
   static SetUserDetails(userDetails) {
     localStorage.setItem('userDetails', JSON.stringify(userDetails));
