@@ -6,3 +6,6 @@ module.exports.retakeAssessmentController = require('./retake.assessment.control
 module.exports.subjectRepetitionController = require('./subject.repetition.controller');
 module.exports.scholarshipController = require('./scholarship.controller');
 module.exports.othersController = require('./others.controller');
+module.exports.sessionController = require('./session.controller');
+module.exports.coursesController = require('./courses.controller');
+module.exports.enrollController = require('./enroll.controller');

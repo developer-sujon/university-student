@@ -6,3 +6,6 @@ module.exports.RetakeAssessment = require('./retake.assessment.model');
 module.exports.SubjectRepetition = require('./subject.repetition.model');
 module.exports.Scholarship = require('./scholarship.model');
 module.exports.Others = require('./others.model');
+module.exports.Session = require('./session.model');
+module.exports.Courses = require('./courses.model');
+module.exports.Enroll = require('./enroll.model');

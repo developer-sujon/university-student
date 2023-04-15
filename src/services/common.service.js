@@ -33,6 +33,13 @@ const findService = (dataModel, matchQuery, projection, sort) => {
   return dataModel.find(matchQuery).select(projection).sort(sort);
 };
 
+const findServicePopulateTwo = (dataModel, matchQuery, projection, populateOne, populateTow, sort) => {
+  sort = sort || {
+    _id: -1,
+  };
+  return dataModel.find(matchQuery).populate(populateOne).populate(populateTow).select(projection);
+};
+
 const findOneService = (dataModel, matchQuery, projection) => {
   return dataModel.findOne(matchQuery).select(projection);
 };
@@ -71,4 +78,5 @@ module.exports = {
   detailsJoinService,
   updateService,
   deleteService,
+  findServicePopulateTwo,
 };

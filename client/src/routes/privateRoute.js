@@ -12,6 +12,8 @@ const RetakeAssessment = lazy(() => import('../screens/private/RetakeAssessment/
 const Scholarship = lazy(() => import('../screens/private/Scholarship/Scholarship'));
 const Profile = lazy(() => import('../screens/private/Profile/Profile'));
 const Students = lazy(() => import('../screens/private/Students/Students'));
+const ElectiveCourses = lazy(() => import('../screens/private/Admin/ElectiveCourses'));
+const Enroll = lazy(() => import('../screens/private/Admin/Enroll'));
 
 const CreateUpdateLeave = lazy(() => import('../screens/private/Leave/CreateUpdateLeave'));
 const CreateUpdateOthers = lazy(() => import('../screens/private/Others/CreateUpdateOthers'));
@@ -20,6 +22,8 @@ const CreateUpdateSubjectRepetition = lazy(() =>
 );
 const CreateUpdateRetakeAssessment = lazy(() => import('../screens/private/RetakeAssessment/CreateUpdateRetakeAssessment'));
 const CreateUpdateScholarship = lazy(() => import('../screens/private/Scholarship/CreateUpdateRetakeScholarship'));
+const CreateUpdateSession = lazy(() => import('../screens/private/Admin/CreateUpdateSession'));
+const CreateUpdateCourses = lazy(() => import('../screens/private/Admin/CreateUpdateCourses'));
 
 const LazyLoading = ({ children }) => {
   return <Suspense fallback={<LazyLoader />}>{children}</Suspense>;
@@ -117,6 +121,36 @@ const privateRoutes = [
     accessPermission: null,
   },
   {
+    path: '/session-create-update',
+    element: (
+      <LazyLoading>
+        <CreateUpdateSession />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/courses-create-update',
+    element: (
+      <LazyLoading>
+        <CreateUpdateCourses />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/enrolled-student',
+    element: (
+      <LazyLoading>
+        <Enroll />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
     path: '/scholarship',
     element: (
       <LazyLoading>
@@ -164,6 +198,16 @@ const privateRoutes = [
       </LazyLoading>
     ),
     roles: ['ADMIN', 'STUDENT'],
+    accessPermission: null,
+  },
+  {
+    path: '/elective-courses',
+    element: (
+      <LazyLoading>
+        <ElectiveCourses />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
     accessPermission: null,
   },
 ];

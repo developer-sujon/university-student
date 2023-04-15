@@ -9,6 +9,7 @@ import { MdSubject, MdCastForEducation } from 'react-icons/md';
 import { RiCompassesLine } from 'react-icons/ri';
 import { SiSemanticscholar } from 'react-icons/si';
 import { CgProfile } from 'react-icons/cg';
+import { FaUniversity } from 'react-icons/fa';
 
 //Internal Lib  imports
 import NavItem from './NavItem';
@@ -31,6 +32,7 @@ const SideBar = ({ openMenu, setOpenMenu }) => {
         <NavItem title={t('retake assessment')} link="/retake-assessment" Icon={RiCompassesLine} />
         <NavItem title={t('scholarship')} link="/scholarship" Icon={SiSemanticscholar} />
         <NavItem title={t('others')} link="/others" Icon={BiSupport} />
+        <NavItem title={t('elective courses')} link="/elective-courses" Icon={FaUniversity} />
         <NavItem title={t('profile')} link="/profile" Icon={CgProfile} />
       </Nav>
     </div>

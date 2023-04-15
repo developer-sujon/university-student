@@ -9,3 +9,6 @@ module.exports.subjectRepetitionService = require('./subject.repetition.service'
 module.exports.scholarshipService = require('./scholarship.service');
 module.exports.othersService = require('./others.service');
 module.exports.dashboardService = require('./dashboard.service');
+module.exports.sessionService = require('./session.service');
+module.exports.coursesService = require('./courses.service');
+module.exports.enrollService = require('./enroll.service');

@@ -6,3 +6,6 @@ module.exports.retakeAssessmentValidation = require('./retake.assessment.validat
 module.exports.subjectRepetitionValidation = require('./subject.repetition.validation');
 module.exports.scholarshipValidation = require('./scholarship.validation');
 module.exports.othersValidation = require('./others.validation');
+module.exports.sessionValidation = require('./session.validation');
+module.exports.coursesValidation = require('./courses.validation');
+module.exports.enrollValidation = require('./enroll.validation');
