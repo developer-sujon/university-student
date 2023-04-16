@@ -41,6 +41,18 @@ const enrollList = catchAsync(async (req, res) => {
 });
 
 /**
+ * @desc enroll list by coursesID
+ * @access private
+ * @route /api/v1/enroll/enrollListByCoursesID/:coursesID
+ * @methud GET
+ */
+
+const enrollListByCoursesID = catchAsync(async (req, res) => {
+  const data = await enrollService.enrollListByCoursesID(req);
+  res.json({ status: true, message: null, data });
+});
+
+/**
  * @desc enroll details
  * @access private
  * @route /api/v1/enroll/enrollDetails/:id
@@ -83,4 +95,5 @@ module.exports = {
   enrollDetails,
   enrollUpdate,
   enrollDelete,
+  enrollListByCoursesID,
 };

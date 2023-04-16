@@ -6,25 +6,25 @@ const { auth, roles } = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const coursesValidation = require('../../validations/courses.validation');
 const coursesController = require('../../controllers/courses.controller');
-const { roles: allRoles } = require('../../config/roles');
 
 const router = express.Router();
 
 router.post(
   '/coursesCreate',
   auth(),
-  roles(allRoles),
+  roles(['ADMIN']),
   validate(coursesValidation.coursesCreate),
   coursesController.coursesCreate
 );
 
-router.get('/coursesList', auth(), roles(allRoles), coursesController.coursesList);
-router.get('/coursesdropDown', auth(), roles(allRoles), coursesController.coursesDropDown);
+router.get('/coursesList', auth(), roles(['ADMIN']), coursesController.coursesList);
+
+router.get('/coursesdropDown', auth(), roles(['ADMIN']), coursesController.coursesDropDown);
 
 router.get(
   '/coursesDetails/:id',
   auth(),
-  roles(allRoles),
+  roles(['ADMIN']),
   validate(coursesValidation.coursesDetails),
   coursesController.coursesDetails
 );
@@ -32,7 +32,7 @@ router.get(
 router.patch(
   '/coursesUpdate/:id',
   auth(),
-  roles(allRoles),
+  roles(['ADMIN']),
   validate(coursesValidation.coursesUpdate),
   coursesController.coursesUpdate
 );
@@ -40,7 +40,7 @@ router.patch(
 router.delete(
   '/coursesDelete/:id',
   auth(),
-  roles(allRoles),
+  roles(['ADMIN']),
   validate(coursesValidation.coursesDelete),
   coursesController.coursesDelete
 );

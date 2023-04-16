@@ -16,6 +16,12 @@ const enrollDetails = {
   }),
 };
 
+const enrollListByCoursesID = {
+  params: Joi.object().keys({
+    coursesID: Joi.string().custom(objectId).required(),
+  }),
+};
+
 const enrollUpdate = {
   params: Joi.object().keys({
     id: Joi.string().custom(objectId).required(),
@@ -36,4 +42,5 @@ module.exports = {
   enrollDetails,
   enrollUpdate,
   enrollDelete,
+  enrollListByCoursesID,
 };

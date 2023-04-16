@@ -18,13 +18,22 @@ router.post(
   enrollController.enrollCreate
 );
 
-router.get('/enrollList', auth(), roles(['ADMIN']), enrollController.enrollList);
+router.get('/enrollList', auth(), roles(allRoles), enrollController.enrollList);
+
+router.get(
+  '/enrollListByCoursesID/:coursesID',
+  auth(),
+  roles(['ADMIN']),
+  validate(enrollValidation.enrollListByCoursesID),
+  enrollController.enrollListByCoursesID
+);
+
 router.get('/enrolldropDown', auth(), roles(['ADMIN']), enrollController.enrollDropDown);
 
 router.get(
   '/enrollDetails/:id',
   auth(),
-  roles(['ADMIN']),
+  roles(allRoles),
   validate(enrollValidation.enrollDetails),
   enrollController.enrollDetails
 );
@@ -32,7 +41,7 @@ router.get(
 router.patch(
   '/enrollUpdate/:id',
   auth(),
-  roles(['ADMIN']),
+  roles(allRoles),
   validate(enrollValidation.enrollUpdate),
   enrollController.enrollUpdate
 );
@@ -40,7 +49,7 @@ router.patch(
 router.delete(
   '/enrollDelete/:id',
   auth(),
-  roles(['ADMIN']),
+  roles(allRoles),
   validate(enrollValidation.enrollDelete),
   enrollController.enrollDelete
 );

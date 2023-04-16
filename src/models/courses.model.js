@@ -21,6 +21,10 @@ const coursesSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    registrationDeadline: {
+      type: Date,
+      required: true,
+    },
     seatsLimit: {
       type: Number,
       trim: true,

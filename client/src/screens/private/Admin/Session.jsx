@@ -17,14 +17,12 @@ import {
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
-import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 
 const Session = () => {
   const { t } = useTranslation();
   const { data: Sessions, isLoading } = useSessionListQuery();
   const [SessionDelete] = useSessionDeleteMutation();
   const data = Sessions?.data || [];
-  const [SessionUpdate] = useSessionUpdateMutation();
 
   const deleteItem = (id) => {
     AleartMessage.Delete(id, SessionDelete);
@@ -39,6 +37,11 @@ const Session = () => {
     {
       Header: t('session name'),
       accessor: (d) => <span className="ms-1"> {d.sessionName}</span>,
+      sort: true,
+    },
+    {
+      Header: t('session year'),
+      accessor: (d) => <span className="ms-1"> {DateFormatter(d.sessionYear)}</span>,
       sort: true,
     },
     {
@@ -97,10 +100,10 @@ const Session = () => {
   return (
     <Row>
       <Col className="d-flex justify-content-between p-2" sm={12}>
-        <h5>{t('Session')}</h5>
+        <h5>{t('session')}</h5>
         <Link to={'/session-create-update'}>
           <Button size="sm" variant="primary">
-            {t('create Session')}
+            {t('create session')}
           </Button>
         </Link>
       </Col>

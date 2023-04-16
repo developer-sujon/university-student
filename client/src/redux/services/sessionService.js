@@ -43,6 +43,7 @@ export const sessionService = apiService.injectEndpoints({
             apiService.util.updateQueryData('sessionList', undefined, (draft) => {
               const findIndex = draft.data.findIndex((role) => role.id === id);
               draft.data[findIndex].sessionName = data?.data?.sessionName;
+              draft.data[findIndex].sessionYear = data?.data?.sessionYear;
             })
           );
 

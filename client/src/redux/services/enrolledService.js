@@ -9,6 +9,12 @@ export const enrollService = apiService.injectEndpoints({
         method: 'GET',
       }),
     }),
+    enrollListByCoursesID: builder.query({
+      query: (coursesID) => ({
+        url: 'enroll/enrollListByCoursesID/' + coursesID,
+        method: 'GET',
+      }),
+    }),
     enrollCreate: builder.mutation({
       query: (postBody) => ({
         url: 'enroll/enrollCreate',
@@ -75,5 +81,10 @@ export const enrollService = apiService.injectEndpoints({
   }),
 });
 
-export const { useEnrollCreateMutation, useEnrollListQuery, useEnrollUpdateMutation, useEnrollDeleteMutation } =
-  enrollService;
+export const {
+  useEnrollCreateMutation,
+  useEnrollListQuery,
+  useEnrollUpdateMutation,
+  useEnrollDeleteMutation,
+  useEnrollListByCoursesIDQuery,
+} = enrollService;

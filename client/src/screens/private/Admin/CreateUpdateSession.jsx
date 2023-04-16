@@ -20,6 +20,7 @@ const CreateUpdateSession = () => {
   let [objectID, SetObjectID] = useState(null);
   const [details, setDetails] = useState({
     sessionName: '',
+    sessionYear: formatDate(new Date()),
   });
 
   const { t } = useTranslation();
@@ -53,6 +54,7 @@ const CreateUpdateSession = () => {
     resolver: yupResolver(
       yup.object({
         sessionName: yup.string().required(t('session name is required')),
+        sessionYear: yup.date().required(t('courses registration deadline is required')),
       })
     ),
   });
@@ -66,9 +68,10 @@ const CreateUpdateSession = () => {
   /*
    * form handle submit
    */
-  const submitForm = ({ sessionName }) => {
+  const submitForm = ({ sessionName, sessionYear }) => {
     const postBody = {
       sessionName,
+      sessionYear,
     };
     if (!objectID) {
       SessionCreate(postBody);
@@ -89,7 +92,7 @@ const CreateUpdateSession = () => {
         <Card>
           <Card.Body>
             <Row>
-              <h5>{t(`${objectID ? 'update Session' : 'save Session'}`)}</h5>
+              <h5>{t(`${objectID ? 'update session' : 'save session'}`)}</h5>
               <hr className="bg-light" />
               <Col>
                 <Form onSubmit={handleSubmit(submitForm)} onReset={reset}>
@@ -113,6 +116,26 @@ const CreateUpdateSession = () => {
                           )}
                         />
                         {errors.sessionName && <Form.Text className="text-danger">{errors.sessionName.message}</Form.Text>}
+                      </Form.Group>
+                    </Col>
+                    <Col sm={4}>
+                      <Form.Group className="mb-3" controlId="sessionYear">
+                        <Form.Label>{t('session year')}</Form.Label>
+                        <Controller
+                          control={control}
+                          name="sessionYear"
+                          render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Form.Control
+                              onChange={onChange}
+                              defaultValue={value}
+                              ref={ref}
+                              isInvalid={errors.sessionYear}
+                              type="date"
+                              size="sm"
+                            />
+                          )}
+                        />
+                        {errors.sessionYear && <Form.Text className="text-danger">{errors.sessionYear.message}</Form.Text>}
                       </Form.Group>
                     </Col>
                   </Row>

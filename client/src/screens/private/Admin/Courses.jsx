@@ -46,6 +46,11 @@ const Courses = () => {
       sort: true,
     },
     {
+      Header: t('registration deadline'),
+      accessor: (d) => <span className="ms-1"> {DateFormatter(d.registrationDeadline)}</span>,
+      sort: true,
+    },
+    {
       Header: t('created at'),
       accessor: (d) => <span className="ms-1"> {DateFormatter(d.createdAt)}</span>,
       sort: true,
@@ -112,10 +117,10 @@ const Courses = () => {
   return (
     <Row>
       <Col className="d-flex justify-content-between p-2" sm={12}>
-        <h5>{t('Courses')}</h5>
+        <h5>{t('courses')}</h5>
         <Link to={'/courses-create-update'}>
           <Button size="sm" variant="primary">
-            {t('create Courses')}
+            {t('create courses')}
           </Button>
         </Link>
       </Col>

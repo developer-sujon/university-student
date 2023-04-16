@@ -46,6 +46,7 @@ export const coursesService = apiService.injectEndpoints({
               draft.data[findIndex].coursesName = data?.data?.coursesName;
               draft.data[findIndex].coursesInstructor = data?.data?.coursesInstructor;
               draft.data[findIndex].seatsLimit = data?.data?.seatsLimit;
+              draft.data[findIndex].registrationDeadline = data?.data?.registrationDeadline;
             })
           );
 

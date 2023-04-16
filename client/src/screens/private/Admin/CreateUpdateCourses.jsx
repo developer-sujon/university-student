@@ -22,7 +22,8 @@ const CreateUpdateCourses = () => {
     coursesCode: '',
     coursesName: '',
     coursesInstructor: '',
-    seatsLimit: '',
+    seatsLimit: 0,
+    registrationDeadline: formatDate(new Date()),
   });
 
   const { t } = useTranslation();
@@ -59,9 +60,10 @@ const CreateUpdateCourses = () => {
         coursesName: yup.string().required(t('courses name is required')),
         coursesInstructor: yup.string().required(t('courses instructor is required')),
         seatsLimit: yup
-          .number()
+          .number(t('seats limit is required'))
           .required(t('seats limit is required'))
           .min(1, 'seats limit must be greater than or equal to 1'),
+        registrationDeadline: yup.date().required(t('courses registration deadline is required')),
       })
     ),
   });
@@ -75,12 +77,13 @@ const CreateUpdateCourses = () => {
   /*
    * form handle submit
    */
-  const submitForm = ({ coursesCode, coursesName, coursesInstructor, seatsLimit }) => {
+  const submitForm = ({ coursesCode, coursesName, coursesInstructor, seatsLimit, registrationDeadline }) => {
     const postBody = {
       coursesCode,
       coursesName,
       coursesInstructor,
       seatsLimit,
+      registrationDeadline,
     };
     if (!objectID) {
       CoursesCreate(postBody);
@@ -118,7 +121,7 @@ const CreateUpdateCourses = () => {
                               defaultValue={value}
                               ref={ref}
                               isInvalid={errors.coursesCode}
-                              placeholder={t('courses code of the Courses')}
+                              placeholder={t('courses code of the courses')}
                               type="text"
                               size="sm"
                             />
@@ -139,7 +142,7 @@ const CreateUpdateCourses = () => {
                               defaultValue={value}
                               ref={ref}
                               isInvalid={errors.coursesName}
-                              placeholder={t('courses name of the Courses')}
+                              placeholder={t('courses name of the courses')}
                               type="text"
                               size="sm"
                             />
@@ -160,7 +163,7 @@ const CreateUpdateCourses = () => {
                               defaultValue={value}
                               ref={ref}
                               isInvalid={errors.coursesInstructor}
-                              placeholder={t('courses instructor of the Courses')}
+                              placeholder={t('courses instructor of the courses')}
                               type="text"
                               size="sm"
                             />
@@ -183,13 +186,35 @@ const CreateUpdateCourses = () => {
                               defaultValue={value}
                               ref={ref}
                               isInvalid={errors.seatsLimit}
-                              placeholder={t('seats limit of the Courses')}
-                              type="text"
+                              placeholder={t('seats limit of the courses')}
+                              type="number"
                               size="sm"
                             />
                           )}
                         />
                         {errors.seatsLimit && <Form.Text className="text-danger">{errors.seatsLimit.message}</Form.Text>}
+                      </Form.Group>
+                    </Col>
+                    <Col sm={4}>
+                      <Form.Group className="mb-3" controlId="registrationDeadline">
+                        <Form.Label>{t('registration deadline')}</Form.Label>
+                        <Controller
+                          control={control}
+                          name="registrationDeadline"
+                          render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Form.Control
+                              onChange={onChange}
+                              defaultValue={value}
+                              ref={ref}
+                              isInvalid={errors.registrationDeadline}
+                              type="date"
+                              size="sm"
+                            />
+                          )}
+                        />
+                        {errors.registrationDeadline && (
+                          <Form.Text className="text-danger">{errors.registrationDeadline.message}</Form.Text>
+                        )}
                       </Form.Group>
                     </Col>
                   </Row>

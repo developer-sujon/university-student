@@ -64,6 +64,34 @@ const enrollList = (request) => {
 };
 
 /**
+ * @desc enroll list
+ * @returns {Promise<[Enroll]>}
+ */
+
+const enrollListByCoursesID = (request) => {
+  const { studentID, role } = request.user;
+
+  const matchQuery = {
+    coursesID: ObjectId(request.params.coursesID),
+  };
+  if (role === 'STUDENT') {
+    matchQuery.studentID = ObjectId(studentID);
+  }
+
+  const projection = {
+    role: 0,
+  };
+
+  const populateOne = { path: 'studentID', select: 'name email address _id' };
+  const populateTwo = {
+    path: 'coursesID',
+    select: 'coursesCode coursesName coursesInstructor seatsLimit allowSessions',
+  };
+
+  return commonService.findServicePopulateTwo(Enroll, matchQuery, projection, populateOne, populateTwo);
+};
+
+/**
  * @desc enroll details
  * @returns {Promise<Enroll>}
  */
@@ -128,4 +156,5 @@ module.exports = {
   enrollDetails,
   enrollUpdate,
   enrollDelete,
+  enrollListByCoursesID,
 };
