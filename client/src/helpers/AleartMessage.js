@@ -23,17 +23,23 @@ class AleartMessage {
     });
   }
 
-  static Update(email, status, option, request) {
+  static Update(coursesID, request) {
     return Swal.fire({
-      title: 'Change Status',
-      input: 'select',
-      inputOptions: option,
-      inputValue: status,
+      title: 'Do you want to enrolled courses?',
+      showCancelButton: true,
+      confirmButtonText: 'yes',
     }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        return request(email, result.value).then((res) => {
+        return request({
+          coursesID,
+        }).then((res) => {
+          Swal.fire('enrolled!', '', 'success');
+          window.location.reload();
           return res;
         });
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info');
       }
     });
   }

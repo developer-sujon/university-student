@@ -32,7 +32,12 @@ const SideBar = ({ openMenu, setOpenMenu }) => {
         <NavItem title={t('retake assessment')} link="/retake-assessment" Icon={RiCompassesLine} />
         <NavItem title={t('scholarship')} link="/scholarship" Icon={SiSemanticscholar} />
         <NavItem title={t('others')} link="/others" Icon={BiSupport} />
-        <NavItem title={t('elective courses')} link="/elective-courses" Icon={FaUniversity} />
+        {profileDetails?.data?.role === 'ADMIN' && (
+          <NavItem title={t('elective courses')} link="/elective-courses" Icon={FaUniversity} />
+        )}
+        {profileDetails?.data?.role === 'STUDENT' && (
+          <NavItem title={t('elective courses')} link="/elective-courses-student" Icon={FaUniversity} />
+        )}
         <NavItem title={t('profile')} link="/profile" Icon={CgProfile} />
       </Nav>
     </div>

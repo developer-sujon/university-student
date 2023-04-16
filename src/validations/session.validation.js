@@ -7,7 +7,7 @@ const { objectId } = require('./custom.validation');
 const sessionCreate = {
   body: Joi.object().keys({
     sessionName: Joi.string().required(),
-    sessionYear: Joi.date().required(),
+    sessionYear: Joi.string().required(),
   }),
 };
 
@@ -23,7 +23,7 @@ const sessionUpdate = {
   }),
   body: Joi.object().keys({
     sessionName: Joi.string().required(),
-    sessionYear: Joi.date().required(),
+    sessionYear: Joi.string().required(),
   }),
 };
 

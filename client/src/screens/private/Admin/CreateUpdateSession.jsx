@@ -20,7 +20,7 @@ const CreateUpdateSession = () => {
   let [objectID, SetObjectID] = useState(null);
   const [details, setDetails] = useState({
     sessionName: '',
-    sessionYear: formatDate(new Date()),
+    sessionYear: '',
   });
 
   const { t } = useTranslation();
@@ -54,7 +54,7 @@ const CreateUpdateSession = () => {
     resolver: yupResolver(
       yup.object({
         sessionName: yup.string().required(t('session name is required')),
-        sessionYear: yup.date().required(t('courses registration deadline is required')),
+        sessionYear: yup.string().required(t('session year is required')),
       })
     ),
   });
@@ -130,8 +130,9 @@ const CreateUpdateSession = () => {
                               defaultValue={value}
                               ref={ref}
                               isInvalid={errors.sessionYear}
-                              type="date"
+                              type="text"
                               size="sm"
+                              placeholder={t('session year of the session')}
                             />
                           )}
                         />

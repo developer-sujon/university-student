@@ -41,7 +41,7 @@ const Session = () => {
     },
     {
       Header: t('session year'),
-      accessor: (d) => <span className="ms-1"> {DateFormatter(d.sessionYear)}</span>,
+      accessor: (d) => <span className="ms-1"> {d.sessionYear}</span>,
       sort: true,
     },
     {

@@ -46,9 +46,9 @@ const coursesList = (request) => {
   const { studentID, role } = request.user;
 
   const matchQuery = {};
-  if (role === 'STUDENT') {
-    matchQuery.studentID = ObjectId(studentID);
-  }
+  // if (role === 'STUDENT') {
+  //   matchQuery.studentID = ObjectId(studentID);
+  // }
 
   const projection = {
     role: 0,

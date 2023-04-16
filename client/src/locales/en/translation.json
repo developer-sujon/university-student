@@ -120,5 +120,8 @@
  "seats limit of the courses":"Seats Limit of the Courses",
  "create session":"Create Session",
  "reg date/time":"Reg Date/Time",
+ "session year is required":"Session Year is Required",
+ "session name is required":"Session Name is Required",
+ "session year of the session":"Session Year of the Session",
  "enroll":"Enroll"
 }

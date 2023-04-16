@@ -17,7 +17,7 @@ router.post(
   coursesController.coursesCreate
 );
 
-router.get('/coursesList', auth(), roles(['ADMIN']), coursesController.coursesList);
+router.get('/coursesList', auth(), roles(['ADMIN', 'STUDENT']), coursesController.coursesList);
 
 router.get('/coursesdropDown', auth(), roles(['ADMIN']), coursesController.coursesDropDown);
 

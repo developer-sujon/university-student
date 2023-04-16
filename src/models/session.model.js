@@ -12,8 +12,9 @@ const sessionSchema = mongoose.Schema(
       trim: true,
     },
     sessionYear: {
-      type: Date,
+      type: String,
       required: true,
+      trim: true,
     },
   },
   {

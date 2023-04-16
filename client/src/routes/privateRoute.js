@@ -13,6 +13,7 @@ const Scholarship = lazy(() => import('../screens/private/Scholarship/Scholarshi
 const Profile = lazy(() => import('../screens/private/Profile/Profile'));
 const Students = lazy(() => import('../screens/private/Students/Students'));
 const ElectiveCourses = lazy(() => import('../screens/private/Admin/ElectiveCourses'));
+const ElectiveCoursesStudent = lazy(() => import('../screens/private/Student/ElectiveCoursesStudent'));
 const Enroll = lazy(() => import('../screens/private/Admin/Enroll'));
 
 const CreateUpdateLeave = lazy(() => import('../screens/private/Leave/CreateUpdateLeave'));
@@ -208,6 +209,16 @@ const privateRoutes = [
       </LazyLoading>
     ),
     roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/elective-courses-student',
+    element: (
+      <LazyLoading>
+        <ElectiveCoursesStudent />
+      </LazyLoading>
+    ),
+    roles: ['STUDENT'],
     accessPermission: null,
   },
 ];

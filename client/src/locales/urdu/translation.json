@@ -122,5 +122,8 @@
   "seats limit of the courses":"کورسز کی نشستوں کی حد",
   "create session":"سیشن بنائیں",
   "reg date/time":"ریگ تاریخ/وقت",
+  "session year is required":"سیشن کا سال درکار ہے۔",
+  "session name is required":"سیشن کا نام درکار ہے۔",
+  "session year of the session":"سیشن کا سیشن سال",
   "enroll":"اندراج کریں۔"
  }

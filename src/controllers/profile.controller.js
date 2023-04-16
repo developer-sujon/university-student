@@ -23,7 +23,7 @@ const profileDetails = catchAsync(async (req, res) => {
 
 const updateProfile = catchAsync(async (req, res) => {
   const data = await userService.updateUserById(req.user.userID, req.body);
-  res.json({ status: true, message: null, data });
+  res.json({ status: true, message: 'profile update successful', data });
 });
 
 module.exports = {
