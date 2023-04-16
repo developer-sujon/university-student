@@ -29,7 +29,7 @@ const Others = () => {
   };
 
   const updateStatus = (data) => {
-    const { id, studentID, ...others } = data;
+    const { id, createdAt, updatedAt, studentID, ...others } = data;
     AleartMessage.StatusUpdate(id, others, othersUpdate);
   };
 
