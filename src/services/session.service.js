@@ -22,15 +22,15 @@ const sessionCreate = (request) => {
  */
 
 const sessionDropDown = (request) => {
-  const { studentID, role } = request.user;
+  // const { studentID, role } = request.user;
 
   const matchQuery = {};
-  if (role === 'STUDENT') {
-    matchQuery.studentID = ObjectId(studentID);
-  }
+  // if (role === 'STUDENT') {
+  //   matchQuery.studentID = ObjectId(studentID);
+  // }
 
   const projection = {
-    label: '$title',
+    label: '$sessionName',
     value: '$_id',
   };
 

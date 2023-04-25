@@ -1,5 +1,5 @@
 //External lib imports
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Row, Col, Container, Button, Card, ListGroup, Badge, OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineEdit, AiOutlineFolderView } from 'react-icons/ai';
@@ -14,13 +14,16 @@ import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
 import { useEnrollCreateMutation, useEnrollListQuery } from '../../../redux/services/enrolledService';
+import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 
 const AvailableCourses = () => {
   const { t } = useTranslation();
   const { data: Coursess, isLoading } = useCoursesListQuery();
   const { data: Enrolls } = useEnrollListQuery();
   const [enrollCreate] = useEnrollCreateMutation();
+  const [list, setList] = useState([]);
   const data = Coursess?.data || [];
+  const { data: profileDetails } = useProfileDetailsQuery();
 
   const enrolled = (coursesID) => {
     AleartMessage.Update(coursesID, enrollCreate);
@@ -99,6 +102,14 @@ const AvailableCourses = () => {
     },
   ];
 
+  useEffect(() => {
+    const filterCourses = Coursess?.data.filter((c) => c?.allowSessions?.indexOf(profileDetails?.data?.session) !== -1);
+
+    console.log(filterCourses);
+
+    setList(filterCourses);
+  }, [Coursess, profileDetails]);
+
   return (
     <Row>
       <Col className="d-flex justify-content-between p-2" sm={12}>
@@ -112,10 +123,10 @@ const AvailableCourses = () => {
       <Col sm={12}>
         {isLoading ? (
           <Spinner size="lg" variant="primary" />
-        ) : data?.length ? (
+        ) : list?.length ? (
           <Table
             columns={columns}
-            data={data}
+            data={list}
             pageSize={5}
             sizePerPageList={sizePerPageList}
             isSortable={true}

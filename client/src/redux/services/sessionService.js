@@ -9,6 +9,12 @@ export const sessionService = apiService.injectEndpoints({
         method: 'GET',
       }),
     }),
+    sessionDropDown: builder.query({
+      query: () => ({
+        url: 'session/sessionDropDown',
+        method: 'GET',
+      }),
+    }),
     sessionCreate: builder.mutation({
       query: (postBody) => ({
         url: 'session/sessionCreate',
@@ -76,5 +82,10 @@ export const sessionService = apiService.injectEndpoints({
   }),
 });
 
-export const { useSessionCreateMutation, useSessionListQuery, useSessionUpdateMutation, useSessionDeleteMutation } =
-  sessionService;
+export const {
+  useSessionCreateMutation,
+  useSessionListQuery,
+  useSessionUpdateMutation,
+  useSessionDeleteMutation,
+  useSessionDropDownQuery,
+} = sessionService;

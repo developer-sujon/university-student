@@ -1,5 +1,8 @@
 {
-  "dashboard":"ڈیش بورڈ",
+  "dashboard":"ڈیش بورڈ", 
+  "my courses":"میرے کورسز",
+  "available courses":"دستیاب کورسز",
+  "enroll date/time":"اندراج کی تاریخ/وقت",
   "leave":"چھوڑ دو",
   "subject repetition":"موضوع کی تکرار",
   "retake assessment":"دوبارہ تشخیص",

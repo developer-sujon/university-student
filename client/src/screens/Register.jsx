@@ -11,10 +11,12 @@ import { useSelector } from 'react-redux';
 //Internal lib imports
 import { useRegisterMutation } from '../redux/services/authService';
 import PublicLayout from '../layout/PublicLayout';
+import { useSessionDropDownQuery } from '../redux/services/sessionService';
 
 const Register = () => {
   const navigate = useNavigate();
   const [register, { isLoading, isSuccess }] = useRegisterMutation();
+  const { data } = useSessionDropDownQuery();
   const { t } = useTranslation();
   const { accessToken } = useSelector((state) => state.authReducer);
 
@@ -28,17 +30,19 @@ const Register = () => {
     defaultValues: {
       name: '',
       email: '',
+      session: '',
       password: '',
     },
     resolver: yupResolver(
       yup.object({
-        name: yup.string().required(t('Name is required')),
+        name: yup.string().required(t('name is required')),
         email: yup.string().required(t('email number is required')).email(t('invalid email address')),
-        password: yup.string().required(t('Password is required.')).min(8, t('Password must be 8 digits long')),
+        session: yup.string().required(t('session is required')),
+        password: yup.string().required(t('password is required.')).min(8, t('password must be 8 digits long')),
         confirmPassword: yup
           .string()
-          .required(t('Confirm password is required'))
-          .oneOf([yup.ref('password'), null], t('Password and confirm password must match')),
+          .required(t('confirm password is required'))
+          .oneOf([yup.ref('password'), null], t('password and confirm password must match')),
       })
     ),
   });
@@ -67,11 +71,11 @@ const Register = () => {
                 <Col xl={8} className="center-screen">
                   <Card className="w-100">
                     <Card.Body>
-                      <h5>Sign Up</h5>
+                      <h5>{t('sign up')}</h5>
                       <br />
                       <Form onSubmit={handleSubmit(submitForm)} onReset={reset}>
                         <Form.Group className="mb-3" controlId="name">
-                          <Form.Label>Name</Form.Label>
+                          <Form.Label>{t('name')}</Form.Label>
                           <Controller
                             control={control}
                             name="name"
@@ -81,7 +85,7 @@ const Register = () => {
                                 value={value}
                                 ref={ref}
                                 isInvalid={errors.name}
-                                placeholder="Name"
+                                placeholder={t('name')}
                                 type="name"
                               />
                             )}
@@ -90,7 +94,7 @@ const Register = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="email">
-                          <Form.Label>Email</Form.Label>
+                          <Form.Label>{t('email')}</Form.Label>
                           <Controller
                             control={control}
                             name="email"
@@ -100,15 +104,41 @@ const Register = () => {
                                 value={value}
                                 ref={ref}
                                 isInvalid={errors.email}
-                                placeholder="Email"
+                                placeholder={t('email')}
                                 type="email"
                               />
                             )}
                           />
                           {errors.email && <Form.Text className="text-danger">{errors.email.message}</Form.Text>}
                         </Form.Group>
+                        <Col sm={12}>
+                          <Form.Group className="mb-3" controlId="session">
+                            <Form.Label>{t('session')}</Form.Label>
+
+                            <Controller
+                              control={control}
+                              name="session"
+                              render={({ field: { onChange, onBlur, value, ref } }) => (
+                                <Form.Select
+                                  onChange={onChange}
+                                  value={value}
+                                  ref={ref}
+                                  isInvalid={errors.session}
+                                  placeholder={t('name of the session')}
+                                  type="text"
+                                  size="sm"
+                                >
+                                  <option value="">{t('choice session')}</option>
+                                  {data?.data?.length > 0 &&
+                                    data?.data?.map((i) => <option value={i?.label}>{t(i?.label)}</option>)}
+                                </Form.Select>
+                              )}
+                            />
+                            {errors.session && <Form.Text className="text-danger">{errors.session.message}</Form.Text>}
+                          </Form.Group>
+                        </Col>
                         <Form.Group className="mb-3" controlId="Password">
-                          <Form.Label>Password</Form.Label>
+                          <Form.Label>{t('password')}</Form.Label>
                           <Controller
                             control={control}
                             name="password"
@@ -118,7 +148,7 @@ const Register = () => {
                                 value={value}
                                 ref={ref}
                                 isInvalid={errors.password}
-                                placeholder="Password"
+                                placeholder={t('password')}
                                 type="password"
                               />
                             )}
@@ -127,7 +157,7 @@ const Register = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="confirmPassword">
-                          <Form.Label>Confirm Password</Form.Label>
+                          <Form.Label>{t('confirm password')}</Form.Label>
                           <Controller
                             control={control}
                             name="confirmPassword"
@@ -137,7 +167,7 @@ const Register = () => {
                                 value={value}
                                 ref={ref}
                                 isInvalid={errors.confirmPassword}
-                                placeholder="Confirm Password"
+                                placeholder={t('confirm password')}
                                 type="password"
                               />
                             )}
@@ -155,11 +185,11 @@ const Register = () => {
                       </Form>
                       <div className="text-center w-100 mt-3">
                         <Link className="text-center" to="/login">
-                          Sign In
+                          {t('sign in')}
                         </Link>
                         <br />
                         <Link className="text-center" to="/forgot-password">
-                          Forget Password
+                          {t('forget password')}
                         </Link>
                       </div>
                     </Card.Body>

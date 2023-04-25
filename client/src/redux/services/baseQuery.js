@@ -7,7 +7,7 @@ import { setLoading } from '../slice/settingReducer';
 import { setLogout } from '../slice/authReducer';
 // https://university-student-production.up.railway.app/
 // http://localhost:6100
-const SERVER_URL = process.env.REACT_APP_API_SERVER_URL || 'http://localhost:6100';
+const SERVER_URL = process.env.REACT_APP_API_SERVER_URL || 'https://university-student-production.up.railway.app';
 const API_PREFIX_PATH = process.env.REACT_APP_API_PREFIX_PATH || '/api/v1';
 
 const basefetchBaseQuery = fetchBaseQuery({

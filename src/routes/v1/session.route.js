@@ -19,7 +19,7 @@ router.post(
 );
 
 router.get('/sessionList', auth(), roles(allRoles), sessionController.sessionList);
-router.get('/sessiondropDown', auth(), roles(allRoles), sessionController.sessionDropDown);
+router.get('/sessiondropDown', /*auth(), roles(allRoles),*/ sessionController.sessionDropDown);
 
 router.get(
   '/sessionDetails/:id',
