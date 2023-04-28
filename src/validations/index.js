@@ -9,3 +9,4 @@ module.exports.othersValidation = require('./others.validation');
 module.exports.sessionValidation = require('./session.validation');
 module.exports.coursesValidation = require('./courses.validation');
 module.exports.enrollValidation = require('./enroll.validation');
+module.exports.inscoursesValidation = require('./inscourses.validation');

@@ -14,6 +14,7 @@ import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
+import LeaveDetailsModal from './LeaveDetailsModal';
 
 const Leave = () => {
   const { t } = useTranslation();
@@ -90,6 +91,10 @@ const Leave = () => {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
+          <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
+            <AiOutlineEdit />
+          </Button>
+
           {profileDetails?.data?.role !== 'STUDENT' && (
             <OverlayTrigger
               placement="top"
@@ -207,6 +212,7 @@ const Leave = () => {
           </Card.Body>
         </Card>
       </Container>
+      {/* <LeaveDetailsModal /> */}
     </Layout>
   );
 };

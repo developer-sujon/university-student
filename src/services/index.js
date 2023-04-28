@@ -12,3 +12,5 @@ module.exports.dashboardService = require('./dashboard.service');
 module.exports.sessionService = require('./session.service');
 module.exports.coursesService = require('./courses.service');
 module.exports.enrollService = require('./enroll.service');
+module.exports.instructorService = require('./instructor.service');
+module.exports.inscoursesService = require('./inscourses.service');

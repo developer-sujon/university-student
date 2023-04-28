@@ -13,6 +13,8 @@ const dashboardRoute = require('./dashboard.route');
 const sessionRoute = require('./session.route');
 const coursesRoute = require('./courses.route');
 const enrollRoute = require('./enroll.route');
+const instructorRoute = require('./instructor.route');
+const insCoursesRoute = require('./inscourses.route');
 
 const router = express.Router();
 
@@ -60,6 +62,14 @@ const defaultRoutes = [
   {
     path: '/enroll',
     route: enrollRoute,
+  },
+  {
+    path: '/instructor',
+    route: instructorRoute,
+  },
+  {
+    path: '/insCourses',
+    route: insCoursesRoute,
   },
 ];
 

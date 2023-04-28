@@ -9,3 +9,4 @@ module.exports.Others = require('./others.model');
 module.exports.Session = require('./session.model');
 module.exports.Courses = require('./courses.model');
 module.exports.Enroll = require('./enroll.model');
+module.exports.InsCourses = require('./inscourses.model');

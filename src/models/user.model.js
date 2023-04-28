@@ -27,7 +27,6 @@ const userSchema = mongoose.Schema(
     },
     session: {
       type: String,
-      required: true,
       trim: true,
     },
     password: {

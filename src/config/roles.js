@@ -1,6 +1,7 @@
 const allRoles = {
   STUDENT: [],
   ADMIN: [],
+  INSTRUCTOR: [],
 };
 
 const roles = Object.keys(allRoles);

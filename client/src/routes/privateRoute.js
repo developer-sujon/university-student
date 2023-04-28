@@ -15,6 +15,9 @@ const Students = lazy(() => import('../screens/private/Students/Students'));
 const ElectiveCourses = lazy(() => import('../screens/private/Admin/ElectiveCourses'));
 const ElectiveCoursesStudent = lazy(() => import('../screens/private/Student/ElectiveCoursesStudent'));
 const Enroll = lazy(() => import('../screens/private/Admin/Enroll'));
+const Instructor = lazy(() => import('../screens/private/Admin/Instructor/Instructor'));
+
+const InsCourses = lazy(() => import('../screens/private/Admin/InsCourses'));
 
 const CreateUpdateLeave = lazy(() => import('../screens/private/Leave/CreateUpdateLeave'));
 const CreateUpdateOthers = lazy(() => import('../screens/private/Others/CreateUpdateOthers'));
@@ -25,6 +28,10 @@ const CreateUpdateRetakeAssessment = lazy(() => import('../screens/private/Retak
 const CreateUpdateScholarship = lazy(() => import('../screens/private/Scholarship/CreateUpdateRetakeScholarship'));
 const CreateUpdateSession = lazy(() => import('../screens/private/Admin/CreateUpdateSession'));
 const CreateUpdateCourses = lazy(() => import('../screens/private/Admin/CreateUpdateCourses'));
+
+const CreateUpdateInstructor = lazy(() => import('../screens/private/Admin/Instructor/CreateUpdateInstructor'));
+
+const CreateUpdateInsCourses = lazy(() => import('../screens/private/Admin/CreateUpdateInsCourses'));
 
 const LazyLoading = ({ children }) => {
   return <Suspense fallback={<LazyLoader />}>{children}</Suspense>;
@@ -38,7 +45,7 @@ const privateRoutes = [
         <Dashboard />
       </LazyLoading>
     ),
-    roles: ['ADMIN', 'STUDENT'],
+    roles: ['ADMIN', 'STUDENT', 'INSTRUCTOR'],
     accessPermission: null,
   },
   {
@@ -48,7 +55,7 @@ const privateRoutes = [
         <Dashboard />
       </LazyLoading>
     ),
-    roles: ['ADMIN', 'STUDENT'],
+    roles: ['ADMIN', 'STUDENT', 'INSTRUCTOR'],
     accessPermission: null,
   },
   {
@@ -198,7 +205,7 @@ const privateRoutes = [
         <Profile />
       </LazyLoading>
     ),
-    roles: ['ADMIN', 'STUDENT'],
+    roles: ['ADMIN', 'STUDENT', 'INSTRUCTOR'],
     accessPermission: null,
   },
   {
@@ -219,6 +226,46 @@ const privateRoutes = [
       </LazyLoading>
     ),
     roles: ['STUDENT'],
+    accessPermission: null,
+  },
+  {
+    path: '/instructor',
+    element: (
+      <LazyLoading>
+        <Instructor />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/instructor-create-update',
+    element: (
+      <LazyLoading>
+        <CreateUpdateInstructor />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/inscourses',
+    element: (
+      <LazyLoading>
+        <InsCourses />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/inscourses-create-update',
+    element: (
+      <LazyLoading>
+        <CreateUpdateInsCourses />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
     accessPermission: null,
   },
 ];
