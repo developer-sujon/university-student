@@ -11,7 +11,16 @@ const InsCoursesSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-
+    coursesSession: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    coursesProgram: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     coursesName: {
       type: String,
       required: true,

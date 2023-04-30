@@ -25,16 +25,25 @@ const SideBar = ({ openMenu, setOpenMenu }) => {
       <Nav className="flex-column pt-2">
         <NavItem title={t('dashboard')} link="/dashboard" Icon={RiDashboardLine} />
 
-        {profileDetails?.data?.role === 'STUDENT' ||
-          (profileDetails?.data?.role === 'ADMIN' && (
-            <>
-              <NavItem title={t('leave')} link="/leave" Icon={GiMeatCleaver} />
-              <NavItem title={t('subject repetition')} link="/subject-repetition" Icon={MdSubject} />
-              <NavItem title={t('retake assessment')} link="/retake-assessment" Icon={RiCompassesLine} />
-              <NavItem title={t('scholarship')} link="/scholarship" Icon={SiSemanticscholar} />{' '}
-              <NavItem title={t('others')} link="/others" Icon={BiSupport} />
-            </>
-          ))}
+        {profileDetails?.data?.role === 'STUDENT' && (
+          <>
+            <NavItem title={t('leave')} link="/leave" Icon={GiMeatCleaver} />
+            <NavItem title={t('subject repetition')} link="/subject-repetition" Icon={MdSubject} />
+            <NavItem title={t('retake assessment')} link="/retake-assessment" Icon={RiCompassesLine} />
+            <NavItem title={t('scholarship')} link="/scholarship" Icon={SiSemanticscholar} />{' '}
+            <NavItem title={t('others')} link="/others" Icon={BiSupport} />
+          </>
+        )}
+
+        {profileDetails?.data?.role === 'ADMIN' && (
+          <>
+            <NavItem title={t('leave')} link="/leave" Icon={GiMeatCleaver} />
+            <NavItem title={t('subject repetition')} link="/subject-repetition" Icon={MdSubject} />
+            <NavItem title={t('retake assessment')} link="/retake-assessment" Icon={RiCompassesLine} />
+            <NavItem title={t('scholarship')} link="/scholarship" Icon={SiSemanticscholar} />{' '}
+            <NavItem title={t('others')} link="/others" Icon={BiSupport} />
+          </>
+        )}
 
         {profileDetails?.data?.role === 'ADMIN' && (
           <>
