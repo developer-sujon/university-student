@@ -17,6 +17,11 @@ import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 import LeaveDetailsModal from './LeaveDetailsModal';
 
 const Leave = () => {
+  const [singleLeave, setSingleLeave] = useState({});
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const { t } = useTranslation();
   const { data: Leaves, isLoading } = useLeaveListQuery();
   const [LeaveDelete] = useLeaveDeleteMutation();
@@ -31,6 +36,10 @@ const Leave = () => {
   const updateStatus = (data) => {
     const { id, createdAt, updatedAt, studentID, ...others } = data;
     AleartMessage.StatusUpdate(id, others, leaveUpdate);
+  };
+  const handleQuickView = (d) => {
+    setSingleLeave(d);
+    handleShow();
   };
 
   const columns = [
@@ -91,9 +100,15 @@ const Leave = () => {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
-          <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
-            <AiOutlineEdit />
-          </Button>
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={<Tooltip id="button-tooltip">{t('view')}</Tooltip>}
+          >
+            <Button variant="primary" style={{ padding: '5px 10px' }} onClick={() => handleQuickView(d)}>
+              <AiOutlineFolderView />
+            </Button>
+          </OverlayTrigger>
 
           {profileDetails?.data?.role !== 'STUDENT' && (
             <OverlayTrigger
@@ -212,7 +227,7 @@ const Leave = () => {
           </Card.Body>
         </Card>
       </Container>
-      {/* <LeaveDetailsModal /> */}
+      <LeaveDetailsModal singleLeave={singleLeave} show={show} handleClose={handleClose} />
     </Layout>
   );
 };

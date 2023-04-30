@@ -17,8 +17,14 @@ import {
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
+import SessionDetailsModal from './SessionDetailsModal';
 
 const Session = () => {
+  const [singleSession, setSingleSession] = useState({});
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const { t } = useTranslation();
   const { data: Sessions, isLoading } = useSessionListQuery();
   const [SessionDelete] = useSessionDeleteMutation();
@@ -26,6 +32,11 @@ const Session = () => {
 
   const deleteItem = (id) => {
     AleartMessage.Delete(id, SessionDelete);
+  };
+
+  const handleQuickView = (d) => {
+    setSingleSession(d);
+    handleShow();
   };
 
   const columns = [
@@ -53,6 +64,15 @@ const Session = () => {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={<Tooltip id="button-tooltip">{t('view')}</Tooltip>}
+          >
+            <Button variant="primary" style={{ padding: '5px 10px' }} onClick={() => handleQuickView(d)}>
+              <AiOutlineFolderView />
+            </Button>
+          </OverlayTrigger>
           <OverlayTrigger
             placement="top"
             delay={{ show: 250, hide: 400 }}
@@ -98,32 +118,35 @@ const Session = () => {
   ];
 
   return (
-    <Row>
-      <Col className="d-flex justify-content-between p-2" sm={12}>
-        <h5>{t('session')}</h5>
-        <Link to={'/session-create-update'}>
-          <Button size="sm" variant="primary">
-            {t('create session')}
-          </Button>
-        </Link>
-      </Col>
-      <Col sm={12}>
-        {isLoading ? (
-          <Spinner size="lg" variant="primary" />
-        ) : data?.length ? (
-          <Table
-            columns={columns}
-            data={data}
-            pageSize={5}
-            sizePerPageList={sizePerPageList}
-            isSortable={true}
-            pagination={true}
-          />
-        ) : (
-          t('no data found')
-        )}
-      </Col>
-    </Row>
+    <>
+      <Row>
+        <Col className="d-flex justify-content-between p-2" sm={12}>
+          <h5>{t('session')}</h5>
+          <Link to={'/session-create-update'}>
+            <Button size="sm" variant="primary">
+              {t('create session')}
+            </Button>
+          </Link>
+        </Col>
+        <Col sm={12}>
+          {isLoading ? (
+            <Spinner size="lg" variant="primary" />
+          ) : data?.length ? (
+            <Table
+              columns={columns}
+              data={data}
+              pageSize={5}
+              sizePerPageList={sizePerPageList}
+              isSortable={true}
+              pagination={true}
+            />
+          ) : (
+            t('no data found')
+          )}
+        </Col>
+      </Row>
+      <SessionDetailsModal singleSession={singleSession} show={show} handleClose={handleClose} />
+    </>
   );
 };
 

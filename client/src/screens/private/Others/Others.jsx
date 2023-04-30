@@ -13,11 +13,16 @@ import { useOthersDeleteMutation, useOthersListQuery, useOthersUpdateMutation } 
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
+import OthersDetailsModal from './OthersDetailsModal';
 
 const Others = () => {
   const [singleOthers, setSingleOthers] = useState({});
   const { data: profileDetails } = useProfileDetailsQuery();
   const [othersUpdate] = useOthersUpdateMutation();
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const { t } = useTranslation();
   const { data: Otherss, isLoading } = useOthersListQuery();
@@ -31,6 +36,11 @@ const Others = () => {
   const updateStatus = (data) => {
     const { id, createdAt, updatedAt, studentID, ...others } = data;
     AleartMessage.StatusUpdate(id, others, othersUpdate);
+  };
+
+  const handleQuickView = (d) => {
+    setSingleOthers(d);
+    handleShow();
   };
 
   const columns = [
@@ -81,6 +91,15 @@ const Others = () => {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={<Tooltip id="button-tooltip">{t('view')}</Tooltip>}
+          >
+            <Button variant="primary" style={{ padding: '5px 10px' }} onClick={() => handleQuickView(d)}>
+              <AiOutlineFolderView />
+            </Button>
+          </OverlayTrigger>
           {profileDetails?.data?.role !== 'STUDENT' && (
             <OverlayTrigger
               placement="top"
@@ -197,6 +216,7 @@ const Others = () => {
           </Card.Body>
         </Card>
       </Container>
+      <OthersDetailsModal singleOthers={singleOthers} show={show} handleClose={handleClose} />
     </Layout>
   );
 };

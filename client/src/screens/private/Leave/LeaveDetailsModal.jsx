@@ -12,7 +12,18 @@ const LeaveDetailsModal = ({ show, handleClose, singleLeave }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {t('reason')}: {singleLeave.reason}{' '}
+        <p>
+          {t('reason')}: {singleLeave.reason}
+        </p>
+        <p>
+          {t('start date')}: {singleLeave.startDate}
+        </p>
+        <p>
+          {t('end date')}: {singleLeave.endDate}
+        </p>
+        <p>
+          {t('duration')}: {singleLeave.duration}
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={handleClose}>
