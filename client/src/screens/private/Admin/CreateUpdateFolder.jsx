@@ -10,7 +10,7 @@ function CreateUpdateFolder(props) {
   const [folderName, setFolderName] = useState('');
   const { data: InsCoursess, isLoading } = useInsCoursesListQuery();
   const [InsCoursesDelete] = useInsCoursesDeleteMutation();
-  const [InsCoursesUpdate] = useInsCoursesUpdateMutation();
+  const [InsCoursesUpdate, { isSuccess }] = useInsCoursesUpdateMutation();
   const data = InsCoursess?.data || [];
 
   const onSubmit = () => {
@@ -33,7 +33,7 @@ function CreateUpdateFolder(props) {
   };
 
   return (
-    <Modal {...props} size="sm" aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal {...props} size="sm" aria-labelledby="contained-modal-title-vcenter" centered show={props.show && !isSuccess}>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">Create Folder </Modal.Title>
       </Modal.Header>

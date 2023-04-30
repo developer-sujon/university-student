@@ -12,17 +12,17 @@ const router = express.Router();
 router.post(
   '/inscoursesCreate',
   auth(),
-  roles(['ADMIN']),
+  roles(['ADMIN', 'INSTRUCTOR']),
   validate(inscoursesValidation.inscoursesCreate),
   inscoursesController.inscoursesCreate
 );
 
-router.get('/inscoursesList', auth(), roles(['ADMIN', 'STUDENT']), inscoursesController.inscoursesList);
+router.get('/inscoursesList', auth(), roles(['ADMIN', 'INSTRUCTOR']), inscoursesController.inscoursesList);
 
 router.get(
   '/inscoursesDetails/:id',
   auth(),
-  roles(['ADMIN']),
+  roles(['ADMIN', 'INSTRUCTOR']),
   validate(inscoursesValidation.inscoursesDetails),
   inscoursesController.inscoursesDetails
 );
@@ -30,7 +30,7 @@ router.get(
 router.patch(
   '/inscoursesUpdate/:id',
   auth(),
-  roles(['ADMIN']),
+  roles(['ADMIN', 'INSTRUCTOR']),
   validate(inscoursesValidation.inscoursesUpdate),
   inscoursesController.inscoursesUpdate
 );
@@ -38,7 +38,7 @@ router.patch(
 router.delete(
   '/inscoursesDelete/:id',
   auth(),
-  roles(['ADMIN']),
+  roles(['ADMIN', 'INSTRUCTOR']),
   validate(inscoursesValidation.inscoursesDelete),
   inscoursesController.inscoursesDelete
 );

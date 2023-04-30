@@ -26,28 +26,18 @@ const InsCourses = () => {
   console.log(data);
   const columns = [
     {
-      Header: t('InsCourses code'),
+      Header: t('courses code'),
       accessor: (d) => <span className="ms-1"> {d.coursesCode}</span>,
       sort: true,
     },
     {
-      Header: t('InsCourses name'),
+      Header: t('courses name'),
       accessor: (d) => <span className="ms-1"> {d.coursesName}</span>,
       sort: true,
     },
     {
-      Header: t('InsCourses instructor'),
+      Header: t('courses instructor'),
       accessor: (d) => <span className="ms-1"> {d.coursesInstructor}</span>,
-      sort: true,
-    },
-    {
-      Header: t('seats limit'),
-      accessor: (d) => <span className="ms-1"> {d.seatsLimit}</span>,
-      sort: true,
-    },
-    {
-      Header: t('registration deadline'),
-      accessor: (d) => <span className="ms-1"> {DateFormatter(d.registrationDeadline)}</span>,
       sort: true,
     },
     {
@@ -62,11 +52,11 @@ const InsCourses = () => {
           <OverlayTrigger
             placement="top"
             delay={{ show: 250, hide: 400 }}
-            overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
+            overlay={<Tooltip id="button-tooltip">{t('view')}</Tooltip>}
           >
-            <Link to={`/InsCourses-view/${d?.id}`}>
+            <Link to={`/inscourses-view/${d?.id}`}>
               <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
-                <AiOutlineEdit />
+                <AiOutlineFolderView />
               </Button>
             </Link>
           </OverlayTrigger>
@@ -75,7 +65,7 @@ const InsCourses = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
           >
-            <Link to={`/InsCourses-create-update?id=${d?.id}`}>
+            <Link to={`/inscourses-create-update?id=${d?.id}`}>
               <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
                 <AiOutlineEdit />
               </Button>
@@ -89,17 +79,6 @@ const InsCourses = () => {
             <Button variant="danger" style={{ padding: '5px 10px' }} onClick={() => deleteItem(d.id)}>
               <BsTrash />
             </Button>
-          </OverlayTrigger>
-          <OverlayTrigger
-            placement="top"
-            delay={{ show: 250, hide: 400 }}
-            overlay={<Tooltip id="button-tooltip">{t('enrolled student')}</Tooltip>}
-          >
-            <Link to={`/enrolled-student?id=${d?.id}`}>
-              <Button variant="info" style={{ padding: '5px 10px' }}>
-                <AiOutlineFolderView />
-              </Button>
-            </Link>
           </OverlayTrigger>
         </div>
       ),
@@ -132,10 +111,10 @@ const InsCourses = () => {
           <Card.Body>
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
-                <h5>{t('InsCourses')}</h5>
-                <Link to={'/InsCourses-create-update'}>
+                <h5>{t('courses')}</h5>
+                <Link to={'/insCourses-create-update'}>
                   <Button size="sm" variant="primary">
-                    {t('create InsCourses')}
+                    {t('create courses')}
                   </Button>
                 </Link>
               </Col>

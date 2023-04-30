@@ -21,12 +21,6 @@ const InsCoursesSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    seatLimit: {
-      type: Number,
-    },
-    registrationDeadline: {
-      type: Date,
-    },
     resources: [],
     coursesHistory: [],
   },

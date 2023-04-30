@@ -11,19 +11,18 @@ function Upload({ modalData, ...rest }) {
   const submitHandler = (files) => {
     upload(files)
       .then((result) => {
-        console.log(result);
         const resourceData = result.map((item) => {
           return {
             folderId: rest.folderId,
             id: Date.now(),
-            url: item,
+            url: item.url,
+            type: item.type,
           };
         });
         const data = {
           ...rest.course,
           resources: [...rest.course.resources, ...resourceData],
         };
-        console.log(data);
         delete data.id;
         delete data.createdAt;
         delete data.updatedAt;
@@ -31,7 +30,6 @@ function Upload({ modalData, ...rest }) {
       })
       .catch((error) => console.log(error));
   };
-  console.log(rest);
   return (
     <Modal {...modalData} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>

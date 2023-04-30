@@ -42,13 +42,17 @@ export const insCoursesService = apiService.injectEndpoints({
           dispatch(
             apiService.util.updateQueryData('insCoursesList', undefined, (draft) => {
               const findIndex = draft.data.findIndex((role) => role.id === id);
-              draft.data[findIndex].insCoursesCode = data?.data?.insCoursesCode;
-              draft.data[findIndex].insCoursesName = data?.data?.insCoursesName;
-              draft.data[findIndex].insCoursesInstructor = data?.data?.insCoursesInstructor;
-              draft.data[findIndex].seatsLimit = data?.data?.seatsLimit;
-              draft.data[findIndex].registrationDeadline = data?.data?.registrationDeadline;
+              draft.data[findIndex].coursesCode = data?.data?.coursesCode;
+              draft.data[findIndex].coursesName = data?.data?.coursesName;
+              draft.data[findIndex].coursesInstructor = data?.data?.coursesInstructor;
+              draft.data[findIndex].resources = data?.data?.resources;
+              draft.data[findIndex].coursesHistory = data?.data?.coursesHistory;
             })
           );
+
+          if (data) {
+            window.location.reload();
+          }
 
           //dispatch(dashboardService.endpoints.dashboardSummary.initiate());
         } catch {

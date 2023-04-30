@@ -56,11 +56,11 @@ const CourseDetails = () => {
           <OverlayTrigger
             placement="top"
             delay={{ show: 250, hide: 400 }}
-            overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
+            overlay={<Tooltip id="button-tooltip">{t('view')}</Tooltip>}
           >
             <Link to={`/course-folder/${id}/${d.id}`}>
               <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
-                <AiOutlineEdit />
+                <AiOutlineFolderView />
               </Button>
             </Link>
           </OverlayTrigger>
@@ -72,17 +72,6 @@ const CourseDetails = () => {
             <Button variant="danger" style={{ padding: '5px 10px' }} onClick={() => deleteItem(d.id)}>
               <BsTrash />
             </Button>
-          </OverlayTrigger>
-          <OverlayTrigger
-            placement="top"
-            delay={{ show: 250, hide: 400 }}
-            overlay={<Tooltip id="button-tooltip">{t('enrolled student')}</Tooltip>}
-          >
-            <Link to={`/enrolled-student?id=${d?.id}`}>
-              <Button variant="info" style={{ padding: '5px 10px' }}>
-                <AiOutlineFolderView />
-              </Button>
-            </Link>
           </OverlayTrigger>
         </div>
       ),
@@ -111,42 +100,43 @@ const CourseDetails = () => {
   return (
     <Layout>
       <Container>
-        <Row>
-          <Col className="d-flex justify-content-between p-2" sm={12}>
-            <h5>{t('courses')}</h5>
-            <div>
-              <Button className="mx-2" size="sm" variant="primary" onClick={() => setModalShow(true)}>
-                {t(' upload')}
-              </Button>
-              <Button size="sm" variant="primary" onClick={() => setFolderCreateUpdateModalSHow(true)}>
-                {t('create Folder')}
-              </Button>
-            </div>
-          </Col>
-          <Col sm={12}>
-            {isLoading ? (
-              <Spinner size="lg" variant="primary" />
-            ) : data?.length ? (
-              <Table
-                columns={columns}
-                data={course?.coursesHistory || []}
-                pageSize={5}
-                sizePerPageList={sizePerPageList}
-                isSortable={true}
-                pagination={true}
-              />
-            ) : (
-              t('no data found')
-            )}
-          </Col>
-        </Row>
-        <Upload show={modalShow} onHide={() => setModalShow(false)} />
-        <CreateUpdateFolder
-          show={folderCreateUpdateModalShow}
-          onHide={() => setFolderCreateUpdateModalSHow(false)}
-          createFlag
-          course={course}
-        />
+        <Card>
+          <Card.Body>
+            <Row>
+              <Col className="d-flex justify-content-between p-2" sm={12}>
+                <h5>{t('courses')}</h5>
+                <div>
+                  <Button size="sm" variant="primary" onClick={() => setFolderCreateUpdateModalSHow(true)}>
+                    {t('create Folder')}
+                  </Button>
+                </div>
+              </Col>
+              <Col sm={12}>
+                {isLoading ? (
+                  <Spinner size="lg" variant="primary" />
+                ) : data?.length ? (
+                  <Table
+                    columns={columns}
+                    data={course?.coursesHistory || []}
+                    pageSize={5}
+                    sizePerPageList={sizePerPageList}
+                    isSortable={true}
+                    pagination={true}
+                  />
+                ) : (
+                  t('no data found')
+                )}
+              </Col>
+            </Row>
+
+            <CreateUpdateFolder
+              show={folderCreateUpdateModalShow}
+              onHide={() => setFolderCreateUpdateModalSHow(false)}
+              createFlag
+              course={course}
+            />
+          </Card.Body>
+        </Card>
       </Container>
     </Layout>
   );

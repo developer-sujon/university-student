@@ -47,7 +47,7 @@ const useFileUpload = () => {
             ]);
           },
         });
-        response.push(data.secure_url);
+        response.push({ url: data.secure_url, type: data.resource_type });
       } catch (error) {
         console.log(error);
       }

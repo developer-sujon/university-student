@@ -48,6 +48,12 @@ const SideBar = ({ openMenu, setOpenMenu }) => {
           <NavItem title={t('elective courses')} link="/elective-courses-student" Icon={FaUniversity} />
         )}
 
+        {profileDetails?.data?.role === 'INSTRUCTOR' && (
+          <>
+            <NavItem title={t('courses')} link="/inscourses" Icon={SiFuturelearn} />
+          </>
+        )}
+
         {profileDetails?.data?.role === 'ADMIN' && (
           <>
             <NavItem title={t('courses')} link="/inscourses" Icon={SiFuturelearn} />

@@ -259,7 +259,7 @@ const privateRoutes = [
         <InsCourses />
       </LazyLoading>
     ),
-    roles: ['ADMIN'],
+    roles: ['ADMIN', 'INSTRUCTOR'],
     accessPermission: null,
   },
   {
@@ -269,17 +269,17 @@ const privateRoutes = [
         <CreateUpdateInsCourses />
       </LazyLoading>
     ),
-    roles: ['ADMIN'],
+    roles: ['ADMIN', 'INSTRUCTOR'],
     accessPermission: null,
   },
   {
-    path: '/InsCourses-view/:id',
+    path: '/insCourses-view/:id',
     element: (
       <LazyLoading>
         <InsCourseDetails />
       </LazyLoading>
     ),
-    roles: ['ADMIN'],
+    roles: ['ADMIN', 'INSTRUCTOR'],
     accessPermission: null,
   },
   {
@@ -289,7 +289,7 @@ const privateRoutes = [
         <InsCourseResources />
       </LazyLoading>
     ),
-    roles: ['ADMIN'],
+    roles: ['ADMIN', 'INSTRUCTOR'],
     accessPermission: null,
   },
 ];
