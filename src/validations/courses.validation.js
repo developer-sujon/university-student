@@ -11,6 +11,7 @@ const coursesCreate = {
     coursesInstructor: Joi.string().required(),
     seatsLimit: Joi.number().required(),
     registrationDeadline: Joi.date().required(),
+    allowSessions: Joi.array().required(),
   }),
 };
 
@@ -30,6 +31,7 @@ const coursesUpdate = {
     coursesInstructor: Joi.string().required(),
     seatsLimit: Joi.number().required(),
     registrationDeadline: Joi.date().required(),
+    allowSessions: Joi.array().required(),
   }),
 };
 

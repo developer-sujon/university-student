@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import Select from 'react-select';
 
 //Internal lib imports
 import Layout from '../../../layout/Layout';
@@ -15,6 +16,7 @@ import {
   useCoursesUpdateMutation,
 } from '../../../redux/services/coursesService';
 import { formatDate } from '../../../utils/DateFormatter';
+import { useSessionDropDownQuery } from '../../../redux/services/sessionService';
 
 const CreateUpdateCourses = () => {
   let [objectID, SetObjectID] = useState(null);
@@ -29,6 +31,7 @@ const CreateUpdateCourses = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { data: allCourses } = useCoursesListQuery();
+  const { data: Sessions, isLoading } = useSessionDropDownQuery();
   const [CoursesCreate, { isLoading: createLoading, isSuccess: createSuccess }] = useCoursesCreateMutation();
   const [CoursesUpdate, { isLoading: updateLoading, isSuccess: updateSuccess }] = useCoursesUpdateMutation();
 
@@ -77,14 +80,16 @@ const CreateUpdateCourses = () => {
   /*
    * form handle submit
    */
-  const submitForm = ({ coursesCode, coursesName, coursesInstructor, seatsLimit, registrationDeadline }) => {
+  const submitForm = ({ coursesCode, coursesName, coursesInstructor, seatsLimit, registrationDeadline, allowSessions }) => {
     const postBody = {
       coursesCode,
       coursesName,
       coursesInstructor,
       seatsLimit,
       registrationDeadline,
+      allowSessions,
     };
+
     if (!objectID) {
       CoursesCreate(postBody);
     } else {
@@ -214,6 +219,30 @@ const CreateUpdateCourses = () => {
                         />
                         {errors.registrationDeadline && (
                           <Form.Text className="text-danger">{errors.registrationDeadline.message}</Form.Text>
+                        )}
+                      </Form.Group>
+                    </Col>
+                    <Col sm={4}>
+                      <Form.Group className="mb-3" controlId="allowSessions">
+                        <Form.Label>{t('allow sessions')}</Form.Label>
+                        <Controller
+                          control={control}
+                          name="allowSessions"
+                          defaultValue={Sessions?.data.map((c) => c.value)}
+                          render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Select
+                              inputRef={ref}
+                              //value={Sessions?.data?.filter((c) => value.includes(c.value))}
+                              onChange={(val) => onChange(val.map((c) => c.label))}
+                              isMulti
+                              options={Sessions?.data}
+                              className="basic-multi-select"
+                              classNamePrefix="select"
+                            />
+                          )}
+                        />
+                        {errors.allowSessions && (
+                          <Form.Text className="text-danger">{errors.allowSessions.message}</Form.Text>
                         )}
                       </Form.Group>
                     </Col>

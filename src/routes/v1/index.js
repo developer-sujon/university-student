@@ -6,6 +6,7 @@ const authRoute = require('./auth.route');
 const profileRoute = require('./profile.route');
 const leaveRoute = require('./leave.route');
 const retakeAssessmentRoute = require('./retake.assessment.route');
+const summerAssessmentRoute = require('./summer.assessment.route');
 const subjectRepetitionRoute = require('./subject.repetition.route');
 const scholarshipRoute = require('./scholarship.route');
 const othersRoute = require('./others.route');
@@ -34,6 +35,10 @@ const defaultRoutes = [
   {
     path: '/retakeAssessment',
     route: retakeAssessmentRoute,
+  },
+  {
+    path: '/summerAssessment',
+    route: summerAssessmentRoute,
   },
   {
     path: '/subjectRepetition',
