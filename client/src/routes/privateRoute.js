@@ -33,7 +33,9 @@ const CreateUpdateInstructor = lazy(() => import('../screens/private/Admin/Instr
 
 const CreateUpdateInsCourses = lazy(() => import('../screens/private/Admin/CreateUpdateInsCourses'));
 
-const CourseDetails = lazy(() => import('../screens/private/Admin/CourseDetails'));
+const InsCourseDetails = lazy(() => import('../screens/private/Admin/InsCourseDetails'));
+
+const InsCourseResources = lazy(() => import('../screens/private/Admin/InsCourseResources'));
 
 const LazyLoading = ({ children }) => {
   return <Suspense fallback={<LazyLoader />}>{children}</Suspense>;
@@ -274,7 +276,17 @@ const privateRoutes = [
     path: '/InsCourses-view/:id',
     element: (
       <LazyLoading>
-        <CourseDetails />
+        <InsCourseDetails />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/course-folder/:id/:uniqueId',
+    element: (
+      <LazyLoading>
+        <InsCourseResources />
       </LazyLoading>
     ),
     roles: ['ADMIN'],

@@ -3,53 +3,45 @@ import { useState } from 'react';
 import { Row, Col, Container, Button, Card, ListGroup, Badge, OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineEdit, AiOutlineFolderView } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { BsTrash } from 'react-icons/bs';
-import { GrStatusGood } from 'react-icons/gr';
 
 //Internal lib imports
 import Layout from '../../../layout/Layout';
-import { useCoursesDeleteMutation, useCoursesListQuery } from '../../../redux/services/coursesService';
+
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
 import Upload from '../../../components/Upload';
+import {
+  useInsCoursesDeleteMutation,
+  useInsCoursesListQuery,
+  useInsCoursesUpdateMutation,
+} from '../../../redux/services/inccoursesService';
+import CreateUpdateFolder from './CreateUpdateFolder';
 
 const CourseDetails = () => {
   const { t } = useTranslation();
-  const { data: Coursess, isLoading } = useCoursesListQuery();
-  const [CoursesDelete] = useCoursesDeleteMutation();
-  const data = Coursess?.data || [];
+  const { data: InsCoursess, isLoading } = useInsCoursesListQuery();
+  const [InsCoursesDelete] = useInsCoursesDeleteMutation();
+
+  const data = InsCoursess?.data || [];
+
+  const { id } = useParams();
+  const course = data.find((item) => item.id === id);
+
   const [modalShow, setModalShow] = useState(false);
+  const [folderCreateUpdateModalShow, setFolderCreateUpdateModalSHow] = useState(false);
+  const [createFlag, setCreateFlag] = useState(true);
 
   const deleteItem = (id) => {
-    AleartMessage.Delete(id, CoursesDelete);
+    AleartMessage.Delete(id, InsCoursesDelete);
   };
 
   const columns = [
     {
-      Header: t('courses code'),
-      accessor: (d) => <span className="ms-1"> {d.coursesCode}</span>,
-      sort: true,
-    },
-    {
-      Header: t('courses name'),
-      accessor: (d) => <span className="ms-1"> {d.coursesName}</span>,
-      sort: true,
-    },
-    {
-      Header: t('courses instructor'),
-      accessor: (d) => <span className="ms-1"> {d.coursesInstructor}</span>,
-      sort: true,
-    },
-    {
-      Header: t('seats limit'),
-      accessor: (d) => <span className="ms-1"> {d.seatsLimit}</span>,
-      sort: true,
-    },
-    {
-      Header: t('registration deadline'),
-      accessor: (d) => <span className="ms-1"> {DateFormatter(d.registrationDeadline)}</span>,
+      Header: t('Folder Name'),
+      accessor: (data) => <span className="ms-1"> {data.title}</span>,
       sort: true,
     },
     {
@@ -66,7 +58,7 @@ const CourseDetails = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
           >
-            <Link to={`/courses-create-update?id=${d?.id}`}>
+            <Link to={`/course-folder/${id}/${d.id}`}>
               <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
                 <AiOutlineEdit />
               </Button>
@@ -122,18 +114,14 @@ const CourseDetails = () => {
         <Row>
           <Col className="d-flex justify-content-between p-2" sm={12}>
             <h5>{t('courses')}</h5>
-
-            <Button size="sm" variant="primary" onClick={() => setModalShow(true)}>
-              {t('create upload')}
-            </Button>
-          </Col>
-          <Col className="d-flex justify-content-between p-2" sm={12}>
-            <h5>{t('courses')}</h5>
-            <Link to={'/courses-create-update'}>
-              <Button size="sm" variant="primary">
-                {t('create courses')}
+            <div>
+              <Button className="mx-2" size="sm" variant="primary" onClick={() => setModalShow(true)}>
+                {t(' upload')}
               </Button>
-            </Link>
+              <Button size="sm" variant="primary" onClick={() => setFolderCreateUpdateModalSHow(true)}>
+                {t('create Folder')}
+              </Button>
+            </div>
           </Col>
           <Col sm={12}>
             {isLoading ? (
@@ -141,7 +129,7 @@ const CourseDetails = () => {
             ) : data?.length ? (
               <Table
                 columns={columns}
-                data={data}
+                data={course?.coursesHistory || []}
                 pageSize={5}
                 sizePerPageList={sizePerPageList}
                 isSortable={true}
@@ -153,6 +141,12 @@ const CourseDetails = () => {
           </Col>
         </Row>
         <Upload show={modalShow} onHide={() => setModalShow(false)} />
+        <CreateUpdateFolder
+          show={folderCreateUpdateModalShow}
+          onHide={() => setFolderCreateUpdateModalSHow(false)}
+          createFlag
+          course={course}
+        />
       </Container>
     </Layout>
   );

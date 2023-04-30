@@ -56,6 +56,7 @@ const updateService = async (dataModel, matchQuery, postBody, notFoundErrorMessa
   if (!data) {
     throw new ApiError(httpStatus.BAD_REQUEST, notFoundErrorMessage);
   }
+  console.log(data);
   Object.assign(data, postBody);
   return await data.save();
 };
