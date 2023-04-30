@@ -23,7 +23,9 @@ const SideBar = ({ openMenu, setOpenMenu }) => {
   return (
     <div className={openMenu ? 'side-nav-open' : 'side-nav-close'}>
       <Nav className="flex-column pt-2">
-        <NavItem title={t('dashboard')} link="/dashboard" Icon={RiDashboardLine} />
+        {profileDetails?.data?.role === 'ADMIN' && (
+          <NavItem title={t('dashboard')} link="/dashboard" Icon={RiDashboardLine} />
+        )}
 
         {profileDetails?.data?.role === 'STUDENT' && (
           <>

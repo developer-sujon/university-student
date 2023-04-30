@@ -26,7 +26,7 @@ const InsCourses = () => {
   const deleteItem = (id) => {
     AleartMessage.Delete(id, InsCoursesDelete);
   };
-  console.log(data);
+
   const columns = [
     {
       Header: t('courses code'),

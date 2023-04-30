@@ -59,7 +59,7 @@ const privateRoutes = [
         <Dashboard />
       </LazyLoading>
     ),
-    roles: ['ADMIN', 'STUDENT', 'INSTRUCTOR'],
+    roles: ['ADMIN'],
     accessPermission: null,
   },
   {
