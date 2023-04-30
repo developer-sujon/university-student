@@ -13,15 +13,26 @@ import { useCoursesDeleteMutation, useCoursesListQuery } from '../../../redux/se
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
+import CoursesDetailsModal from './CoursesDetailsModal';
 
 const Courses = () => {
   const { t } = useTranslation();
+
+  const [singleCourses, setSingleCourses] = useState({});
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const { data: Coursess, isLoading } = useCoursesListQuery();
   const [CoursesDelete] = useCoursesDeleteMutation();
   const data = Coursess?.data || [];
 
   const deleteItem = (id) => {
     AleartMessage.Delete(id, CoursesDelete);
+  };
+  const handleQuickView = (d) => {
+    setSingleCourses(d);
+    handleShow();
   };
 
   const columns = [
@@ -59,6 +70,15 @@ const Courses = () => {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={<Tooltip id="button-tooltip">{t('view')}</Tooltip>}
+          >
+            <Button variant="primary" style={{ padding: '5px 10px' }} onClick={() => handleQuickView(d)}>
+              <AiOutlineFolderView />
+            </Button>
+          </OverlayTrigger>
           <OverlayTrigger
             placement="top"
             delay={{ show: 250, hide: 400 }}
@@ -115,32 +135,35 @@ const Courses = () => {
   ];
 
   return (
-    <Row>
-      <Col className="d-flex justify-content-between p-2" sm={12}>
-        <h5>{t('courses')}</h5>
-        <Link to={'/courses-create-update'}>
-          <Button size="sm" variant="primary">
-            {t('create courses')}
-          </Button>
-        </Link>
-      </Col>
-      <Col sm={12}>
-        {isLoading ? (
-          <Spinner size="lg" variant="primary" />
-        ) : data?.length ? (
-          <Table
-            columns={columns}
-            data={data}
-            pageSize={5}
-            sizePerPageList={sizePerPageList}
-            isSortable={true}
-            pagination={true}
-          />
-        ) : (
-          t('no data found')
-        )}
-      </Col>
-    </Row>
+    <>
+      <Row>
+        <Col className="d-flex justify-content-between p-2" sm={12}>
+          <h5>{t('courses')}</h5>
+          <Link to={'/courses-create-update'}>
+            <Button size="sm" variant="primary">
+              {t('create courses')}
+            </Button>
+          </Link>
+        </Col>
+        <Col sm={12}>
+          {isLoading ? (
+            <Spinner size="lg" variant="primary" />
+          ) : data?.length ? (
+            <Table
+              columns={columns}
+              data={data}
+              pageSize={5}
+              sizePerPageList={sizePerPageList}
+              isSortable={true}
+              pagination={true}
+            />
+          ) : (
+            t('no data found')
+          )}
+        </Col>
+      </Row>
+      <CoursesDetailsModal singleCourses={singleCourses} show={show} handleClose={handleClose} />
+    </>
   );
 };
 

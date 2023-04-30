@@ -8,11 +8,16 @@ const InstructorDetailsModal = ({ show, handleClose, singleInstructor }) => {
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>
-          {t('subject')}: {singleInstructor.subject}
+          {t('mobile')}: {singleInstructor.mobile}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {t('reason')}: {singleInstructor.reason}{' '}
+        <p>
+          {t('name')}: {singleInstructor.name}{' '}
+        </p>
+        <p>
+          {t('email')}: {singleInstructor.email}{' '}
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={handleClose}>

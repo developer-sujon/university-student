@@ -17,8 +17,13 @@ import {
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
+import SubjectRepetitionDetailsModal from './RetakeAssessmentDetailsModal';
 
 const RetakeAssessment = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [singleRetakeAssessment, setSingleRetakeAssessment] = useState({});
   const { data: profileDetails } = useProfileDetailsQuery();
   const [retakeAssessmentUpdate] = useRetakeAssessmentUpdateMutation();
@@ -35,6 +40,11 @@ const RetakeAssessment = () => {
   const updateStatus = (data) => {
     const { id, createdAt, updatedAt, studentID, ...others } = data;
     AleartMessage.StatusUpdate(id, others, retakeAssessmentUpdate);
+  };
+
+  const handleQuickView = (d) => {
+    setSingleRetakeAssessment(d);
+    handleShow();
   };
 
   const columns = [
@@ -90,6 +100,15 @@ const RetakeAssessment = () => {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={<Tooltip id="button-tooltip">{t('view')}</Tooltip>}
+          >
+            <Button variant="primary" style={{ padding: '5px 10px' }} onClick={() => handleQuickView(d)}>
+              <AiOutlineFolderView />
+            </Button>
+          </OverlayTrigger>
           {profileDetails?.data?.role !== 'STUDENT' && (
             <OverlayTrigger
               placement="top"
@@ -206,6 +225,7 @@ const RetakeAssessment = () => {
           </Card.Body>
         </Card>
       </Container>
+      <SubjectRepetitionDetailsModal singleRetakeAssessment={singleRetakeAssessment} show={show} handleClose={handleClose} />
     </Layout>
   );
 };

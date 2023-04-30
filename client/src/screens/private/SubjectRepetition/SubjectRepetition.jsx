@@ -17,8 +17,13 @@ import {
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
+import SubjectRepetitionDetailsModal from './SubjectRepetitionDetailsModal';
 
 const SubjectRepetition = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [singleSubjectRepetition, setSingleSubjectRepetition] = useState({});
   const { data: profileDetails } = useProfileDetailsQuery();
   const [subjectRepetitionUpdate] = useSubjectRepetitionUpdateMutation();
@@ -35,6 +40,11 @@ const SubjectRepetition = () => {
   const updateStatus = (data) => {
     const { id, createdAt, updatedAt, studentID, ...others } = data;
     AleartMessage.StatusUpdate(id, others, subjectRepetitionUpdate);
+  };
+
+  const handleQuickView = (d) => {
+    setSingleSubjectRepetition(d);
+    handleShow();
   };
 
   const columns = [
@@ -100,6 +110,15 @@ const SubjectRepetition = () => {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={<Tooltip id="button-tooltip">{t('view')}</Tooltip>}
+          >
+            <Button variant="primary" style={{ padding: '5px 10px' }} onClick={() => handleQuickView(d)}>
+              <AiOutlineFolderView />
+            </Button>
+          </OverlayTrigger>
           {profileDetails?.data?.role !== 'STUDENT' && (
             <OverlayTrigger
               placement="top"
@@ -216,6 +235,11 @@ const SubjectRepetition = () => {
           </Card.Body>
         </Card>
       </Container>
+      <SubjectRepetitionDetailsModal
+        singleSubjectRepetition={singleSubjectRepetition}
+        show={show}
+        handleClose={handleClose}
+      />
     </Layout>
   );
 };

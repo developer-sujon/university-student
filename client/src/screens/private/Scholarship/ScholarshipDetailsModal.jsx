@@ -2,17 +2,25 @@
 import { Modal, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-const SubjectRepetitionDetailsModal = ({ show, handleClose, singleSubjectRepetition }) => {
+const ScholarshipDetailsModal = ({ show, handleClose, singleScholarship }) => {
   const { t } = useTranslation();
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>
-          {t('subject')}: {singleSubjectRepetition?.subject}
+          {t('student id')}: {singleScholarship?.studentID}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {t('reason')}: {singleSubjectRepetition?.reason}{' '}
+        <p>
+          {t('subject')}: {singleScholarship?.subject}
+        </p>
+        <p>
+          {t('scholarship type')}: {singleScholarship?.scholarshipType}
+        </p>
+        <p>
+          {t('description')}: {singleScholarship?.description}
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={handleClose}>
@@ -23,4 +31,4 @@ const SubjectRepetitionDetailsModal = ({ show, handleClose, singleSubjectRepetit
   );
 };
 
-export default SubjectRepetitionDetailsModal;
+export default ScholarshipDetailsModal;

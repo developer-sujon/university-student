@@ -18,8 +18,14 @@ import Table from '../../../../components/Table/Table';
 import AleartMessage from '../../../../helpers/AleartMessage';
 import DateFormatter from '../../../../utils/DateFormatter';
 import { useProfileDetailsQuery } from '../../../../redux/services/profileService';
+import InstructorDetailsModal from './InstructorDetailsModal';
 
 const Instructor = () => {
+  const [singleInstructor, setSingleInstructor] = useState({});
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const { t } = useTranslation();
   const { data: Instructors, isLoading } = useInstructorListQuery();
   const [InstructorDelete] = useInstructorDeleteMutation();
@@ -34,6 +40,11 @@ const Instructor = () => {
   const updateStatus = (data) => {
     const { id, createdAt, updatedAt, studentID, ...others } = data;
     AleartMessage.StatusUpdate(id, others, InstructorUpdate);
+  };
+
+  const handleQuickView = (d) => {
+    setSingleInstructor(d);
+    handleShow();
   };
 
   const columns = [
@@ -61,6 +72,15 @@ const Instructor = () => {
       Header: t('action'),
       accessor: (d) => (
         <div className="bodySmall">
+          <OverlayTrigger
+            placement="top"
+            delay={{ show: 250, hide: 400 }}
+            overlay={<Tooltip id="button-tooltip">{t('view')}</Tooltip>}
+          >
+            <Button variant="primary" style={{ padding: '5px 10px' }} onClick={() => handleQuickView(d)}>
+              <AiOutlineFolderView />
+            </Button>
+          </OverlayTrigger>
           <OverlayTrigger
             placement="top"
             delay={{ show: 250, hide: 400 }}
@@ -139,6 +159,7 @@ const Instructor = () => {
           </Card.Body>
         </Card>
       </Container>
+      <InstructorDetailsModal singleInstructor={singleInstructor} show={show} handleClose={handleClose} />
     </Layout>
   );
 };
