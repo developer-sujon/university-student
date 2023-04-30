@@ -9,34 +9,36 @@ import { GrStatusGood } from 'react-icons/gr';
 
 //Internal lib imports
 import Layout from '../../../layout/Layout';
-import { useInsCoursesDeleteMutation, useInsCoursesListQuery } from '../../../redux/services/inccoursesService';
+import { useCoursesDeleteMutation, useCoursesListQuery } from '../../../redux/services/coursesService';
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
+import Upload from '../../../components/Upload';
 
-const InsCourses = () => {
+const CourseDetails = () => {
   const { t } = useTranslation();
-  const { data: InsCoursess, isLoading } = useInsCoursesListQuery();
-  const [InsCoursesDelete] = useInsCoursesDeleteMutation();
-  const data = InsCoursess?.data || [];
+  const { data: Coursess, isLoading } = useCoursesListQuery();
+  const [CoursesDelete] = useCoursesDeleteMutation();
+  const data = Coursess?.data || [];
+  const [modalShow, setModalShow] = useState(false);
 
   const deleteItem = (id) => {
-    AleartMessage.Delete(id, InsCoursesDelete);
+    AleartMessage.Delete(id, CoursesDelete);
   };
 
   const columns = [
     {
-      Header: t('InsCourses code'),
+      Header: t('courses code'),
       accessor: (d) => <span className="ms-1"> {d.coursesCode}</span>,
       sort: true,
     },
     {
-      Header: t('InsCourses name'),
+      Header: t('courses name'),
       accessor: (d) => <span className="ms-1"> {d.coursesName}</span>,
       sort: true,
     },
     {
-      Header: t('InsCourses instructor'),
+      Header: t('courses instructor'),
       accessor: (d) => <span className="ms-1"> {d.coursesInstructor}</span>,
       sort: true,
     },
@@ -64,18 +66,7 @@ const InsCourses = () => {
             delay={{ show: 250, hide: 400 }}
             overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
           >
-            <Link to={`/InsCourses-view/${d?.id}`}>
-              <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
-                <AiOutlineEdit />
-              </Button>
-            </Link>
-          </OverlayTrigger>
-          <OverlayTrigger
-            placement="top"
-            delay={{ show: 250, hide: 400 }}
-            overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
-          >
-            <Link to={`/InsCourses-create-update?id=${d?.id}`}>
+            <Link to={`/courses-create-update?id=${d?.id}`}>
               <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
                 <AiOutlineEdit />
               </Button>
@@ -128,39 +119,43 @@ const InsCourses = () => {
   return (
     <Layout>
       <Container>
-        <Card>
-          <Card.Body>
-            <Row>
-              <Col className="d-flex justify-content-between p-2" sm={12}>
-                <h5>{t('InsCourses')}</h5>
-                <Link to={'/InsCourses-create-update'}>
-                  <Button size="sm" variant="primary">
-                    {t('create InsCourses')}
-                  </Button>
-                </Link>
-              </Col>
-              <Col sm={12}>
-                {isLoading ? (
-                  <Spinner size="lg" variant="primary" />
-                ) : data?.length ? (
-                  <Table
-                    columns={columns}
-                    data={data}
-                    pageSize={5}
-                    sizePerPageList={sizePerPageList}
-                    isSortable={true}
-                    pagination={true}
-                  />
-                ) : (
-                  t('no data found')
-                )}
-              </Col>
-            </Row>
-          </Card.Body>
-        </Card>
+        <Row>
+          <Col className="d-flex justify-content-between p-2" sm={12}>
+            <h5>{t('courses')}</h5>
+
+            <Button size="sm" variant="primary" onClick={() => setModalShow(true)}>
+              {t('create upload')}
+            </Button>
+          </Col>
+          <Col className="d-flex justify-content-between p-2" sm={12}>
+            <h5>{t('courses')}</h5>
+            <Link to={'/courses-create-update'}>
+              <Button size="sm" variant="primary">
+                {t('create courses')}
+              </Button>
+            </Link>
+          </Col>
+          <Col sm={12}>
+            {isLoading ? (
+              <Spinner size="lg" variant="primary" />
+            ) : data?.length ? (
+              <Table
+                columns={columns}
+                data={data}
+                pageSize={5}
+                sizePerPageList={sizePerPageList}
+                isSortable={true}
+                pagination={true}
+              />
+            ) : (
+              t('no data found')
+            )}
+          </Col>
+        </Row>
+        <Upload show={modalShow} onHide={() => setModalShow(false)} />
       </Container>
     </Layout>
   );
 };
 
-export default InsCourses;
+export default CourseDetails;

@@ -33,6 +33,8 @@ const CreateUpdateInstructor = lazy(() => import('../screens/private/Admin/Instr
 
 const CreateUpdateInsCourses = lazy(() => import('../screens/private/Admin/CreateUpdateInsCourses'));
 
+const CourseDetails = lazy(() => import('../screens/private/Admin/CourseDetails'));
+
 const LazyLoading = ({ children }) => {
   return <Suspense fallback={<LazyLoader />}>{children}</Suspense>;
 };
@@ -263,6 +265,16 @@ const privateRoutes = [
     element: (
       <LazyLoading>
         <CreateUpdateInsCourses />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/InsCourses-view/:id',
+    element: (
+      <LazyLoading>
+        <CourseDetails />
       </LazyLoading>
     ),
     roles: ['ADMIN'],

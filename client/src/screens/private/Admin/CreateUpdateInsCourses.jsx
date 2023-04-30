@@ -79,9 +79,9 @@ const CreateUpdateInsCourses = () => {
    */
   const submitForm = ({ InsCoursesCode, InsCoursesName, InsCoursesInstructor, seatsLimit, registrationDeadline }) => {
     const postBody = {
-      InsCoursesCode,
-      InsCoursesName,
-      InsCoursesInstructor,
+      coursesCode: InsCoursesCode,
+      coursesName: InsCoursesName,
+      coursesInstructor: InsCoursesInstructor,
       seatsLimit,
       registrationDeadline,
     };
