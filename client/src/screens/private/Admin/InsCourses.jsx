@@ -13,12 +13,15 @@ import { useInsCoursesDeleteMutation, useInsCoursesListQuery } from '../../../re
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
+import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 
 const InsCourses = () => {
   const { t } = useTranslation();
   const { data: InsCoursess, isLoading } = useInsCoursesListQuery();
   const [InsCoursesDelete] = useInsCoursesDeleteMutation();
   const data = InsCoursess?.data || [];
+
+  const { data: profileDetails } = useProfileDetailsQuery();
 
   const deleteItem = (id) => {
     AleartMessage.Delete(id, InsCoursesDelete);
@@ -124,7 +127,11 @@ const InsCourses = () => {
                 ) : data?.length ? (
                   <Table
                     columns={columns}
-                    data={data}
+                    data={
+                      profileDetails?.data?.role === 'INSTRUCTOR'
+                        ? data?.filter((i) => i.coursesInstructor?.trim() === profileDetails?.data?.name)
+                        : data
+                    }
                     pageSize={5}
                     sizePerPageList={sizePerPageList}
                     isSortable={true}
