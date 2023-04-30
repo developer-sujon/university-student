@@ -15,6 +15,7 @@ import DateFormatter from '../../../utils/DateFormatter';
 import Upload from '../../../components/Upload';
 import {
   useInsCoursesDeleteMutation,
+  useInsCoursesHistoryDeleteMutation,
   useInsCoursesListQuery,
   useInsCoursesUpdateMutation,
 } from '../../../redux/services/inccoursesService';
@@ -23,7 +24,7 @@ import CreateUpdateFolder from './CreateUpdateFolder';
 const CourseDetails = () => {
   const { t } = useTranslation();
   const { data: InsCoursess, isLoading } = useInsCoursesListQuery();
-  const [InsCoursesDelete] = useInsCoursesDeleteMutation();
+  const [insCoursesHistoryDelete] = useInsCoursesHistoryDeleteMutation();
 
   const data = InsCoursess?.data || [];
 
@@ -34,8 +35,8 @@ const CourseDetails = () => {
   const [folderCreateUpdateModalShow, setFolderCreateUpdateModalSHow] = useState(false);
   const [createFlag, setCreateFlag] = useState(true);
 
-  const deleteItem = (id) => {
-    AleartMessage.Delete(id, InsCoursesDelete);
+  const deleteItem = (hid) => {
+    AleartMessage.DeleteHistory(id, hid, insCoursesHistoryDelete);
   };
 
   const columns = [

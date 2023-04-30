@@ -64,10 +64,23 @@ const inscoursesDelete = catchAsync(async (req, res) => {
   res.json({ status: true, message: 'inscourses delete successful', data });
 });
 
+/**
+ * @desc inscourses history delete
+ * @access private
+ * @route /api/v1/inscourses/insCoursesHistoryDelete/:id/:hid
+ * @methud DELETE
+ */
+
+const insCoursesHistoryDelete = catchAsync(async (req, res) => {
+  const data = await inscoursesService.insCoursesHistoryDelete(req);
+  res.json({ status: true, message: 'inscourses delete successful', data });
+});
+
 module.exports = {
   inscoursesCreate,
   inscoursesList,
   inscoursesDetails,
   inscoursesUpdate,
   inscoursesDelete,
+  insCoursesHistoryDelete,
 };

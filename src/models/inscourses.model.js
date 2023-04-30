@@ -11,6 +11,7 @@ const InsCoursesSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+
     coursesName: {
       type: String,
       required: true,

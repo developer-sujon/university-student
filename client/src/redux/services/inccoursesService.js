@@ -80,6 +80,24 @@ export const insCoursesService = apiService.injectEndpoints({
         }
       },
     }),
+    insCoursesHistoryDelete: builder.mutation({
+      query: ({ id, hid }) => ({
+        url: `insCourses/insCoursesHistoryDelete/${id}/${hid}`,
+        method: 'DELETE',
+      }),
+
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+
+          if (data) {
+            window.location.reload();
+          }
+        } catch {
+          //patchinsCourses.undo();
+        }
+      },
+    }),
   }),
 });
 
@@ -88,4 +106,5 @@ export const {
   useInsCoursesListQuery,
   useInsCoursesUpdateMutation,
   useInsCoursesDeleteMutation,
+  useInsCoursesHistoryDeleteMutation,
 } = insCoursesService;

@@ -75,10 +75,23 @@ const inscoursesDelete = (request) => {
   return commonService.deleteService(InsCourses, matchQuery, errorMessage);
 };
 
+/**
+ * @desc inscourses history delete
+ * @returns {Promise<InsCourses>}
+ */
+
+const insCoursesHistoryDelete = async (request) => {
+  const data = await InsCourses.findById(request.params.id);
+  data.coursesHistory = data.coursesHistory.filter((i) => i.id != request.params.hid);
+
+  return await data.save();
+};
+
 module.exports = {
   inscoursesCreate,
   inscoursesList,
   inscoursesDetails,
   inscoursesUpdate,
   inscoursesDelete,
+  insCoursesHistoryDelete,
 };

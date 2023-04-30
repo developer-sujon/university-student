@@ -23,6 +23,26 @@ class AleartMessage {
     });
   }
 
+  static DeleteHistory(id, hid, request) {
+    return Swal.fire({
+      title: i18n.t('Are you sure?'),
+      text: i18n.t("You won't be able to revert this!"),
+      icon: i18n.t('warning'),
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: i18n.t('Cancel'),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        return request({ id, hid }).then((res) => {
+          if (res) {
+            return true;
+          }
+        });
+      }
+    });
+  }
+
   static Update(coursesID, request) {
     return Swal.fire({
       title: 'Do you want to enrolled courses?',

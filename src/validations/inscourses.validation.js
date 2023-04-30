@@ -8,11 +8,11 @@ const inscoursesCreate = {
   body: Joi.object().keys({
     coursesCode: Joi.string().required(),
     coursesName: Joi.string().required(),
+    coursesSession: Joi.string().required(),
+    coursesProgram: Joi.string().required(),
     coursesInstructor: Joi.string().required(),
     resources: Joi.array(),
     coursesHistory: Joi.array(),
-    seatsLimit: Joi.number(),
-    registrationDeadline: Joi.date(),
   }),
 };
 
@@ -29,11 +29,11 @@ const inscoursesUpdate = {
   body: Joi.object().keys({
     coursesCode: Joi.string().required(),
     coursesName: Joi.string().required(),
+    coursesSession: Joi.string().required(),
+    coursesProgram: Joi.string().required(),
     coursesInstructor: Joi.string().required(),
     resources: Joi.array(),
     coursesHistory: Joi.array(),
-    seatsLimit: Joi.number(),
-    registrationDeadline: Joi.date(),
   }),
 };
 
@@ -43,9 +43,17 @@ const inscoursesDelete = {
   }),
 };
 
+const insCoursesHistoryDelete = {
+  params: Joi.object().keys({
+    id: Joi.string().custom(objectId).required(),
+    hid: Joi.string().required(),
+  }),
+};
+
 module.exports = {
   inscoursesCreate,
   inscoursesDetails,
   inscoursesUpdate,
   inscoursesDelete,
+  insCoursesHistoryDelete,
 };

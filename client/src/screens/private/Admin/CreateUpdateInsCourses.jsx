@@ -19,11 +19,11 @@ import { formatDate } from '../../../utils/DateFormatter';
 const CreateUpdateInsCourses = () => {
   let [objectID, SetObjectID] = useState(null);
   const [details, setDetails] = useState({
-    InsCoursesCode: '',
-    InsCoursesName: '',
+    insCoursesCode: '',
+    insCoursesName: '',
     InsCoursesInstructor: '',
-    seatsLimit: 0,
-    registrationDeadline: formatDate(new Date()),
+    coursesSession: '',
+    coursesProgram: '',
   });
 
   const { t } = useTranslation();
@@ -40,7 +40,7 @@ const CreateUpdateInsCourses = () => {
     }
 
     if (objectID && allInsCourses) {
-      setDetails(allInsCourses?.data?.find((item) => item.id === objectID));
+      allInsCourses?.data && setDetails(allInsCourses?.data?.find((item) => item.id === objectID));
     }
   }, [objectID, allInsCourses]);
 
@@ -56,14 +56,11 @@ const CreateUpdateInsCourses = () => {
     defaultValues: details,
     resolver: yupResolver(
       yup.object({
-        InsCoursesCode: yup.string().required(t('InsInsCoursesname is required')),
-        InsCoursesName: yup.string().required(t('InsInsCoursesname is required')),
+        insCoursesCode: yup.string().required(t('Ins Coursesname is required')),
+        insCoursesName: yup.string().required(t('Ins Coursesname is required')),
+        coursesSession: yup.string().required(t('Ins coursesSession is required')),
+        coursesProgram: yup.string().required(t('Ins coursesProgram is required')),
         InsCoursesInstructor: yup.string().required(t('InsInsCoursesinstructor is required')),
-        seatsLimit: yup
-          .number(t('seats limit is required'))
-          .required(t('seats limit is required'))
-          .min(1, 'seats limit must be greater than or equal to 1'),
-        registrationDeadline: yup.date().required(t('InsInsCoursesregistration deadline is required')),
       })
     ),
   });
@@ -77,13 +74,13 @@ const CreateUpdateInsCourses = () => {
   /*
    * form handle submit
    */
-  const submitForm = ({ InsCoursesCode, InsCoursesName, InsCoursesInstructor, seatsLimit, registrationDeadline }) => {
+  const submitForm = ({ insCoursesCode, insCoursesName, InsCoursesInstructor, coursesSession, coursesProgram }) => {
     const postBody = {
-      coursesCode: InsCoursesCode,
-      coursesName: InsCoursesName,
+      coursesCode: insCoursesCode,
+      coursesName: insCoursesName,
       coursesInstructor: InsCoursesInstructor,
-      seatsLimit,
-      registrationDeadline,
+      coursesSession,
+      coursesProgram,
     };
     if (!objectID) {
       InsCoursesCreate(postBody);
@@ -94,7 +91,7 @@ const CreateUpdateInsCourses = () => {
 
   useEffect(() => {
     if (createSuccess || updateSuccess) {
-      navigate('/elective-InsCourses');
+      navigate('/inscourses');
     }
   }, [createSuccess, updateSuccess]);
 
@@ -110,48 +107,48 @@ const CreateUpdateInsCourses = () => {
                 <Form onSubmit={handleSubmit(submitForm)} onReset={reset}>
                   <Row class>
                     <Col sm={4}>
-                      <Form.Group className="mb-3" controlId="InsCoursesCode">
-                        <Form.Label>{t('InsInsCoursescode')}</Form.Label>
+                      <Form.Group className="mb-3" controlId="insCoursesCode">
+                        <Form.Label>{t('InsinsCoursescode')}</Form.Label>
                         <Controller
                           control={control}
-                          name="InsCoursesCode"
+                          name="insCoursesCode"
                           render={({ field: { onChange, onBlur, value, ref } }) => (
                             <Form.Control
                               onChange={onChange}
                               defaultValue={value}
                               ref={ref}
-                              isInvalid={errors.InsCoursesCode}
-                              placeholder={t('InsInsCoursescode of the InsCourses')}
+                              isInvalid={errors.insCoursesCode}
+                              placeholder={t('InsinsCoursescode of the InsCourses')}
                               type="text"
                               size="sm"
                             />
                           )}
                         />
-                        {errors.InsCoursesCode && (
-                          <Form.Text className="text-danger">{errors.InsCoursesCode.message}</Form.Text>
+                        {errors.insCoursesCode && (
+                          <Form.Text className="text-danger">{errors.insCoursesCode.message}</Form.Text>
                         )}
                       </Form.Group>
                     </Col>
                     <Col sm={4}>
-                      <Form.Group className="mb-3" controlId="InsCoursesName">
-                        <Form.Label>{t('InsInsCoursesname')}</Form.Label>
+                      <Form.Group className="mb-3" controlId="insCoursesName">
+                        <Form.Label>{t('InsinsCoursesname')}</Form.Label>
                         <Controller
                           control={control}
-                          name="InsCoursesName"
+                          name="insCoursesName"
                           render={({ field: { onChange, onBlur, value, ref } }) => (
                             <Form.Control
                               onChange={onChange}
                               defaultValue={value}
                               ref={ref}
-                              isInvalid={errors.InsCoursesName}
-                              placeholder={t('InsInsCoursesname of the InsCourses')}
+                              isInvalid={errors.insCoursesName}
+                              placeholder={t('InsinsCoursesname of the InsCourses')}
                               type="text"
                               size="sm"
                             />
                           )}
                         />
-                        {errors.InsCoursesName && (
-                          <Form.Text className="text-danger">{errors.InsCoursesName.message}</Form.Text>
+                        {errors.insCoursesName && (
+                          <Form.Text className="text-danger">{errors.insCoursesName.message}</Form.Text>
                         )}
                       </Form.Group>
                     </Col>
@@ -179,45 +176,47 @@ const CreateUpdateInsCourses = () => {
                       </Form.Group>
                     </Col>
                     <Col sm={4}>
-                      <Form.Group className="mb-3" controlId="seatsLimit">
-                        <Form.Label>{t('seats limit')}</Form.Label>
+                      <Form.Group className="mb-3" controlId="coursesSession">
+                        <Form.Label>{t('courses session')}</Form.Label>
                         <Controller
                           control={control}
-                          name="seatsLimit"
+                          name="coursesSession"
                           render={({ field: { onChange, onBlur, value, ref } }) => (
                             <Form.Control
                               onChange={onChange}
                               defaultValue={value}
                               ref={ref}
-                              isInvalid={errors.seatsLimit}
+                              isInvalid={errors.coursesSession}
                               placeholder={t('seats limit of the InsCourses')}
-                              type="number"
+                              type="text"
                               size="sm"
                             />
                           )}
                         />
-                        {errors.seatsLimit && <Form.Text className="text-danger">{errors.seatsLimit.message}</Form.Text>}
+                        {errors.coursesSession && (
+                          <Form.Text className="text-danger">{errors.coursesSession.message}</Form.Text>
+                        )}
                       </Form.Group>
                     </Col>
                     <Col sm={4}>
-                      <Form.Group className="mb-3" controlId="registrationDeadline">
-                        <Form.Label>{t('registration deadline')}</Form.Label>
+                      <Form.Group className="mb-3" controlId="coursesProgram">
+                        <Form.Label>{t('courses program')}</Form.Label>
                         <Controller
                           control={control}
-                          name="registrationDeadline"
+                          name="coursesProgram"
                           render={({ field: { onChange, onBlur, value, ref } }) => (
                             <Form.Control
                               onChange={onChange}
                               defaultValue={value}
                               ref={ref}
-                              isInvalid={errors.registrationDeadline}
-                              type="date"
+                              isInvalid={errors.coursesProgram}
+                              type="text"
                               size="sm"
                             />
                           )}
                         />
-                        {errors.registrationDeadline && (
-                          <Form.Text className="text-danger">{errors.registrationDeadline.message}</Form.Text>
+                        {errors.coursesProgram && (
+                          <Form.Text className="text-danger">{errors.coursesProgram.message}</Form.Text>
                         )}
                       </Form.Group>
                     </Col>

@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import ToastMessage from '../../helpers/ToastMessage';
 import { setLoading } from '../slice/settingReducer';
 import { setLogout } from '../slice/authReducer';
-// https://university-student-production.up.railway.app/
+// https://shy-gray-camel-suit.cyclic.app
 // http://localhost:6100
 const SERVER_URL = process.env.REACT_APP_API_SERVER_URL || 'http://localhost:6100';
 const API_PREFIX_PATH = process.env.REACT_APP_API_PREFIX_PATH || '/api/v1';

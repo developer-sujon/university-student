@@ -43,4 +43,12 @@ router.delete(
   inscoursesController.inscoursesDelete
 );
 
+router.delete(
+  '/insCoursesHistoryDelete/:id/:hid',
+  auth(),
+  roles(['ADMIN', 'INSTRUCTOR']),
+  validate(inscoursesValidation.insCoursesHistoryDelete),
+  inscoursesController.insCoursesHistoryDelete
+);
+
 module.exports = router;

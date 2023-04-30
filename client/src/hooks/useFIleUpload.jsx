@@ -21,8 +21,8 @@ const useFileUpload = () => {
     for (let file of files) {
       formData.append('file', file);
 
-      formData.append('cloud_name', CLOUD_NAME);
-      formData.append('upload_preset', UPLOAD_PRESET);
+      formData.append('cloud_name', "ds199wmf0");
+      formData.append('upload_preset', "university-student");
 
       setLoading(true);
       // axios POST request
