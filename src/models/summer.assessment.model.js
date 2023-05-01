@@ -31,6 +31,10 @@ const summerAssessmentSchema = mongoose.Schema(
             type: String,
             trim: true,
           },
+          coursesNameI: {
+            type: String,
+            trim: true,
+          },
           motive: {
             type: String,
           },

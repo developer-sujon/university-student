@@ -49,6 +49,11 @@ const StudentSummerAssessment = () => {
       sort: true,
     },
     {
+      Header: t('courses name'),
+      accessor: (d) => <span className="ms-1"> {d?.coursesNameI}</span>,
+      sort: true,
+    },
+    {
       Header: t('session'),
       accessor: (d) => <span className="ms-1"> {d?.session}</span>,
       sort: true,

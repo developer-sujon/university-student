@@ -55,7 +55,10 @@ const ApplyStudentSummerAssessment = () => {
       session: profileDetails?.data?.session,
     };
 
-    summerAssessmentApply({ id: coursesName, enrolls: postBody });
+    summerAssessmentApply({
+      id: coursesName.split('_')[1],
+      enrolls: { ...postBody, coursesName: coursesName.split('_')[1], coursesNameI: coursesName.split('_')[0] },
+    });
   };
 
   useEffect(() => {
@@ -93,7 +96,7 @@ const ApplyStudentSummerAssessment = () => {
                             >
                               <option value="">{t('choice courses name')}</option>
                               {data?.map((i) => (
-                                <option value={i.id}>{t(i.name)}</option>
+                                <option value={i.name + '_' + i.id}>{t(i.name)}</option>
                               ))}
                             </Form.Select>
                           )}
