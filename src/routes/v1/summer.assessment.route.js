@@ -37,6 +37,14 @@ router.patch(
   summerAssessmentController.summerAssessmentUpdate
 );
 
+router.patch(
+  '/summerAssessmentApply/:id',
+  auth(),
+  roles(allRoles),
+  validate(summerAssessmentValidation.summerAssessmentApply),
+  summerAssessmentController.summerAssessmentApply
+);
+
 router.delete(
   '/summerAssessmentDelete/:id',
   auth(),

@@ -27,6 +27,24 @@ export const summerAssessmentService = apiService.injectEndpoints({
         } catch {}
       },
     }),
+    summerAssessmentApply: builder.mutation({
+      query: ({ id, enrolls }) => ({
+        url: `summerAssessment/summerAssessmentApply/${id}`,
+        method: 'PATCH',
+        body: {
+          enrolls: enrolls,
+        },
+      }),
+      async onQueryStarted({ id, enrolls }, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+
+          if (data) {
+            window.location.reload();
+          }
+        } catch {}
+      },
+    }),
 
     summerAssessmentUpdate: builder.mutation({
       query: ({ id, postBody }) => ({
@@ -76,6 +94,7 @@ export const summerAssessmentService = apiService.injectEndpoints({
 
 export const {
   useSummerAssessmentCreateMutation,
+  useSummerAssessmentApplyMutation,
   useSummerAssessmentListQuery,
   useSummerAssessmentUpdateMutation,
   useSummerAssessmentDeleteMutation,

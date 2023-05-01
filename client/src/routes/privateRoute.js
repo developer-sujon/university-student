@@ -21,6 +21,12 @@ const InsCourses = lazy(() => import('../screens/private/Admin/InsCourses'));
 const SummerCourses = lazy(() => import('../screens/private/Admin/SummerCourses/SummerAssessment'));
 const SummerAssessmentReport = lazy(() => import('../screens/private/Admin/SummerCourses/SummerAssessmentReport'));
 
+const StudentSummerAssessment = lazy(() => import('../screens/private/StudentSummerAssessment/StudentSummerAssessment'));
+
+const ApplyStudentSummerAssessment = lazy(() =>
+  import('../screens/private/StudentSummerAssessment/ApplyStudentSummerAssessment')
+);
+
 const CreateUpdateSummerCourses = lazy(() => import('../screens/private/Admin/SummerCourses/CreateUpdateSummerAssessment'));
 const CreateUpdateLeave = lazy(() => import('../screens/private/Leave/CreateUpdateLeave'));
 const CreateUpdateOthers = lazy(() => import('../screens/private/Others/CreateUpdateOthers'));
@@ -323,6 +329,26 @@ const privateRoutes = [
       </LazyLoading>
     ),
     roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/summer-assessment-student',
+    element: (
+      <LazyLoading>
+        <StudentSummerAssessment />
+      </LazyLoading>
+    ),
+    roles: ['STUDENT'],
+    accessPermission: null,
+  },
+  {
+    path: '/summer-assessment-apply',
+    element: (
+      <LazyLoading>
+        <ApplyStudentSummerAssessment />
+      </LazyLoading>
+    ),
+    roles: ['STUDENT'],
     accessPermission: null,
   },
 ];

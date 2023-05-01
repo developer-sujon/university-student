@@ -34,6 +34,15 @@ const summerAssessmentUpdate = {
   }),
 };
 
+const summerAssessmentApply = {
+  params: Joi.object().keys({
+    id: Joi.string().custom(objectId).required(),
+  }),
+  body: Joi.object().keys({
+    enrolls: Joi.object().required(),
+  }),
+};
+
 const summerAssessmentDelete = {
   params: Joi.object().keys({
     id: Joi.string().custom(objectId).required(),
@@ -45,4 +54,5 @@ module.exports = {
   summerAssessmentDetails,
   summerAssessmentUpdate,
   summerAssessmentDelete,
+  summerAssessmentApply,
 };

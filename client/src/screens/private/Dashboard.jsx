@@ -1,6 +1,6 @@
 //External lib imports
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Card, Container, Row } from 'react-bootstrap';
 
 //Internal lib imports
 import Layout from '../../layout/Layout';
@@ -18,7 +18,11 @@ const Dashboard = () => {
     <Layout>
       <Container>
         <Row>
-          <p>{t('welcome')}</p>
+          <Card>
+            <Card.Body>
+              <h3>{t('Welcome to D-Space')}</h3>
+            </Card.Body>
+          </Card>
         </Row>
       </Container>
     </Layout>

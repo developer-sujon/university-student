@@ -65,6 +65,18 @@ const summerAssessmentUpdate = catchAsync(async (req, res) => {
 });
 
 /**
+ * @desc summerAssessment apply
+ * @access private
+ * @route /api/v1/summerAssessment/summerAssessmentApply/:id
+ * @methud PATCH
+ */
+
+const summerAssessmentApply = catchAsync(async (req, res) => {
+  const data = await summerAssessmentService.summerAssessmentApply(req);
+  res.json({ status: true, message: 'summerAssessment apply successful', data });
+});
+
+/**
  * @desc summerAssessment delete
  * @access private
  * @route /api/v1/summerAssessment/summerAssessmentDelete/:id
@@ -83,4 +95,5 @@ module.exports = {
   summerAssessmentDetails,
   summerAssessmentUpdate,
   summerAssessmentDelete,
+  summerAssessmentApply,
 };
