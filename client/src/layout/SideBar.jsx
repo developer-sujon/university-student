@@ -4,7 +4,7 @@ import { RiDashboardLine } from 'react-icons/ri';
 import { Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { BiSupport } from 'react-icons/bi';
-import { GiMeatCleaver, GiTeacher } from 'react-icons/gi';
+import { GiMeatCleaver, GiTeacher, GiSummits } from 'react-icons/gi';
 import { MdSubject, MdCastForEducation } from 'react-icons/md';
 import { RiCompassesLine } from 'react-icons/ri';
 import { SiSemanticscholar, SiFuturelearn } from 'react-icons/si';
@@ -32,6 +32,7 @@ const SideBar = ({ openMenu, setOpenMenu }) => {
             <NavItem title={t('leave')} link="/leave" Icon={GiMeatCleaver} />
             <NavItem title={t('subject repetition')} link="/subject-repetition" Icon={MdSubject} />
             <NavItem title={t('retake assessment')} link="/retake-assessment" Icon={RiCompassesLine} />
+            <NavItem title={t('summer assessment')} link="/summer-assessment" Icon={RiCompassesLine} />
             <NavItem title={t('scholarship')} link="/scholarship" Icon={SiSemanticscholar} />{' '}
             <NavItem title={t('others')} link="/others" Icon={BiSupport} />
           </>
@@ -42,6 +43,7 @@ const SideBar = ({ openMenu, setOpenMenu }) => {
             <NavItem title={t('leave')} link="/leave" Icon={GiMeatCleaver} />
             <NavItem title={t('subject repetition')} link="/subject-repetition" Icon={MdSubject} />
             <NavItem title={t('retake assessment')} link="/retake-assessment" Icon={RiCompassesLine} />
+            <NavItem title={t('summer assessment')} link="/summer-assessment" Icon={GiSummits} />
             <NavItem title={t('scholarship')} link="/scholarship" Icon={SiSemanticscholar} />{' '}
             <NavItem title={t('others')} link="/others" Icon={BiSupport} />
           </>

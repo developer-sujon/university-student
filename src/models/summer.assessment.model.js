@@ -12,27 +12,36 @@ const summerAssessmentSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    degree: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    session: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    currentSemester: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-    motive: {
-      type: String,
-      required: true,
-    },
     enrolls: {
-      type: [String],
+      type: [
+        {
+          studentID: {
+            type: String,
+            trim: true,
+          },
+          degree: {
+            type: String,
+            trim: true,
+          },
+          session: {
+            type: String,
+            trim: true,
+          },
+          currentSemester: {
+            type: String,
+            trim: true,
+          },
+          motive: {
+            type: String,
+          },
+          status: {
+            type: String,
+            enum: status,
+            default: 'PENDING',
+            required: true,
+          },
+        },
+      ],
       default: [],
     },
     status: {

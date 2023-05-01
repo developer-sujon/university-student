@@ -18,7 +18,10 @@ const Enroll = lazy(() => import('../screens/private/Admin/Enroll'));
 const Instructor = lazy(() => import('../screens/private/Admin/Instructor/Instructor'));
 
 const InsCourses = lazy(() => import('../screens/private/Admin/InsCourses'));
+const SummerCourses = lazy(() => import('../screens/private/Admin/SummerCourses/SummerAssessment'));
+const SummerAssessmentReport = lazy(() => import('../screens/private/Admin/SummerCourses/SummerAssessmentReport'));
 
+const CreateUpdateSummerCourses = lazy(() => import('../screens/private/Admin/SummerCourses/CreateUpdateSummerAssessment'));
 const CreateUpdateLeave = lazy(() => import('../screens/private/Leave/CreateUpdateLeave'));
 const CreateUpdateOthers = lazy(() => import('../screens/private/Others/CreateUpdateOthers'));
 const CreateUpdateSubjectRepetition = lazy(() =>
@@ -290,6 +293,36 @@ const privateRoutes = [
       </LazyLoading>
     ),
     roles: ['ADMIN', 'INSTRUCTOR'],
+    accessPermission: null,
+  },
+  {
+    path: '/summer-assessment',
+    element: (
+      <LazyLoading>
+        <SummerCourses />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/summer-assessment-create-update',
+    element: (
+      <LazyLoading>
+        <CreateUpdateSummerCourses />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
+    accessPermission: null,
+  },
+  {
+    path: '/summer-assessment-report',
+    element: (
+      <LazyLoading>
+        <SummerAssessmentReport />
+      </LazyLoading>
+    ),
+    roles: ['ADMIN'],
     accessPermission: null,
   },
 ];

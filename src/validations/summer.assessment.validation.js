@@ -4,16 +4,18 @@ const Joi = require('joi');
 //Internal Lib Import
 const { objectId } = require('./custom.validation');
 
+// name: Joi.string().required(),
+//     degree: Joi.string().required(),
+//     session: Joi.string().required(),
+//     currentSemester: Joi.string().required(),
+//     motive: Joi.string().required(),
+//     enrolls: Joi.array(),
+//     attach: Joi.object(),
+//     status: Joi.string().valid('REJECTED', 'APPROVED', 'PENDING'),
+
 const summerAssessmentCreate = {
   body: Joi.object().keys({
     name: Joi.string().required(),
-    degree: Joi.string().required(),
-    session: Joi.string().required(),
-    currentSemester: Joi.string().required(),
-    motive: Joi.string().required(),
-    enrolls: Joi.array(),
-    attach: Joi.object(),
-    status: Joi.string().valid('REJECTED', 'APPROVED', 'PENDING'),
   }),
 };
 
@@ -29,13 +31,6 @@ const summerAssessmentUpdate = {
   }),
   body: Joi.object().keys({
     name: Joi.string().required(),
-    degree: Joi.string().required(),
-    session: Joi.string().required(),
-    currentSemester: Joi.string().required(),
-    motive: Joi.string().required(),
-    enrolls: Joi.array(),
-    attach: Joi.object(),
-    status: Joi.string().valid('REJECTED', 'APPROVED', 'PENDING'),
   }),
 };
 
