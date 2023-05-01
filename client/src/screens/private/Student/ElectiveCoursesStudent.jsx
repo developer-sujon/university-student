@@ -19,7 +19,7 @@ const ElectiveCoursesStudent = () => {
               <Tab eventKey="myCourses" title={t('my courses')}>
                 <MyCourses />
               </Tab>
-              <Tab eventKey="availableCourses" title={t('available courses')}>
+              <Tab eventKey="availableCourses" title={t('Available courses')}>
                 <AvailableCourses />
               </Tab>
             </Tabs>
