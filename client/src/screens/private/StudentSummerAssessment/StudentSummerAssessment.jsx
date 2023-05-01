@@ -32,6 +32,8 @@ const StudentSummerAssessment = () => {
   const { data: StudentSummerAssessments, isLoading } = useSummerAssessmentListQuery();
   const data = StudentSummerAssessments?.data || [];
 
+  console.log(data);
+
   useEffect(() => {
     const tempData = [];
     data.forEach((element) => {
@@ -47,33 +49,23 @@ const StudentSummerAssessment = () => {
       sort: true,
     },
     {
-      Header: t('student id'),
-      accessor: (d) => <span className="ms-1"> {d?.studentID}</span>,
-      sort: true,
-    },
-    {
-      Header: t('name'),
-      accessor: (d) => <span className="ms-1"> {d?.studentName}</span>,
-      sort: true,
-    },
-    {
-      Header: t('roll'),
-      accessor: (d) => d?.rollNo,
-      sort: true,
-    },
-    {
       Header: t('session'),
-      accessor: (d) => d?.session,
+      accessor: (d) => <span className="ms-1"> {d?.session}</span>,
       sort: true,
     },
     {
-      Header: t('session registration'),
-      accessor: (d) => <span className="ms-1"> {d?.sessionRegistration}</span>,
+      Header: t('currentSemester'),
+      accessor: (d) => <span className="ms-1"> {d?.currentSemester}</span>,
       sort: true,
     },
     {
-      Header: t('session CGPA'),
-      accessor: (d) => <span className="ms-1"> {d?.sessionCGPA}</span>,
+      Header: t('degree'),
+      accessor: (d) => <span className="ms-1"> {d?.degree}</span>,
+      sort: true,
+    },
+    {
+      Header: t('motive'),
+      accessor: (d) => <span className="ms-1"> {d?.motive}</span>,
       sort: true,
     },
   ];
