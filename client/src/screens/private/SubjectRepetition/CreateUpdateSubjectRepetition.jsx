@@ -23,6 +23,7 @@ const CreateUpdateSubjectRepetition = () => {
     session: '',
     sessionRegistration: '',
     sessionCGPA: '',
+    subject: '',
   });
 
   const { t } = useTranslation();
@@ -62,6 +63,7 @@ const CreateUpdateSubjectRepetition = () => {
         session: yup.string().required(t('session is required')),
         sessionRegistration: yup.string().required(t('session registration is required')),
         sessionCGPA: yup.string().required(t('session CGPA is required')),
+        subject: yup.string().required(t('subject is required')),
       })
     ),
   });
@@ -147,6 +149,27 @@ const CreateUpdateSubjectRepetition = () => {
                           )}
                         />
                         {errors.rollNo && <Form.Text className="text-danger">{errors.rollNo.message}</Form.Text>}
+                      </Form.Group>
+                    </Col>
+                    <Col sm={4}>
+                      <Form.Group className="mb-3" controlId="subject">
+                        <Form.Label>{t('subject')}</Form.Label>
+                        <Controller
+                          control={control}
+                          name="subject"
+                          render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Form.Control
+                              onChange={onChange}
+                              defaultValue={value}
+                              ref={ref}
+                              isInvalid={errors.subject}
+                              placeholder={t('subject of the subject repetition')}
+                              type="text"
+                              size="sm"
+                            />
+                          )}
+                        />
+                        {errors.subject && <Form.Text className="text-danger">{errors.subject.message}</Form.Text>}
                       </Form.Group>
                     </Col>
                     <Col sm={4}>

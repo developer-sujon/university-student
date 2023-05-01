@@ -49,6 +49,7 @@ export const subjectRepetitionService = apiService.injectEndpoints({
               draft.data[findIndex].status = data?.data?.status;
               draft.data[findIndex].studentID = postBody.studentID;
               draft.data[findIndex].studentName = postBody.studentName;
+              draft.data[findIndex].subject = postBody.subject;
             })
           );
 
