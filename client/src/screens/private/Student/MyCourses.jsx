@@ -12,6 +12,7 @@ import Layout from '../../../layout/Layout';
 import { useEnrollListQuery } from '../../../redux/services/enrolledService';
 import Table from '../../../components/Table/Table';
 import DateFormatter from '../../../utils/DateFormatter';
+import exportDataJson from '../../../utils/exportDataJson.js';
 
 const MyCourses = () => {
   const { t } = useTranslation();
@@ -70,6 +71,16 @@ const MyCourses = () => {
     <Row>
       <Col className="d-flex justify-content-between p-2" sm={12}>
         <h5>{t('my courses')}</h5>
+        <div>
+          <Button
+            className="mx-2"
+            size="sm"
+            variant="primary"
+            onClick={() => exportDataJson(data, 'my-courses-report', 'xls')}
+          >
+            {t('download report')}
+          </Button>
+        </div>
       </Col>
       <Col sm={12}>
         {isLoading ? (

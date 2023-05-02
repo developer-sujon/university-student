@@ -18,6 +18,7 @@ import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
 import SessionDetailsModal from './SessionDetailsModal';
+import exportDataJson from '../../../utils/exportDataJson';
 
 const Session = () => {
   const [singleSession, setSingleSession] = useState({});
@@ -122,11 +123,21 @@ const Session = () => {
       <Row>
         <Col className="d-flex justify-content-between p-2" sm={12}>
           <h5>{t('session')}</h5>
-          <Link to={'/session-create-update'}>
-            <Button size="sm" variant="primary">
-              {t('create session')}
+          <div>
+            <Link to={'/session-create-update'}>
+              <Button size="sm" variant="primary">
+                {t('create session')}
+              </Button>
+            </Link>
+            <Button
+              className="mx-2"
+              size="sm"
+              variant="primary"
+              onClick={() => exportDataJson(data, 'session-report', 'xls')}
+            >
+              {t('download report')}
             </Button>
-          </Link>
+          </div>
         </Col>
         <Col sm={12}>
           {isLoading ? (

@@ -17,6 +17,7 @@ import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 import StudentSummerAssessmentDetailsModal from './StudentSummerAssessmentDetailsModal';
+import exportDataJson from '../../../utils/exportDataJson';
 
 const StudentSummerAssessment = () => {
   const [filterEnroll, setFilterEnroll] = useState([]);
@@ -102,11 +103,23 @@ const StudentSummerAssessment = () => {
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
                 <h5>{t('summer assessment')}</h5>
-                <Link to={'/summer-assessment-apply'}>
-                  <Button size="sm" variant="primary">
-                    {t('apply summer assessments')}
+
+                <div>
+                  <Link to={'/summer-assessment-apply'}>
+                    <Button size="sm" variant="primary">
+                      {t('apply summer assessments')}
+                    </Button>
+                  </Link>
+
+                  <Button
+                    className="mx-2"
+                    size="sm"
+                    variant="primary"
+                    onClick={() => exportDataJson(data, 'student-summer-assessment-report', 'xls')}
+                  >
+                    {t('download report')}
                   </Button>
-                </Link>
+                </div>
               </Col>
               <Col sm={12}>
                 {isLoading ? (

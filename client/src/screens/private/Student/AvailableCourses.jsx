@@ -15,6 +15,7 @@ import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
 import { useEnrollCreateMutation, useEnrollListQuery } from '../../../redux/services/enrolledService';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
+import exportDataJson from '../../../utils/exportDataJson';
 
 const AvailableCourses = () => {
   const { t } = useTranslation();
@@ -114,11 +115,23 @@ const AvailableCourses = () => {
     <Row>
       <Col className="d-flex justify-content-between p-2" sm={12}>
         <h5>{t('courses')}</h5>
-        <Link to={'/courses-create-update'}>
-          <Button size="sm" variant="primary">
-            {t('create courses')}
+
+        <div>
+          <Link to={'/courses-create-update'}>
+            <Button size="sm" variant="primary">
+              {t('create courses')}
+            </Button>
+          </Link>
+
+          <Button
+            className="mx-2"
+            size="sm"
+            variant="primary"
+            onClick={() => exportDataJson(data, 'available-courses-report', 'xls')}
+          >
+            {t('download report')}
           </Button>
-        </Link>
+        </div>
       </Col>
       <Col sm={12}>
         {isLoading ? (

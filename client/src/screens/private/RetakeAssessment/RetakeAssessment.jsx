@@ -18,6 +18,7 @@ import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 import SubjectRepetitionDetailsModal from './RetakeAssessmentDetailsModal';
+import exportDataJson from '../../../utils/exportDataJson';
 
 const RetakeAssessment = () => {
   const [show, setShow] = useState(false);
@@ -196,14 +197,25 @@ const RetakeAssessment = () => {
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
                 <h5>{t('retake assessment')}</h5>
-                <Link
-                  to={'/retake-assessment-create-update'}
-                  onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
-                >
-                  <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
-                    {t('create retake assessment')}
+
+                <div>
+                  <Link
+                    to={'/retake-assessment-create-update'}
+                    onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
+                  >
+                    <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
+                      {t('create retake assessment')}
+                    </Button>
+                  </Link>
+                  <Button
+                    className="mx-2"
+                    size="sm"
+                    variant="primary"
+                    onClick={() => exportDataJson(data, 'retake-assessment-report', 'xls')}
+                  >
+                    {t('download report')}
                   </Button>
-                </Link>
+                </div>
               </Col>
               <Col sm={12}>
                 {isLoading ? (

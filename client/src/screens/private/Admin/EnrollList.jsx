@@ -9,61 +9,46 @@ import { GrStatusGood } from 'react-icons/gr';
 
 //Internal lib imports
 import Layout from '../../../layout/Layout';
-import { useCoursesDeleteMutation, useCoursesListQuery } from '../../../redux/services/coursesService';
+import { useEnrollListQuery } from '../../../redux/services/enrolledService';
 import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
-import CoursesDetailsModal from './CoursesDetailsModal';
+import EnrollDetailsModal from './EnrollDetailsModal';
 import exportDataJson from '../../../utils/exportDataJson';
 
-const Courses = () => {
-  const { t } = useTranslation();
-
-  const [singleCourses, setSingleCourses] = useState({});
+const EnrollList = () => {
+  const [singleEnroll, setSingleEnroll] = useState({});
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const { data: Coursess, isLoading } = useCoursesListQuery();
-  const [CoursesDelete] = useCoursesDeleteMutation();
-  const data = Coursess?.data || [];
+  const { t } = useTranslation();
+  const { data: Enrolls, isLoading } = useEnrollListQuery();
+  const data = Enrolls?.data || [];
 
-  const deleteItem = (id) => {
-    AleartMessage.Delete(id, CoursesDelete);
-  };
   const handleQuickView = (d) => {
-    setSingleCourses(d);
+    setSingleEnroll(d);
     handleShow();
   };
 
   const columns = [
     {
-      Header: t('courses code'),
-      accessor: (d) => <span className="ms-1"> {d.coursesCode}</span>,
+      Header: '#',
+      accessor: (_, index) => index + 1,
       sort: true,
     },
     {
-      Header: t('courses name'),
-      accessor: (d) => <span className="ms-1"> {d.coursesName}</span>,
+      Header: t('student name'),
+      accessor: (d) => <span className="ms-1"> {d?.studentID?.name}</span>,
       sort: true,
     },
     {
-      Header: t('courses instructor'),
-      accessor: (d) => <span className="ms-1"> {d.coursesInstructor}</span>,
+      Header: t('student email'),
+      accessor: (d) => <span className="ms-1"> {d?.studentID?.email}</span>,
       sort: true,
     },
     {
-      Header: t('seats limit'),
-      accessor: (d) => <span className="ms-1"> {d.seatsLimit}</span>,
-      sort: true,
-    },
-    {
-      Header: t('registration deadline'),
-      accessor: (d) => <span className="ms-1"> {DateFormatter(d.registrationDeadline)}</span>,
-      sort: true,
-    },
-    {
-      Header: t('created at'),
+      Header: t('reg date/time'),
       accessor: (d) => <span className="ms-1"> {DateFormatter(d.createdAt)}</span>,
       sort: true,
     },
@@ -79,37 +64,6 @@ const Courses = () => {
             <Button variant="primary" style={{ padding: '5px 10px' }} onClick={() => handleQuickView(d)}>
               <AiOutlineFolderView />
             </Button>
-          </OverlayTrigger>
-          <OverlayTrigger
-            placement="top"
-            delay={{ show: 250, hide: 400 }}
-            overlay={<Tooltip id="button-tooltip">{t('edit')}</Tooltip>}
-          >
-            <Link to={`/courses-create-update?id=${d?.id}`}>
-              <Button variant="primary" style={{ padding: '5px 10px' }} className="me-1">
-                <AiOutlineEdit />
-              </Button>
-            </Link>
-          </OverlayTrigger>
-          <OverlayTrigger
-            placement="top"
-            delay={{ show: 250, hide: 400 }}
-            overlay={<Tooltip id="button-tooltip">{t('delete')}</Tooltip>}
-          >
-            <Button variant="danger" style={{ padding: '5px 10px' }} onClick={() => deleteItem(d.id)}>
-              <BsTrash />
-            </Button>
-          </OverlayTrigger>
-          <OverlayTrigger
-            placement="top"
-            delay={{ show: 250, hide: 400 }}
-            overlay={<Tooltip id="button-tooltip">{t('enrolled student')}</Tooltip>}
-          >
-            <Link to={`/enrolled-student?id=${d?.id}`}>
-              <Button variant="info" style={{ padding: '5px 10px' }}>
-                <AiOutlineFolderView />
-              </Button>
-            </Link>
           </OverlayTrigger>
         </div>
       ),
@@ -139,19 +93,18 @@ const Courses = () => {
     <>
       <Row>
         <Col className="d-flex justify-content-between p-2" sm={12}>
-          <h5>{t('courses')}</h5>
-
+          <h5>{t('Enroll')}</h5>
           <div>
-            <Link to={'/courses-create-update'}>
+            <Link to={'/Enroll-create-update'}>
               <Button size="sm" variant="primary">
-                {t('create courses')}
+                {t('create Enroll')}
               </Button>
             </Link>
             <Button
               className="mx-2"
               size="sm"
               variant="primary"
-              onClick={() => exportDataJson(data, 'courses-report', 'xls')}
+              onClick={() => exportDataJson(data, 'enroll-report', 'xls')}
             >
               {t('download report')}
             </Button>
@@ -174,9 +127,9 @@ const Courses = () => {
           )}
         </Col>
       </Row>
-      <CoursesDetailsModal singleCourses={singleCourses} show={show} handleClose={handleClose} />
+      <EnrollDetailsModal singleEnroll={singleEnroll} show={show} handleClose={handleClose} />
     </>
   );
 };
 
-export default Courses;
+export default EnrollList;

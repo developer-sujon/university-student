@@ -19,6 +19,7 @@ import AleartMessage from '../../../../helpers/AleartMessage';
 import DateFormatter from '../../../../utils/DateFormatter';
 import { useProfileDetailsQuery } from '../../../../redux/services/profileService';
 import InstructorDetailsModal from './InstructorDetailsModal';
+import exportDataJson from '../../../../utils/exportDataJson';
 
 const Instructor = () => {
   const [singleInstructor, setSingleInstructor] = useState({});
@@ -133,11 +134,21 @@ const Instructor = () => {
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
                 <h5>{t('Instructor')}</h5>
-                <Link to={'/instructor-create-update'}>
-                  <Button size="sm" variant="primary">
-                    {t('create Instructor')}
+                <div>
+                  <Link to={'/instructor-create-update'}>
+                    <Button size="sm" variant="primary">
+                      {t('create Instructor')}
+                    </Button>
+                  </Link>
+                  <Button
+                    className="mx-2"
+                    size="sm"
+                    variant="primary"
+                    onClick={() => exportDataJson(data, 'instructor-report', 'xls')}
+                  >
+                    {t('download report')}
                   </Button>
-                </Link>
+                </div>
               </Col>
               <Col sm={12}>
                 {isLoading ? (

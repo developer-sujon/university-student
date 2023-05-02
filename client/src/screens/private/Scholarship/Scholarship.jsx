@@ -18,6 +18,7 @@ import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 import ScholarshipDetailsModal from './ScholarshipDetailsModal';
+import exportDataJson from '../../../utils/exportDataJson';
 
 const Scholarship = () => {
   const [singleScholarship, setSingleScholarship] = useState({});
@@ -196,14 +197,26 @@ const Scholarship = () => {
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
                 <h5>{t('scholarship')}</h5>
-                <Link
-                  to={'/scholarship-create-update'}
-                  onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
-                >
-                  <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
-                    {t('create scholarship')}
+
+                <div>
+                  <Link
+                    to={'/scholarship-create-update'}
+                    onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
+                  >
+                    <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
+                      {t('create scholarship')}
+                    </Button>
+                  </Link>
+
+                  <Button
+                    className="mx-2"
+                    size="sm"
+                    variant="primary"
+                    onClick={() => exportDataJson(data, 'scholarship-report', 'xls')}
+                  >
+                    {t('download report')}
                   </Button>
-                </Link>
+                </div>
               </Col>
               <Col sm={12}>
                 {isLoading ? (

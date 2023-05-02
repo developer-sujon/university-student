@@ -14,6 +14,7 @@ import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 import OthersDetailsModal from './OthersDetailsModal';
+import exportDataJson from '../../../utils/exportDataJson';
 
 const Others = () => {
   const [singleOthers, setSingleOthers] = useState({});
@@ -187,14 +188,24 @@ const Others = () => {
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
                 <h5>{t('Others')}</h5>
-                <Link
-                  to={'/others-create-update'}
-                  onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
-                >
-                  <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
-                    {t('create Others')}
+                <div>
+                  <Link
+                    to={'/others-create-update'}
+                    onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
+                  >
+                    <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
+                      {t('create Others')}
+                    </Button>
+                  </Link>
+                  <Button
+                    className="mx-2"
+                    size="sm"
+                    variant="primary"
+                    onClick={() => exportDataJson(data, 'others-report', 'xls')}
+                  >
+                    {t('download report')}
                   </Button>
-                </Link>
+                </div>
               </Col>
               <Col sm={12}>
                 {isLoading ? (

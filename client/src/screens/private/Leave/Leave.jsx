@@ -1,6 +1,18 @@
 //External lib imports
 import { useState } from 'react';
-import { Row, Col, Container, Button, Card, ListGroup, Badge, OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  Container,
+  Button,
+  Card,
+  ListGroup,
+  Badge,
+  OverlayTrigger,
+  Tooltip,
+  Spinner,
+  ButtonGroup,
+} from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineEdit, AiOutlineFolderView } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -15,6 +27,7 @@ import AleartMessage from '../../../helpers/AleartMessage';
 import DateFormatter from '../../../utils/DateFormatter';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 import LeaveDetailsModal from './LeaveDetailsModal';
+import exportDataJson from '../../../utils/exportDataJson';
 
 const Leave = () => {
   const [singleLeave, setSingleLeave] = useState({});
@@ -198,14 +211,25 @@ const Leave = () => {
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
                 <h5>{t('leave')}</h5>
-                <Link
-                  to={'/leave-create-update'}
-                  onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
-                >
-                  <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
-                    {t('create leave')}
+                <div>
+                  <Link
+                    to={'/leave-create-update'}
+                    onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
+                  >
+                    <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
+                      {t('create leave')}
+                    </Button>
+                  </Link>
+
+                  <Button
+                    className="mx-2"
+                    size="sm"
+                    variant="primary"
+                    onClick={() => exportDataJson(data, 'leave-report', 'xls')}
+                  >
+                    {t('download report')}
                   </Button>
-                </Link>
+                </div>
               </Col>
               <Col sm={12}>
                 {isLoading ? (

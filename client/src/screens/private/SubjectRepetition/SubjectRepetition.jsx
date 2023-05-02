@@ -18,6 +18,7 @@ import Table from '../../../components/Table/Table';
 import AleartMessage from '../../../helpers/AleartMessage';
 import { useProfileDetailsQuery } from '../../../redux/services/profileService';
 import SubjectRepetitionDetailsModal from './SubjectRepetitionDetailsModal';
+import exportDataJson from '../../../utils/exportDataJson';
 
 const SubjectRepetition = () => {
   const [show, setShow] = useState(false);
@@ -206,14 +207,24 @@ const SubjectRepetition = () => {
             <Row>
               <Col className="d-flex justify-content-between p-2" sm={12}>
                 <h5>{t('subject repetition')}</h5>
-                <Link
-                  to={'/subject-repetition-create-update'}
-                  onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
-                >
-                  <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
-                    {t('create subject repetition')}
+                <div>
+                  <Link
+                    to={'/subject-repetition-create-update'}
+                    onClick={(e) => (profileDetails?.data?.role === 'ADMIN' ? e.preventDefault() : undefined)}
+                  >
+                    <Button size="sm" variant="primary" disabled={profileDetails?.data?.role === 'ADMIN'}>
+                      {t('create subject repetition')}
+                    </Button>
+                  </Link>
+                  <Button
+                    className="mx-2"
+                    size="sm"
+                    variant="primary"
+                    onClick={() => exportDataJson(data, 'subject-repetition-report', 'xls')}
+                  >
+                    {t('download report')}
                   </Button>
-                </Link>
+                </div>
               </Col>
               <Col sm={12}>
                 {isLoading ? (
