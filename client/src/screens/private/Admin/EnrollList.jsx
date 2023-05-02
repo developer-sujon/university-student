@@ -38,6 +38,11 @@ const EnrollList = () => {
       sort: true,
     },
     {
+      Header: t('courses name'),
+      accessor: (d) => <span className="ms-1"> {d?.coursesID?.coursesName}</span>,
+      sort: true,
+    },
+    {
       Header: t('student name'),
       accessor: (d) => <span className="ms-1"> {d?.studentID?.name}</span>,
       sort: true,
@@ -95,11 +100,6 @@ const EnrollList = () => {
         <Col className="d-flex justify-content-between p-2" sm={12}>
           <h5>{t('Enroll')}</h5>
           <div>
-            <Link to={'/Enroll-create-update'}>
-              <Button size="sm" variant="primary">
-                {t('create Enroll')}
-              </Button>
-            </Link>
             <Button
               className="mx-2"
               size="sm"
