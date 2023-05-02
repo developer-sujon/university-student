@@ -8,8 +8,8 @@ const useFileUpload = () => {
 
   //file states
 
-  const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME;
-  const UPLOAD_PRESET = process.env.REACT_APP_CLOUD_UPLOAD_PRESET;
+  const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME || 'dhlmvivr4';
+  const UPLOAD_PRESET = process.env.REACT_APP_CLOUD_UPLOAD_PRESET || 'shunnoSupport';
   const URL = 'https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/auto/upload';
 
   const upload = async (files) => {
@@ -21,8 +21,8 @@ const useFileUpload = () => {
     for (let file of files) {
       formData.append('file', file);
 
-      formData.append('cloud_name', "ds199wmf0");
-      formData.append('upload_preset', "university-student");
+      formData.append('cloud_name', CLOUD_NAME);
+      formData.append('upload_preset', UPLOAD_PRESET);
 
       setLoading(true);
       // axios POST request
