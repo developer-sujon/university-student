@@ -8,8 +8,8 @@ const useFileUpload = () => {
 
   //file states
 
-  const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME || 'dhlmvivr4';
-  const UPLOAD_PRESET = process.env.REACT_APP_CLOUD_UPLOAD_PRESET || 'shunnoSupport';
+  const CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME || 'dx6e7qlyt';
+  const UPLOAD_PRESET = process.env.REACT_APP_CLOUD_UPLOAD_PRESET || 'sfqgqojg';
   const URL = 'https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/auto/upload';
 
   const upload = async (files) => {
