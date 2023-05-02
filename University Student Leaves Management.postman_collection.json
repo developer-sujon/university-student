@@ -1,0 +1,2039 @@
+{
+	"info": {
+		"_postman_id": "e3ef94b0-6fae-4016-b8ee-56551bb5303a",
+		"name": "University Student Leaves Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19667438"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mohammad Sujon\",\r\n    \"email\": \"devoloper.sujon@gmail.com\",\r\n    \"password\": \"pass1234@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/auth/register",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"pass1234@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/auth/login",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDI5OWE1MGNkMjk5ODAyMTg2NzVlZTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODA0NDg5NzYsImV4cCI6MTY4MzA0MDk3NiwidHlwZSI6InJlZnJlc2gifQ.nRr5BgE5EBRePe-LbrLJN9-1ynzR_1wh0Aew3z6yADY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/auth/logout",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgotPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"devoloper.sujon@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/auth/forgotPassword",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"auth",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verifyEmail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"devoloper.sujon@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/auth/verifyEmail?otp=5k7sjs",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"auth",
+								"verifyEmail"
+							],
+							"query": [
+								{
+									"key": "otp",
+									"value": "5k7sjs"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"devoloper.sujon@gmail.com\",\r\n    \"password\": \"111ff42342311111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/auth/resetPassword?otp=5k7sjs",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"auth",
+								"resetPassword"
+							],
+							"query": [
+								{
+									"key": "otp",
+									"value": "5k7sjs"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "leave",
+			"item": [
+				{
+					"name": "leaveCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"endDate\": \"2023-05-08T09:39:29.182+00:00\",\r\n    \"duration\": 5,\r\n    \"subject\": \"leave\",\r\n    \"reason\": \"sick leave\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/leave/leaveCreate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"leave",
+								"leaveCreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "leaveDropDown",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/leave/leaveDropDown",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"leave",
+								"leaveDropDown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "leaveList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/leave/leaveList",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"leave",
+								"leaveList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "leaveDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/leave/leaveDetails/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"leave",
+								"leaveDetails",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "leaveUpdate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"applyDate\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"startDate\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"endDate\": \"2023-05-11T09:39:29.182+00:00\",\r\n    \"duration\": 8,\r\n    \"subject\": \"leave\",\r\n    \"reason\": \"sick leave\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/leave/leaveUpdate/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"leave",
+								"leaveUpdate",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "leaveDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/leave/leaveDelete/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"leave",
+								"leaveDelete",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SubjectRepetition",
+			"item": [
+				{
+					"name": "subjectRepetitionCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentName\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"rollNo\": \"2023-05-08T09:39:29.182+00:00\",\r\n    \"session\": \"CS21\",\r\n    \"sessionRegistration\": \"2022\",\r\n    \"sessionCGPA\": \"leave\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/subjectRepetition/subjectRepetitionCreate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"subjectRepetition",
+								"subjectRepetitionCreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subjectRepetitionDropDown",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/subjectRepetition/subjectRepetitionDropDown",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"subjectRepetition",
+								"subjectRepetitionDropDown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subjectRepetitionList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/subjectRepetition/subjectRepetitionList",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"subjectRepetition",
+								"subjectRepetitionList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subjectRepetitionDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/subjectRepetition/subjectRepetitionDetails/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"subjectRepetition",
+								"subjectRepetitionDetails",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subjectRepetitionUpdate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentName\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"rollNo\": \"2023-05-08T09:39:29.182+00:00\",\r\n    \"session\": \"CS21\",\r\n    \"sessionRegistration\": \"2022\",\r\n    \"sessionCGPA\": \"leave\",\r\n    \"adminRemark\": \"sick leave\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/subjectRepetition/subjectRepetitionUpdate/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"subjectRepetition",
+								"subjectRepetitionUpdate",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subjectRepetitionDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/subjectRepetition/subjectRepetitionDelete/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"subjectRepetition",
+								"subjectRepetitionDelete",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RetakeAssessment",
+			"item": [
+				{
+					"name": "retakeAssessment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"instructor\": \"2023-05-08T09:39:29.182+00:00\",\r\n    \"assessmentType\": \"MID_TERM\",\r\n    \"reason\": \"2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/retakeAssessment/retakeAssessmentCreate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"retakeAssessment",
+								"retakeAssessmentCreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "retakeAssessmentDropDown",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/retakeAssessment/retakeAssessmentDropDown",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"retakeAssessment",
+								"retakeAssessmentDropDown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "retakeAssessmentList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/retakeAssessment/retakeAssessmentList",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"retakeAssessment",
+								"retakeAssessmentList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "retakeAssessmentDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/retakeAssessment/retakeAssessmentDetails/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"retakeAssessment",
+								"retakeAssessmentDetails",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "retakeAssessmentUpdate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"instructor\": \"2023-05-08T09:39:29.182+00:00\",\r\n    \"assessmentType\": \"MID_TERM\",\r\n    \"reason\": \"2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/retakeAssessment/retakeAssessmentUpdate/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"retakeAssessment",
+								"retakeAssessmentUpdate",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "retakeAssessmentDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/retakeAssessment/retakeAssessmentDelete/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"retakeAssessment",
+								"retakeAssessmentDelete",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Scholarship",
+			"item": [
+				{
+					"name": "scholarshipCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"instructor\": \"2023-05-08T09:39:29.182+00:00\",\r\n    \"assessmentType\": \"MID_TERM\",\r\n    \"reason\": \"2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipCreate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipCreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scholarshipDropDown",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipDropDown",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipDropDown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scholarshipList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipList",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scholarshipDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipDetails/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipDetails",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scholarshipUpdate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"instructor\": \"2023-05-08T09:39:29.182+00:00\",\r\n    \"assessmentType\": \"MID_TERM\",\r\n    \"reason\": \"2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipUpdate/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipUpdate",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scholarshipDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipDelete/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipDelete",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Others",
+			"item": [
+				{
+					"name": "othersCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"description\": \"2023-05-08T09:39:29.182+00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/others/othersCreate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"others",
+								"othersCreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scholarshipDropDown",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipDropDown",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipDropDown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scholarshipList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipList",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scholarshipDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipDetails/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipDetails",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scholarshipUpdate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"2023-05-03T09:39:29.182+00:00\",\r\n    \"instructor\": \"2023-05-08T09:39:29.182+00:00\",\r\n    \"assessmentType\": \"MID_TERM\",\r\n    \"reason\": \"2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipUpdate/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipUpdate",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "scholarshipDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/scholarship/scholarshipDelete/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"scholarship",
+								"scholarshipDelete",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "dashboardSummary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/dashboard/dashboardSummary",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"dashboard",
+								"dashboardSummary"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Session",
+			"item": [
+				{
+					"name": "sessionCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sessionName\": \"2022\",\r\n    \"sessionYear\": \"2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/session/sessionCreate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"session",
+								"sessionCreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sessionDropDown",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/session/sessionDropDown",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"session",
+								"sessionDropDown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sessionList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/session/sessionList",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"session",
+								"sessionList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sessionDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/session/sessionDetails/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"session",
+								"sessionDetails",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sessionUpdate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sessionName\": \"2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/session/sessionUpdate/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"session",
+								"sessionUpdate",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sessionDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/session/sessionDelete/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"session",
+								"sessionDelete",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "coursesCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"coursesCode\": \"1001\",\r\n    \"coursesName\": \"Full Stack Bootcamp\",\r\n    \"coursesInstructor\": \"Mohammad Sujon\",\r\n    \"seatsLimit\": 1001\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/courses/coursesCreate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"courses",
+								"coursesCreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "coursesDropDown",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/courses/coursesDropDown",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"courses",
+								"coursesDropDown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "coursesList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/courses/coursesList",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"courses",
+								"coursesList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "coursesDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/courses/coursesDetails/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"courses",
+								"coursesDetails",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "coursesUpdate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"coursesCode\": \"1001\",\r\n    \"coursesName\": \"Full Stack Bootcamp\",\r\n    \"coursesInstructor\": \"Mohammad Sujon\",\r\n    \"seatsLimit\": 1001\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/courses/coursesUpdate/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"courses",
+								"coursesUpdate",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "coursesDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/courses/coursesDelete/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"courses",
+								"coursesDelete",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "InsCourses",
+			"item": [
+				{
+					"name": "InsCoursesCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"coursesCode\": \"1001\",\r\n    \"coursesName\": \"Full Stack Bootcamp\",\r\n    \"coursesInstructor\": \"Mohammad Sujon\",\r\n    \"resources\": [{\"src\": \"pdf link\", 'pjkh'}, {\"src\": \"img link link\"}],\r\n    \"coursesHistory\": [{sdf, }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/InsCourses/InsCoursesCreate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"InsCourses",
+								"InsCoursesCreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insCoursesList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/insCourses/insCoursesList",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"insCourses",
+								"insCoursesList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insCoursesDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/insCourses/insCoursesDetails/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"insCourses",
+								"insCoursesDetails",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insCoursesUpdate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"coursesCode\": \"1001\",\r\n    \"coursesName\": \"Full Stack Bootcamp\",\r\n    \"coursesInstructor\": \"Mohammad Sujon\",\r\n    \"seatsLimit\": 1001\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/insCourses/insCoursesUpdate/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"insCourses",
+								"insCoursesUpdate",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "coursesDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/insCourses/insCoursesDelete/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"insCourses",
+								"insCoursesDelete",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enroll",
+			"item": [
+				{
+					"name": "enrollCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"coursesID\": \"643b135aa530e92958c880e2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/enroll/enrollCreate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"enroll",
+								"enrollCreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enrollDropDown",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/enroll/enrollDropDown",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"enroll",
+								"enrollDropDown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enrollList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/enroll/enrollList",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"enroll",
+								"enrollList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enrollListByCoursesID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/enroll/enrollListByCoursesID/643b99f34243922164214c41",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"enroll",
+								"enrollListByCoursesID",
+								"643b99f34243922164214c41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enrollDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/enroll/enrollDetails/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"enroll",
+								"enrollDetails",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enrollUpdate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"coursesID\": \"643b0531e89e5d2e186e97f5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/enroll/enrollUpdate/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"enroll",
+								"enrollUpdate",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enrollDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/enroll/enrollDelete/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"enroll",
+								"enrollDelete",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Instructor",
+			"item": [
+				{
+					"name": "instructorCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hello World\",\r\n    \"email\": \"hello@yah2oo.com\",\r\n\r\n    \"password\": \"pass1234@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/instructor/instructorCreate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"instructor",
+								"instructorCreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "instructorList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/instructor/instructorList",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"instructor",
+								"instructorList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "instructorDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/instructor/instructorDetails/64346573c374ee4dbc53235d",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"instructor",
+								"instructorDetails",
+								"64346573c374ee4dbc53235d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "instructorUpdate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hello 234234\",\r\n    \"email\": \"hello@yahoo.com\",\r\n    \"password\": \"pass1234@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/instructor/instructorUpdate/644acf82e6008719ec052815",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"instructor",
+								"instructorUpdate",
+								"644acf82e6008719ec052815"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "instructorDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/instructor/instructorDelete/644acf82e6008719ec052815",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"instructor",
+								"instructorDelete",
+								"644acf82e6008719ec052815"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "profileDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/profile/",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profileDetails Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}/profile/profileDetails",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"profile",
+								"profileDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profileDetails",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"MD SUJON ISLAM\",\r\n    \"phone\": \"01887878871\",\r\n    \"photo\": \"https://avatars.githubusercontent.com/u/65336862?v=4\",\r\n    \"email\": \"devoloper.sujon@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/user/updateUser",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"user",
+								"updateUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"previousPassword\": \"pass\",\r\n    \"newPassword\": \"pass\",\r\n    \"email\": \"devoloper.sujon@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/user/changePassword",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDM0NmM0MjAwZjZhZjI1NDAyMzcxNmMiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2ODI2OTc0MzYsImV4cCI6MTY4MjcxNTQzNiwidHlwZSI6ImFjY2VzcyJ9.zewGNgp8bC_xPyGE6PjFNZuQGHzpBBatK5BWv_zNubM",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL",
+			"value": "http://localhost:6100/api/v1",
+			"type": "string"
+		}
+	]
+}

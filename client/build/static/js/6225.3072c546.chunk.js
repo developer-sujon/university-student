@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkfresh_app=self.webpackChunkfresh_app||[]).push([[6225],{6225:function(e,s,a){a.r(s);var c=a(184);s.default=function(){return(0,c.jsx)("div",{className:"auth-wrapper",children:(0,c.jsx)("div",{className:"auth-content",children:(0,c.jsx)("div",{className:"auth-wrapper",children:(0,c.jsxs)("div",{className:"auth-content",children:[(0,c.jsx)("div",{children:"NotAccess"}),";"]})})})})}}}]);
+//# sourceMappingURL=6225.3072c546.chunk.js.map
