@@ -9,10 +9,10 @@ const obj = {
     coursesCode: '1234',
     coursesName: 'OS',
     coursesInstructor: 'ABC',
-    seatsLimit: 100,fff
+    seatsLimit: 100,
     id: '644eba4ad5ff682af8f6e9c1',
   },
-  createdAt: '2023-04-fffff30T18:59:33.9cc19Z',
+  createdAt: '2023-04-fffff30T18:59:33.919Z',
   updatedAt: '2023-04-30T18:59:33.919Z',
   id: '644eba95d5ff682af8f6e9de',
 };
