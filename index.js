@@ -12,7 +12,7 @@ const obj = {
     seatsLimit: 100,ffff
     id: '644eba4ad5ff682af8f6e9c1',
   },fff
-  createdAt: '2023-04-fffff30T18:59:33.9cc19Z',
+  createdAt: '2023-04-fffff30T18:59:33.9cc19Z',sdf
   updatedAt: '2023-04-30T18:59:33.919Z',ffffff
   id: '644eba95d5ff682af8f6e9de',
 };
