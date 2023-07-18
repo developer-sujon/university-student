@@ -13,7 +13,7 @@ const obj = {
     id: '644eba4ad5ff682af8f6e9c1',
   },fff
   createdAt: '2023-04-fffff30T18:59:33.9cc19Z',
-  updatedAt: '2023-04-30T18:59:33.919Z',ffffff
+  updatedAt: '2023-04-30T18:59:33.919Z',fff
   id: '644eba95d5ff682af8f6e9de',
 };
 
