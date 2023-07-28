@@ -1,4 +1,4 @@
-yyhh# University Student Leaves Management
+University Student Leaves Management
 
 ## Quick Start
 
